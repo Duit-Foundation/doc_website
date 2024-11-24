@@ -44,9 +44,26 @@ const sidebars: SidebarsConfig = {
       label: "Advanced techniques",
       collapsed: true,
       items: [
+              {
+                type: 'category',
+                label: "Components",
+                collapsed: true,
+                items: [
+                  'advanced_tech/components/app',
+                  'advanced_tech/components/server',
+                ],
+              },
         'advanced_tech/transport_override',
-        'advanced_tech/components',
-        'advanced_tech/custom_widgets',
+        {
+                        type: 'category',
+                        label: "Custom widgets",
+                        collapsed: true,
+                        description: "Раздел про кастомные виджеты Duit"
+                        items: [
+                          'advanced_tech/custom/app',
+                          'advanced_tech/custom/server',
+                        ],
+                      },
         'advanced_tech/scripting',
         'advanced_tech/native',
       ],
