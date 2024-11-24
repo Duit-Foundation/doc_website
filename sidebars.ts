@@ -58,7 +58,7 @@ const sidebars: SidebarsConfig = {
                         type: 'category',
                         label: "Custom widgets",
                         collapsed: true,
-                        description: "Раздел про кастомные виджеты Duit"
+                        description: "Раздел про кастомные виджеты Duit",
                         items: [
                           'advanced_tech/custom/app',
                           'advanced_tech/custom/server',
