@@ -56,12 +56,12 @@ const sidebars: SidebarsConfig = {
         'advanced_tech/transport_override',
         {
                         type: 'category',
-                        label: "Custom widgets",
-                        collapsed: true,
+                        label: "Пользовательские виджеты",
                         description: "Раздел про кастомные виджеты Duit",
                         items: [
-                          'advanced_tech/custom/app',
+                            'advanced_tech/custom/about',
                           'advanced_tech/custom/server',
+                          'advanced_tech/custom/app',
                         ],
                       },
         'advanced_tech/scripting',
