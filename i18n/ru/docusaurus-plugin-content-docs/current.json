@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Далее",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Getting Started": {
+    "message": "Начало работы",
+    "description": "The label for category Getting Started in sidebar docs"
+  },
+  "sidebar.docs.category.Core concepts": {
+    "message": "Ключевые концепции",
+    "description": "The label for category Core concepts in sidebar docs"
+  },
+  "sidebar.docs.category.Advanced techniques": {
+    "message": "Продвинутые техники",
+    "description": "The label for category Advanced techniques in sidebar docs"
+  },
+  "sidebar.docs.category.Components": {
+    "message": "Компоненты",
+    "description": "The label for category Components in sidebar docs"
+  },
+  "sidebar.docs.category.Пользовательские виджеты": {
+    "message": "Пользовательские виджеты",
+    "description": "The label for category Пользовательские виджеты in sidebar docs"
+  }
+}
