@@ -1,3 +1,6 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Установка зависимостей
 
 Duit - это экосистема библиотек и инструментов. Поэтому для использования этого инструмента
@@ -20,14 +23,15 @@ flutter pub add flutter_duit
 
 Установите соотвествующий пакет, используя одну из данных команды:
 
-Go:
-
-```text
-go get github.com/Duit-Foundation/duit_go/v3
-```
-
-JS:
-
-```text
-npm install duit_js
-```
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+      ```text
+      npm install duit_js
+      ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+      ```text
+      go get github.com/Duit-Foundation/duit_go/v3
+      ```
+  </TabItem>
+</Tabs>
