@@ -49,15 +49,15 @@ const sidebars: SidebarsConfig = {
                 label: "Components",
                 collapsed: true,
                 items: [
+                  'advanced_tech/components/about',
                   'advanced_tech/components/app',
                   'advanced_tech/components/server',
                 ],
               },
-        'advanced_tech/transport_override',
+                'advanced_tech/transport_override',
         {
                         type: 'category',
-                        label: "Пользовательские виджеты",
-                        description: "Раздел про кастомные виджеты Duit",
+                        label: "Custom widgets",
                         items: [
                             'advanced_tech/custom/about',
                           'advanced_tech/custom/server',
