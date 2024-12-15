@@ -50,8 +50,8 @@ const sidebars: SidebarsConfig = {
                 collapsed: true,
                 items: [
                   'advanced_tech/components/about',
-                  'advanced_tech/components/app',
                   'advanced_tech/components/server',
+                  'advanced_tech/components/app',
                 ],
               },
                 'advanced_tech/transport_override',
