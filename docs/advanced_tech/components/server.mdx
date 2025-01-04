@@ -1,0 +1,127 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Компоненты - сервер
+
+## Создание нового компонента
+
+Объект-макет компонента на стороне сервера состоит из 2 основных частей: уникального идентификатора (tag) и макета (layoutRoot). Для облегчения создания новых компонентов пакеты duit предоставляют функцию `ComponentDescription`.
+
+:::info
+В рамках компонента не рекомендуется явно устанавливать свойство controlled = true и id виджетов - такие виджеты будут обрабатываться как неконтроллируемые, а фиксированное значение id виджета приведет к ошибке создания контроллера.
+:::
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const ExampleComponent = ComponentDescription("ExampleComponent",
+        Text(
+            {
+                attributes: {
+                    data: "Hellow, Duit!"
+                }
+            }
+        )
+    );
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    var ExampleComponent = duit_widget.NewComponentDescription(
+	    "ExampleComponent",
+        duit_widget.Text(
+            &duit_attributes.TextAttributes[duit_color.ColorRGBO]{
+                Data:                 "Hellow, Duit!",
+            }, "", false),
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Разметка данных
+
+Разметка данных в макете виджета - это способ присваивания атрибутам составного компонента значений, которые будут переданных со стороны сервера.
+За это отвечае свойство `refs` объекта атрибутов, которое представляет из себя коллекцию объектов `ValueReference`.
+Объект `ValueReference` состоит из трех основных частей:
+- attributeKey - название свойства атрибута (в примере - data), куда будет помещено значение
+- objectKey - ключ свойства в объекте, содержащем данные
+- defaultValue - опциональный параметр, который будет использован в случае, если значение не будет найдено
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const ExampleComponent = ComponentDescription("ExampleComponent",
+        Text(
+            {
+                attributes: {
+                    data: "Hellow, Duit!",
+                    refs: [
+                        {
+                            attributeKey: "data",
+                            objectKey: "text",
+                            defaultValue: "Hellow, world!",
+                        },
+                        // Ref("data", "text"), //shortand
+                    ]
+                }
+            }
+        )
+    );
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    var ExampleComponent = duit_widget.NewComponentDescription(
+        "ExampleComponent",
+        duit_widget.Text(
+            &duit_attributes.TextAttributes[duit_color.ColorRGBO]{
+                Data:                 "Hellow, Duit!",
+                ValueReferenceHolder: duit_attributes.ValueReferenceHolder{
+                    Refs: []*duit_attributes.ValueRef{
+                        {
+                            AttributeKey: "data",
+                            ObjectKey:    "text",
+                            DefaultValue: "Hellow, world!",
+                        },
+                        //duit_attributes.Ref("data", "text", "Hellow, world!"), //shortand
+                    },
+                },
+            }, common.NO_ID, false),
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Использование компонентов в верстке
+
+Добавление компонентов в код макета происходит с помощью виджета Component, который принимает в качестве параметров тег целевого компонента и объект, содержащий данные для его заполнения.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Component({
+        tag: ExampleComponent.tag,
+        data: {
+            text: "Hellow, Duit!",
+        },
+        id: "some_id_value",
+    })
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    duit_widget.Component(
+        map[string]interface{}{
+            "text": "Hellow, Duit!",	
+        }, ExampleComponent.Tag, "some_id_value",
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Обновление состояния компонента
+
+Виджеты, входящие в состав компонента всегда являются некотроллируемыми, что исключает их прямое обновление через контроллер. 
+Для обновление одиночного компонента используется обычный подход с событием типа `UpdateEvent`. 
+
+Компоненты по умолчанию являются контроллируемыми виджетами, поэтому для обновления его состояния требуется явно указать уникальный id и вернуть на клиент новое событие, которое опишет изменение с помощью объекта с данными.
