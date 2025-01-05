@@ -79,12 +79,6 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          type: 'docSidebar',
-          position: 'left',
-          sidebarId: 'api',
-          label: 'API',
-        },
-        {
           href: 'https://github.com/Duit-Foundation',
           label: 'GitHub',
           position: 'right',
