@@ -31,6 +31,9 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: "Core concepts",
       collapsed: true,
+      link: {
+        type: 'generated-index',
+      },
       items: [
         'core_concepts/actions_events',
         'core_concepts/transport_layer',
@@ -43,6 +46,9 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: "Advanced techniques",
       collapsed: true,
+      link: {
+        type: 'generated-index',
+      },
       items: [
               {
                 type: 'category',
@@ -72,6 +78,9 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: "API",
       collapsed: true,
+      link: {
+        type: 'generated-index',
+      },
       items: [
         {
           type: 'category',
