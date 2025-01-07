@@ -1,0 +1,39 @@
+.footer_cont {
+    padding: 12px 24px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    background-color: #E1E2E9;
+    max-width: 400px;
+    height: 40px;
+    align-self: center;
+    border-radius: 14px;
+    text-align: center;
+    display: flex;
+}
+
+.direction {
+    display: flex;
+    gap: 24px;
+}
+
+.txt {
+    font-weight:400;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -3%;
+    color: #2F3237;
+}
+
+.heading {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: -3%;
+    color: #2F3237;
+}
+
+.link {
+    color: #2F3237;
+    text-align: center;
+    align-self: center;
+}
