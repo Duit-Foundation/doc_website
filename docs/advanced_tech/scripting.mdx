@@ -1,0 +1,215 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Выполнение динамических скриптов
+
+:::warning
+Данная статья носит ознакомительный характер.
+
+Использование подобного подхода может серьезным образом сказаться на производительности и безопасности ваших приложений. Используйте его на свой страх и риск.
+:::
+
+Duit реализует досточно мощную систему управления состоянием и взаимодействия с сервером, но в некоторых случаях частое обращение к серверу может быть избыточным.
+
+Предлагаю рассмореть следующий случай: на форме авторизации в приложении есть поле, в которое пользователь должен ввести свой номер телефона. Далее будем называть это поле просто `phone`. Частым требованием при реализации подобных виджетов является валидация входных данных при вводе. В нашем случае, нам требуется проверить, чтобы поле `phone` соответствовало правильному паттерну.
+
+Как это можно реализовать средствами Duit:
+
+1. На стороне сервера связать с виджетом `TextField`, который отвечает за ввод телефона, действие, которое будет отправлять текущее значение виджета на бекенд.
+2. Валидируем полученное значение, отправляем в качестве результата валидации новое состояние виджета.
+3. Обновляем состояние.
+
+При такой реализации невооруженным глазом видны серьезные проблемы, например частое обращение к серверу для валидации данных за счет вызова действия на каждый новый введенный символ. И, конечно, такое использование порождает side-effects при обновлении атрибутов и снижает производительность приложения.
+
+Поскольку в Duit не реализована обработка вычисляемых выражений, для реализации подобной функциональности предлагается пойти другим путем - использовать стороннюю среду выполнения для интерпретирования кода, выполнения скрипта и возврата результата выполнения на строну Dart.
+
+:::info
+Пример с полноценной реализацией данного подхода можно найти в репозитории [**duit_hetu_extension**](https://github.com/Duit-Foundation/duit_hetu_extension)
+:::
+
+При использовании скриптов, нам было бы необходимо связать на стороне сервера с виджетом `TextField`, который отвечает за ввод телефона, [действие-скрипт](/docs/core_concepts/actions_events#scriptaction), которое будет валидировать входные параметры и возвращать нужное состояние виджета в зависимости от результата валидации. А также реализовать необходимые для обработки скрипотов абстракции на клиентской стороне.
+
+Рассмотрим подробно все необходимые для реализации шаги.
+
+## Выбор языка и среды выполенения
+
+Dart - компилируемый язык программирования. Для нас это означает то, что мы не сможем выполнить в нашей программе Dart-код, который был получен нами в рантайме, например, в виде строки или файла.
+
+В связи с этим, одним из главных требований при выборе языка для реализации скриптов является возможность "на лету" интерпретировать полученный код и затем выполнять его. Для этих целей подходят виртуальные машины других языков программирования (в т.ч. и Dart).
+
+Пример доступных сред выполенения:
+
+1. [dart_eval](https://pub.dev/packages/dart_eval) - компилятор и интерпретатор байт-кода для языка Dart, написанный на Dart, обеспечивающий динамическое выполнение и отправку кода для Flutter и Dart AOT.
+2. [lua_dardo](https://pub.dev/packages/lua_dardo) - виртуальная машина Lua, написанная на Dart и реализующая версию Lua5.3.
+3. [hetu_script](https://pub.dev/packages/hetu_script) - легковесный скриптовый язык, написанный исключительно на Dart для встраивания в приложения Flutter.
+
+Далее все примеры будут рассматриваться в разрезе интеграции `hetu_script`, как наиболее производительного решения.
+
+## Реализация ScriptRunner
+
+За обработку и выполнение динамических скриптов в Duit отвечает класс, реализующий абстракцию [ScriptRunner](/docs/api/dart_api/ScriptRunner.md). В качестве единственного параметра конструктора он принимает объект обобoенного типа `TOptions`, который предназначен для передачи параметров конфигурации среды выполения.
+
+```dart
+final class HetuInitOptions {
+  Map<String, Function> externalFunctions;
+  ExternalHetuConfig config;
+
+  HetuInitOptions({
+    required this.config,
+    this.externalFunctions = const {},
+  });
+}
+```
+
+В этом конкретном примере мы создали класс `HetuInitOptions`, который будет использоваться для конфигурации среды выполенения.
+
+---
+
+Следующим шагом будет реализация непосредственно `ScriptRunner`.
+
+```dart
+final class _HetuScriptRunner extends ScriptRunner<HetuInitOptions> {
+  late final Hetu _hetuInstance;
+
+  _HetuScriptRunner({
+    required super.runnerOptions,
+  });
+
+  @override
+  Future<void> initWithTransport(Transport transport) async {
+    _hetuInstance = Hetu(
+      config: runnerOptions.config.toHetuConfig(),
+    )..init(
+        externalFunctions: {
+          ...runnerOptions.externalFunctions,
+          "request": (
+            String url,
+            Map<String, dynamic> meta,
+            Map<String, dynamic> body,
+          ) async {
+            return await transport.request(
+              url,
+              meta,
+              body,
+            );
+          }
+        },
+      );
+  }
+
+  @override
+  Future<Map<String, dynamic>?> runScript(
+    String functionName, {
+    String? url,
+    Map<String, dynamic>? meta,
+    Map<String, dynamic>? body,
+  }) async {
+    return await _hetuInstance.invoke(
+      functionName,
+      positionalArgs: [
+        url,
+        meta,
+        body,
+      ],
+    );
+  }
+
+  @override
+  Future<void> eval(String source) async {
+    await _hetuInstance.eval(source);
+  }
+}
+```
+
+Абстракция `ScriptRunner` требует переопределить ряд методов. Рассмотрим их назначение подробнее.
+
+### initWithTransport
+
+Метод `initWithTransport` отвечает за инициализацию среды выполения и в качестве параметра функции принимает объект типа `Transport`. Игнорируйте этот параметр, если вам не требуется выполение сетевых запросов во время выполнения скрипта. Если же такая необходимость есть, то вам следует реализовать метод `request` в классе [`Transport`](/docs/api/dart_api/Transport.md), который в обычном случае не требует реализации.
+
+### eval
+
+Метод `eval` выполняет компиляцию и интерпретацию скрипта на этапе парсинга JSON-структуры Duit представления. Если виджет имеет связанное действие и это действие является `ScriptAction`, то его данные будут обработаны методом `eval`.
+
+### runScript
+
+Метод `runScript` вызывается во время выполениния действия. Обязательный параметр `functionName` - название функции для вызова. Параметры `url`, `meta`, `body` во время вызова действия будут переданы в качестве аргументов в скрипт автоматически. Где `url` - адрес запроса или название события, `meta` - метаданные, `body` - тело запроса или полезные данные для выполнения действия, которые формируются из [зависимостей действия](/docs/core_concepts/actions_events#зависимости-действий).
+
+---
+
+Последним шагом в реализации класса `ScriptRunner` будет реализация расширения класса `UIDriver` для присвоения экземпляра класса `ScriptRunner` свойству `scriptRunner`.
+
+```dart
+//extension.dart
+
+extension HetuExtension on UIDriver {
+  void applyHetuExtensions(HetuInitOptions options) {
+    scriptRunner = _HetuScriptRunner(
+      runnerOptions: options,
+    );
+  }
+}
+
+<...>
+//main.dart
+
+late final DuitDriver driver;
+
+@override
+void initState() {
+    driver = DuitDriver.static(
+      layout,
+      transportOptions: HttpTransportOptions(
+        baseUrl: "http://localhost:3000",
+      ),
+    )..applyHetuExtensions(
+        HetuInitOptions(
+          config: ExternalHetuConfig(),
+        ),
+      );
+    super.initState();
+}
+
+```
+
+## Создание ScriptAction
+
+Рассмотрим, как создать действие-скрипт. DSL-библиотеки предоставляют специальные функции для удобного создания подобных действий.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+const action = ScriptAction(
+      "script1", //event name
+      {
+          "sourceCode": "fun testFn() {...}", //sctipt text
+          "functionName": "testFn", //function name to call
+      },
+      [
+          {
+              id: "dependency1",
+              target: "value"
+          },
+      ],
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+action := NewScriptAction(
+		"scipt1", 
+		[]*ActionDependency{
+			{
+				Id:     "dependency1",
+				Target: "value",
+			},
+		}, 
+		&ScriptData{
+			SourceCode: `fun testFn() {...}`, //script text
+			FunctionName: "function name", //function name to call
+		},
+	)
+    ```
+  </TabItem>
+</Tabs>
+
