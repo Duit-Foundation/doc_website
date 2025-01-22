@@ -1,0 +1,16 @@
+.container {
+    position: relative;
+}
+
+.img {
+    position: absolute;
+    top: -5px;
+    left: 20px;
+}
+
+.bg {
+    margin-top: -12px;
+    margin-bottom: -7px;
+    margin-left: -30px;
+    border-radius: 8px;
+}

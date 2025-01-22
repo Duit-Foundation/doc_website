@@ -1,0 +1,38 @@
+.features {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.row {
+    justify-content: space-between;
+	-webkit-column-count: 3; -moz-column-count: 3; column-count: 3; /* сколько колонок нужно? */
+	-webkit-column-gap: 2em; -moz-column-gap: 2em; column-gap: 2em; /* промежуток между блоками (справа или слева) */
+}
+
+@media (max-width: 1440px) {
+    .row {
+        column-count: 2;
+        text-align: center;
+    }
+    .card {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 840px) {
+    .row {
+        column-count: 1;
+    }
+}
+
+.card {
+    display: inline-block; /* для mansory */
+	width: 100%; /* для mansory */
+	margin-bottom: 0.5em;
+    padding-top: 2rem;
+    border-radius: 8px;
+    min-width: 416px;
+    max-width: 416px;
+}
