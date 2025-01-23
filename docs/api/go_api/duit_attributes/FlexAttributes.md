@@ -1,0 +1,14 @@
+# FlexAttributes (Row, Column)
+
+```go
+type FlexAttributes struct {
+	ValueReferenceHolder
+	animations.AnimatedPropertyOwner
+	MainAxisAlignment  duit_main_axis.MainAxisAlignment   `json:"mainAxisAlignment,omitempty"`
+	MainAxisSize       duit_main_axis.MainAxisSize        `json:"mainAxisSize,omitempty"`
+	CrossAxisAlignment duit_cross_axis.CrossAxisAlignment `json:"crossAxisAlignment,omitempty"`
+	TextDirection      duit_text_properties.TextDirection `json:"textDirection,omitempty"`
+	VerticalDirection  duit_flex.VerticalDirection        `json:"verticalDirection,omitempty"`
+	ClipBehavior       duit_clip.Clip                     `json:"clipBehavior,omitempty"`
+}
+```

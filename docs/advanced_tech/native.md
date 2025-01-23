@@ -1,3 +1,3 @@
-# Integration with native apps (Android, IOS)
+# Experimental - интеграция с нативными приложениями (Android, IOS)
 
 Рассказать о том, как внедрить в нативное приложение
