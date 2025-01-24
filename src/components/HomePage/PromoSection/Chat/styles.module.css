@@ -1,0 +1,19 @@
+.container {
+    position: relative;
+}
+
+.chat {
+    scale: .8;
+}
+
+.img1 {
+    position: absolute;
+    top: 40px;
+    left: 220px;
+}
+
+.img2 {
+    position: absolute;
+    top: 240px;
+    left: 0;
+}

@@ -3,6 +3,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import OpportunitySection from "@site/src/components/HomePage/OpportunitySection";
+import PromoSection from "@site/src/components/HomePage/PromoSection";
 import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
@@ -39,6 +40,7 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
+        <PromoSection />
         <OpportunitySection />
       </main>
     </Layout>
