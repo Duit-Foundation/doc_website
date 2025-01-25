@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Duit',
   tagline: 'Backend-driven UI framework for Flutter',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   // Set the production url of your site here
   url: 'https://github.com',
@@ -26,7 +26,7 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'ru',
-    locales: ['ru', 'en'],
+    locales: ['ru'],
   },
 
   presets: [
@@ -66,77 +66,79 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Duit Foundation',
+      title: 'Duit',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'docs',
-          position: 'left',
-          label: 'Docs',
+          position: 'right',
+          label: 'Документация',
         },
         {
           href: 'https://github.com/Duit-Foundation',
           label: 'GitHub',
           position: 'right',
         },
-    {
-              type: 'localeDropdown',
-              position: 'right',
-            },
+        // {
+        //           type: 'localeDropdown',
+        //           position: 'right',
+        //         },
       ],
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Stack Overflow',
-        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //     },
-        //     {
-        //       label: 'Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //     {
-        //       label: 'Twitter',
-        //       href: 'https://twitter.com/docusaurus',
-        //     },
-        //   ],
-        // },
-        // {
-        //   title: 'More',
-        //   items: [
-        //     {
-        //       label: 'Blog',
-        //       to: '/blog',
-        //     },
-        //     {
-        //       label: 'GitHub',
-        //       href: 'https://github.com/facebook/docusaurus',
-        //     },
-        //   ],
-        // },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Duit Foundation. Built with Docusaurus.`,
+    colorMode: {
+      disableSwitch: true,
     },
+    // footer: {
+    //   style: 'dark',
+    //   links: [
+    //     {
+    //       title: 'Docs',
+    //       items: [
+    //         {
+    //           label: 'Tutorial',
+    //           to: '/docs/intro',
+    //         },
+    //       ],
+    //     },
+    //     // {
+    //     //   title: 'Community',
+    //     //   items: [
+    //     //     {
+    //     //       label: 'Stack Overflow',
+    //     //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+    //     //     },
+    //     //     {
+    //     //       label: 'Discord',
+    //     //       href: 'https://discordapp.com/invite/docusaurus',
+    //     //     },
+    //     //     {
+    //     //       label: 'Twitter',
+    //     //       href: 'https://twitter.com/docusaurus',
+    //     //     },
+    //     //   ],
+    //     // },
+    //     // {
+    //     //   title: 'More',
+    //     //   items: [
+    //     //     {
+    //     //       label: 'Blog',
+    //     //       to: '/blog',
+    //     //     },
+    //     //     {
+    //     //       label: 'GitHub',
+    //     //       href: 'https://github.com/facebook/docusaurus',
+    //     //     },
+    //     //   ],
+    //     // },
+    //   ],
+    //   copyright: `Copyright © ${new Date().getFullYear()} Duit Foundation. Built with Docusaurus.`,
+    // },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
       additionalLanguages: ['dart'],
     },
   } satisfies Preset.ThemeConfig,

@@ -1,0 +1,27 @@
+.divider {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    gap: 16px;
+    padding: 2rem 80px;
+}
+
+.circle {
+    width: 16px;
+    height: 16px;
+    background: #E1E2E9;
+    border-radius: 50px;
+}
+
+.romb {
+    width: 16px;
+    height: 16px;
+    background: #E1E2E9;
+    rotate: 45deg;
+}
+
+.square {
+    width: 16px;
+    height: 16px;
+    background: #E1E2E9;
+}

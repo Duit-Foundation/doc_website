@@ -1,44 +1,17 @@
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import OpportunitySection from "@site/src/components/HomePage/OpportunitySection";
-import Heading from "@theme/Heading";
-
-import styles from "./index.module.css";
-
-function HomepageHeader() {
-  const { siteConfig, i18n } = useDocusaurusContext();
-
-  return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            {i18n.currentLocale == "en" ? "Learn more" : "Узнать больше"}
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import Divider from "@site/src/components/HomePage/divider";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      description="Backend-driver UI framwork for Flutter"
     >
-      <HomepageHeader />
       <main>
+        <Divider/>
         <OpportunitySection />
       </main>
     </Layout>
