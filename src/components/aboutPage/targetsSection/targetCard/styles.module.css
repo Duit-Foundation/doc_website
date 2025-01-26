@@ -1,0 +1,19 @@
+.card {
+    width: 400px;
+    padding: 5rem 0;
+    margin: 0 auto;
+}
+
+.index {
+    color: #00ACD7;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.description {
+    font-weight: 100;
+}

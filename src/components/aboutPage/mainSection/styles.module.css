@@ -1,0 +1,21 @@
+.title {
+    padding: .5rem 1rem;
+    text-align: center;
+    background: #00ACD7;
+    color: white;
+    border-radius: 16px;
+    width: 200px;
+    margin: 5rem auto 2rem auto;
+}
+
+.description {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+.span {
+    text-decoration: underline;
+    font-weight: 600;
+}

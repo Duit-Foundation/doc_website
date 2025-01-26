@@ -11,7 +11,7 @@ type FeatureItem = {
   bgColor: string;
   title: string;
   description: JSX.Element;
-  Component?: () => JSX.Element;
+  Component: () => JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [

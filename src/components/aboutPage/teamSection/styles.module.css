@@ -1,0 +1,9 @@
+.heading {
+    text-align: center;
+    font-weight: 500;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}

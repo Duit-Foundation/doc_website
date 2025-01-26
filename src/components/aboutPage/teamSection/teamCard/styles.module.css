@@ -1,0 +1,23 @@
+.card {
+    flex-wrap: nowrap;
+    margin: 1rem;
+}
+
+.col {
+    width: 280px;
+}
+
+.img {
+    width: 70px;
+    height: 70px;
+    margin-left: 50px;
+}
+
+.name {
+    font-weight: 400;
+}
+
+.position {
+    font-size: 14px;
+    font-weight: 100;
+}
