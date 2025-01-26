@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import styles from "./styles.module.css";
 
@@ -19,21 +19,26 @@ function getRandomElement(): Variant {
     return arr[randomIndex];
 }
 
-function RichDivider() {
-
-    const count = ~~((window.visualViewport.width - 160) / 16); //FIXME
-
-    const arr: JSX.Element[] = [];
-
-    for (let index = 0; index < count; index++) {
-        arr[index] = getVariant(getRandomElement());
-    }
+function Divider(): JSX.Element {
+    const containerRef = useRef(null);
+    const [squaresPerRow, setSquaresPerRow] = useState(0); // Количество квадратов в одной строке
+    const squareSizeWithMargin = 32; // Размер квадрата с учётом отступов
+  
+    useEffect(() => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.clientWidth;
+        const newSquaresPerRow = Math.floor(containerWidth / squareSizeWithMargin);
+        setSquaresPerRow(newSquaresPerRow);
+      }
+    }, []);
 
     return (
-        <div className={styles.divider}>
-            {arr}
+        <div ref={containerRef} className={styles.grid_container}>
+            {Array(squaresPerRow * 2).fill(0).map((_, index) => (
+        getVariant(getRandomElement())
+      ))}
         </div>
     )
 }
 
-export default React.memo(RichDivider);
+export default React.memo(Divider);
