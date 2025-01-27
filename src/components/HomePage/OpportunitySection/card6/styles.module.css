@@ -13,3 +13,21 @@
     margin-bottom: -7px;
     border-radius: 8px;
 }
+
+.img1 {
+    position: absolute;
+    top: 111px;
+    left: 45px;
+}
+
+.img2 {
+    position: absolute;
+    top: 169px;
+    left: 45px;
+}
+
+.img3 {
+    position: absolute;
+    top: 225px;
+    left: 44.5px;
+}

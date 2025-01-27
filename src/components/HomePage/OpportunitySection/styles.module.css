@@ -25,6 +25,9 @@
     .row {
         column-count: 1;
     }
+    .card {
+        margin: 0;
+    }
 }
 
 .card {
