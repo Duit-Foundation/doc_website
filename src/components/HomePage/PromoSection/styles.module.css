@@ -5,3 +5,9 @@
 .title {
     margin: auto;
 }
+
+@media (max-width: 1440px) {
+    .title {
+        margin-top: 2rem;
+    }
+}

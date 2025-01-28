@@ -17,3 +17,9 @@
 .description {
     font-weight: 100;
 }
+
+@media (max-width: 1440px) {
+    .card {
+        padding: 0;
+    }
+}

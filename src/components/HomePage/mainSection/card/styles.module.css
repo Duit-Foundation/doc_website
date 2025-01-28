@@ -1,0 +1,83 @@
+.card {
+    width: 388px;
+    height: 320px;
+    color: white;
+    border-radius: 48px;
+    margin: .5rem;
+    position: relative;
+}
+
+.img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    margin-top: 6rem;
+    margin-left: .5rem;
+}
+
+.svg {
+    position: absolute;
+    top: 20px;
+    left: 210px;
+}
+
+.text {
+    padding: 11rem 2rem 1rem 2rem;
+}
+
+.hText {
+    padding: 3rem 2rem 1rem 2rem;
+    color: black;
+}
+
+.hTitle {
+    font-weight: 700;
+    font-size: 1.7em;
+}
+
+.hDescription {
+    font-size: 0.8em;
+    color: grey;
+}
+
+.hBtn {
+    margin-top: 1.5rem;
+    width: 200px;
+    height: 48px;
+    border: 1px solid transparent;
+    border-radius: 48px;
+    background: #2C323F;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    color: #F6F6F6;
+    margin-left: 3rem;
+}
+
+.hBtn:hover {
+    background: #2C323F;
+    color: #F6F6F6;
+    transition: all 0.3s ease 0s;
+}
+
+.hBtn:active {
+    background: #2C323F;
+    color: #F6F6F6;
+    transition: all 0.3s ease 0s;
+}
+
+.title {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.description {
+    font-size: 0.9rem;
+    font-weight: 300;
+}

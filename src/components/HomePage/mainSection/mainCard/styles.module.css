@@ -1,0 +1,39 @@
+.mainCard {
+    margin-top: 2rem;
+    margin-left: 5rem;
+}
+
+.mainCardMobile {
+    display: none;
+}
+
+.title {
+    font-size: 64px;
+    font-weight: 500;
+    fill: #2C323F;
+}
+
+.description {
+    fill: #2C323F;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.btn {
+    font-size: 24px;
+    font-weight: 600;
+    fill: #F6F6F6;
+    cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+    .mainCard {
+        display: none;
+    }
+    .mainCardMobile {
+        display: flex;
+    }
+    .container {
+        display: flex;
+    }
+}

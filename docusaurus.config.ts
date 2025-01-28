@@ -102,7 +102,7 @@ const config: Config = {
       ],
     },
     colorMode: {
-      disableSwitch: true,
+      disableSwitch: false,
     },
     // footer: {
     //   style: 'dark',

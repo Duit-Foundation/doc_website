@@ -1,5 +1,6 @@
 .container {
     position: relative;
+    margin-left: 10%;
 }
 
 .chat {
@@ -16,4 +17,22 @@
     position: absolute;
     top: 240px;
     left: 0;
+}
+
+@media (max-width: 1440px) {
+    .container {
+        margin-left: 0%;
+     }
+}
+
+@media (max-width: 960px) {
+    .container {
+        margin-left: 20%;
+     }
+}
+
+@media (max-width: 840px) {
+    .container {
+       margin-left: 5%;
+    }
 }

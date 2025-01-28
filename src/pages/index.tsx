@@ -4,6 +4,7 @@ import OpportunitySection from "@site/src/components/HomePage/OpportunitySection
 import Divider from "@site/src/components/divider";
 import PromoSection from "@site/src/components/HomePage/PromoSection";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import MainSection from "@site/src/components/HomePage/mainSection";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -13,8 +14,9 @@ export default function Home(): JSX.Element {
       description="Backend-driver UI framwork for Flutter"
     >
       <main>
+        <MainSection />
         <PromoSection />
-        <BrowserOnly children={() =><Divider/>}/>
+        <BrowserOnly children={() => <Divider />} />
         <OpportunitySection />
       </main>
     </Layout>
