@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import Card from "../card";
 import Translate from "@docusaurus/Translate";
+import { useHistory } from "react-router-dom";
 
 const title1 = "Обновляйте UI вашего ";
 const title2 = "приложения с сервера в ";
@@ -10,7 +11,9 @@ const description =
 const btnText = <Translate>Документация</Translate>;
 
 export default function MainCard(): JSX.Element {
-  const handleOnCLick = () => console.log("lol");
+  const history = useHistory();
+  const handleOnCLick = () => history.push("/docs/intro");
+
   const data = {
     bgColor: "#E1E2E9",
     title: title1 + title2 + title3,

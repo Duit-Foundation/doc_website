@@ -19,7 +19,7 @@ export default function Card(prop): JSX.Element {
       {prop.icon ? (
         <></>
       ) : (
-        <button className={styles.hBtn}>{prop.btnText}</button>
+        <button className={styles.hBtn} onClick={prop.handleOnCLick}>{prop.btnText}</button>
       )}
     </div>
   );
