@@ -9,7 +9,7 @@
 
 .img {
     position: absolute;
-    top: 20px;
+    top: 0;
     left: 20px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .text {
-    padding: 11rem 2rem 1rem 2rem;
+    padding: 10rem 2rem 1rem 2rem;
 }
 
 .hText {
@@ -80,4 +80,10 @@
 .description {
     font-size: 0.9rem;
     font-weight: 300;
+}
+
+@media (max-width: 425px) {
+    .svg {
+       display: none;
+    }
 }

@@ -35,7 +35,7 @@ export default function TargetsSection(): JSX.Element {
       <Heading as="h2" className={styles.heading}>
         {heading}
       </Heading>
-      <div className="row">
+      <div className={`row ${styles.row}`}>
         {TargetsList.map((props, idx) => (
               <TargetCard key={idx} {...props} />
             ))}

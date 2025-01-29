@@ -46,20 +46,20 @@ const cards: Card[] = [
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="">
-        <div className="row">
-          <div className={`col ${styles.col}`}>
-            <div className={styles.mainCard}>
-              <MainCard />
-            </div>
+      <div className={`row ${styles.row}`}>
+        <div className={styles.mainContainer}>
+          <div className={styles.mainCard}>
+            <MainCard />
+          </div>
+          <div className={styles.cardContainer}>
             <div className={styles.card}>
               <Card {...cards[0]} />
             </div>
           </div>
-          <div className={`col ${styles.col}`}>
-            <Card {...cards[1]} />
-            <Card {...cards[2]} />
-          </div>
+        </div>
+        <div className={`${styles.col}`}>
+          <Card {...cards[1]} />
+          <Card {...cards[2]} />
         </div>
       </div>
     </section>

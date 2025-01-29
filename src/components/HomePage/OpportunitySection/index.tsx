@@ -106,8 +106,8 @@ function FeatureCard({ bgColor, title, description, Component }: FeatureItem) {
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <Heading as="h1">Возможности Duit</Heading>
+      <div className={`container ${styles.container}`}>
+        <Heading as="h1" className={styles.heading}>Возможности Duit</Heading>
         <div className={styles.row}>
           {FeatureList.map((props, idx) => (
             <FeatureCard key={idx} {...props} />

@@ -1,4 +1,7 @@
 .grid_container {
+    max-width: 97%;
+    margin: 0 auto;
+    margin-top: 3rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16px, 1fr)); /* Автоматически заполняем строку, учитывая ширину квадратов */
     gap: 16px; /* Внешний отступ между квадратами */

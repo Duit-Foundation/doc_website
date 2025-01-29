@@ -1,13 +1,20 @@
+.container {
+    margin-top: 5rem;
+}
+
 .yellow {
     color: #FC9B00;
 }
 
 .title {
     margin: auto;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-@media (max-width: 1440px) {
-    .title {
-        margin-top: 2rem;
-    }
+.heading {
+    font-size: 54px;
+    font-weight: bold;
 }

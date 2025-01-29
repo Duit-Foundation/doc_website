@@ -5,10 +5,10 @@ import Chat from "./Chat";
 export default function PromoSection(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
+      <div className={`container ${styles.container}`}>
         <div className="row">
           <div className={`${styles.title} col`}>
-            <Heading as="h1">
+            <Heading as="h1" className={styles.heading}>
               Ваше <span className={styles.yellow}>приложение</span> живет на
               сервере
             </Heading>

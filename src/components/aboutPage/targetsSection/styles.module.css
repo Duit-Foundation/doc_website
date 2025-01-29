@@ -1,5 +1,13 @@
 .heading {
     text-align: center;
     font-weight: 500;
+    margin-top: 3rem;
+    font-size: 48px;
 }
 
+@media (max-width: 1440px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+}

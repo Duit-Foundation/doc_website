@@ -17,14 +17,20 @@
         column-count: 2;
         text-align: center;
     }
-    .card {
-        margin: 10px;
-    }
 }
 
 @media (max-width: 840px) {
     .row {
         column-count: 1;
+    }
+}
+
+@media (max-width: 425px) {
+    .container {
+        padding: 0;
+    }
+    .heading {
+        padding-left: 1rem;
     }
 }
 

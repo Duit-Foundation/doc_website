@@ -1,38 +1,17 @@
 .container {
-    position: relative;
-    margin-left: 10%;
-}
-
-.chat {
-    scale: .8;
+    position: absolute;
+    display: flex;
+    justify-content: center;
 }
 
 .img1 {
-    position: absolute;
-    top: 40px;
-    left: 220px;
+    position: relative;
+    top: 8px;
+    left: 370px;
 }
 
 .img2 {
-    position: absolute;
-    top: 240px;
-    left: 0;
-}
-
-@media (max-width: 1440px) {
-    .container {
-        margin-left: 0%;
-     }
-}
-
-@media (max-width: 960px) {
-    .container {
-        margin-left: 20%;
-     }
-}
-
-@media (max-width: 840px) {
-    .container {
-       margin-left: 5%;
-    }
+    position: relative;
+    top: 260px;
+    left: -415px;
 }
