@@ -17,6 +17,9 @@
         column-count: 2;
         text-align: center;
     }
+    .container {
+        margin: 0;
+    }
 }
 
 @media (max-width: 840px) {

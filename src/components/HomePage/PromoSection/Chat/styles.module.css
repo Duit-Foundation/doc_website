@@ -1,17 +1,4 @@
 .container {
-    position: absolute;
     display: flex;
     justify-content: center;
-}
-
-.img1 {
-    position: relative;
-    top: 8px;
-    left: 370px;
-}
-
-.img2 {
-    position: relative;
-    top: 260px;
-    left: -415px;
 }

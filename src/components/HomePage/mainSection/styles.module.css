@@ -15,7 +15,7 @@
 .card {
     position: relative;
     top: -143px;
-    left: 565px;
+    left: 485px;
 }
 
 .col {
@@ -27,7 +27,7 @@
     .col {
         flex-direction: row;
         margin-top: 12rem;
-        margin-left: 10.5rem;
+        margin-left: 5.5rem;
     }
 }
 
