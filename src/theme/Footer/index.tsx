@@ -18,7 +18,7 @@ function Footer(): JSX.Element | null {
       <div className={styles.direction}>
         <h3 className={styles.heading}>Duit</h3>
         <p className={styles.txt}>© {new Date().getFullYear()}</p>
-        <Link className={styles.link} to="/about">{i18n.currentLocale == "en" ? "About" : "О проекте"}</Link>
+        {/* <Link className={styles.link} to="/about">{i18n.currentLocale == "en" ? "About" : "О проекте"}</Link> */}
         <Link className={styles.link} to="/docs/intro">{i18n.currentLocale == "en" ? "Docs" : "Документация"}</Link>
       </div>
     </div>

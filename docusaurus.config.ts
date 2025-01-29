@@ -78,11 +78,11 @@ const config: Config = {
           position: 'right',
           label: 'Документация',
         },
-        {
-          position: 'right',
-          to: '/about',
-          label: 'О проекте',
-        },
+        // {
+        //   position: 'right',
+        //   to: '/about',
+        //   label: 'О проекте',
+        // },
         {
           href: 'https://t.me/duit_community',
           'aria-label': 'Telegram',
@@ -102,7 +102,7 @@ const config: Config = {
       ],
     },
     colorMode: {
-      disableSwitch: false,
+      disableSwitch: true,
     },
     // footer: {
     //   style: 'dark',
