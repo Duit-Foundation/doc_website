@@ -3,11 +3,11 @@ import Card from "../card";
 import Translate from "@docusaurus/Translate";
 import { useHistory } from "react-router-dom";
 
-const title1 = "Обновляйте UI вашего ";
-const title2 = "приложения с сервера в ";
-const title3 = "любой момент!";
+const title1 = "Duit - backend-driven UI ";
+const title2 = "фреймворк с открытым ";
+const title3 = "исходным кодом";
 const description =
-  "Разработка и выпуск обновлений теперь быстрее, чем когда-либо";
+  "Реализация BDUI уже никогда не будет настолько простой";
 const btnText = <Translate>Документация</Translate>;
 
 export default function MainCard(): JSX.Element {
