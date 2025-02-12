@@ -1,0 +1,37 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Установка зависимостей
+
+Duit - это экосистема библиотек и инструментов. Поэтому для использования этого инструмента
+потребуется установить необходимые зависимости.
+
+## Клиент
+
+Для базового использования Duit требуется установить
+пакет [flutter_duit](https://pub.dev/packages/flutter_duit).
+
+```text 
+flutter pub add flutter_duit
+```
+
+## Сервер
+
+В данное время доступно, развивается и поддерживается две DSL-библиотеки для
+работы с Duit на стороне сервера: [duit_js](https://github.com/Duit-Foundation/duit_js) для проектов использующих Javascript/Typescript
+и [duit_go](https://github.com/Duit-Foundation/duit_go) для проектов использующих Golang.
+
+Установите соотвествующий пакет, используя одну из данных команды:
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+      ```text
+      npm install duit_js
+      ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+      ```text
+      go get github.com/Duit-Foundation/duit_go/v3
+      ```
+  </TabItem>
+</Tabs>

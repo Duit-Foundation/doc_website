@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import Card from "../card";
 import Translate from "@docusaurus/Translate";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const title1 = "Duit - backend-driven UI ";
 const title2 = "фреймворк с открытым ";
@@ -87,11 +87,11 @@ export default function MainCard(): JSX.Element {
               rx="36"
               fill="#2C323F"
             />
-            <a href="/docs/intro">
-              <text x="150" y="385" className={styles.btn}>
+            <Link to="docs/intro">
+            <text x="150" y="385" className={styles.btn}>
                 {btnText}
               </text>
-            </a>
+            </Link>
           </g>
           <g opacity="0.08">
             <path

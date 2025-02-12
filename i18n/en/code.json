@@ -305,5 +305,71 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "О проекте": {
+    "message": "О проекте"
+  },
+  "это активно развивающаяся экосистема open source библиотек и инструментов, призванная помочь разработчикам легко и эффективно реализовывать подход backend-driven UI в своих приложениях, написанных на Flutter.": {
+    "message": "это активно развивающаяся экосистема open source библиотек и инструментов, призванная помочь разработчикам легко и эффективно реализовывать подход backend-driven UI в своих приложениях, написанных на Flutter."
+  },
+  "Команда": {
+    "message": "Команда"
+  },
+  "Фамилия Имя": {
+    "message": "Фамилия Имя"
+  },
+  "Важный хуй": {
+    "message": "Важный хуй"
+  },
+  "Влажный хуй": {
+    "message": "Влажный хуй"
+  },
+  "Наша цель": {
+    "message": "Наша цель"
+  },
+  "Быстродействие": {
+    "message": "Быстродействие"
+  },
+  "Мы хотим ускорить процесс разработки и выход на Time-to-Market.": {
+    "message": "Мы хотим ускорить процесс разработки и выход на Time-to-Market."
+  },
+  "Простота использования": {
+    "message": "Простота использования"
+  },
+  "Чем проще использовать инструмент, тем лучше конечный продукт.": {
+    "message": "Чем проще использовать инструмент, тем лучше конечный продукт."
+  },
+  "Эффективное обновление UI": {
+    "message": "Эффективное обновление UI"
+  },
+  "Обновлять интерфейс приложения без обновления самого приложения.": {
+    "message": "Обновлять интерфейс приложения без обновления самого приложения."
+  },
+  "Документация": {
+    "message": "Docs"
+  },
+  "Duit - backend-driven UI ": {
+    "message": "Duit - backend-driven UI "
+  },
+  "фреймворк с открытым ": {
+    "message": "open source "
+  },
+  "исходным кодом": {
+    "message": "framework"
+  },
+  "Реализация BDUI уже никогда не будет настолько простой": {
+    "message": "Implementing BDUI will never be this easy again"
+  },
+  "promo.your": {
+    "message": "Your "
+  },
+  "promo.app": {
+    "message": "application "
+  },
+  "promo.on_server": {
+    "message": "lives on server "
+  },
+  "promo.description": {
+    "message": "You define elements, states, and animations on the server side, and they are sent to the client regardless of the application version. Update the application UI as needed - be it every hour or even more often."
   }
 }
