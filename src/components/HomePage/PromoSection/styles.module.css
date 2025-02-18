@@ -7,14 +7,21 @@
 }
 
 .title {
-    margin: auto;
-    height: 410px;
+    margin: 1.5rem auto auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .heading {
-    font-size: 54px;
-    font-weight: bold;
+    font-size: 5rem;
+    font-weight: 500;
+    line-height: 97%;
+    letter-spacing: -2.4px;
+}
+
+.description {
+    font-size: 1.5rem;
+    line-height: 140%;
+    letter-spacing: -0.72px;
+    color: #2C323F;
 }
