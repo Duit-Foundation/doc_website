@@ -91,7 +91,7 @@ function FeatureCard({ bgColor, title, description, Component }: FeatureItem) {
   return (
     <div className={`${styles.card}`} style={{ backgroundColor: bgColor }}>
       <div>
-        <div className="text--left padding-horiz--md">
+      <div className={`text--left ${styles.description}`}>
           <Heading as="h3">{title}</Heading>
           <p>{description}</p>
         </div>

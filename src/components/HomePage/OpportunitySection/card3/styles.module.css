@@ -4,12 +4,10 @@
 
 .img {
     position: absolute;
-    top: 40px;
-    left: 0px;
+    top: 16px;
+    left: 0;
 }
 
 .bg {
-    margin-top: 160px;
-    margin-bottom: -7px;
-    border-radius: 8px;
+    margin-top: 129px;
 }
