@@ -4,6 +4,7 @@ import MainSection from "@site/src/components/aboutPage/mainSection";
 import Divider from "../components/divider";
 import TargetsSection from "@site/src/components/aboutPage/targetsSection";
 import TeamSection from "@site/src/components/aboutPage/teamSection";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 export default function About() {
   const { siteConfig } = useDocusaurusContext();
@@ -14,7 +15,9 @@ export default function About() {
     >
       <MainSection />
       <TargetsSection />
-      <Divider />
+      <section className='container'>
+        <BrowserOnly children={() => <Divider />} />
+      </section>
       <TeamSection />
     </Layout>
   );

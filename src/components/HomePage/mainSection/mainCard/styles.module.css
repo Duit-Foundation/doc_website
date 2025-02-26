@@ -1,21 +1,31 @@
 .mainCard {
-    margin-top: 2rem;
+    width: 884px;
+    height: 327px;
+    border-radius: 48px 48px 48px 0;
+    padding: 48px;
+    margin-top: .5rem;
+    background: url('@site/static/img/HomePage/mainSection/mainCard/bg.svg') #E1E2E9 no-repeat;
 }
 
 .mainCardMobile {
     display: none;
 }
 
-.title {
-    font-size: 64px;
+.header {
     font-weight: 500;
+    font-size: 64px;
+    line-height: 68px;
+    letter-spacing: -3%;    
     fill: #2C323F;
+    margin-bottom: 24px;
 }
 
 .description {
     fill: #2C323F;
-    font-size: 24px;
     font-weight: 400;
+    font-size: 24px;
+    line-height: 33.6px;
+    letter-spacing: -3%;
 }
 
 .btn {
@@ -23,6 +33,13 @@
     font-weight: 600;
     fill: #F6F6F6;
     cursor: pointer;
+}
+
+@media (max-width: 1440px) {
+    .container {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 1024px) {

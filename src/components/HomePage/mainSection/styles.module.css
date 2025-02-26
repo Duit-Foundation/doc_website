@@ -1,11 +1,12 @@
+.container {
+    margin-top: 2rem;
+}
+
+
 .row {
     margin: 0;
     margin-top: 1.5rem;
     justify-content: center;
-}
-
-.mainCard {
-    margin-top: -1.5rem;
 }
 
 .cardContainer {
@@ -18,20 +19,30 @@
     left: 488px;
 }
 
-.col {
-    display: flex;
-    flex-direction: column;
+.docBtn {
+    padding-right: 0;
 }
 
 @media (max-width: 1440px) {
-    .col {
-        flex-direction: row;
-        margin-top: 12rem;
-        margin-left: 5.5rem;
+    .cardCol {
+        flex: 0;
+        width: auto;
+    }
+    .centerdRow {
+        justify-content: center;
+    }
+    .cardsCol {
+        display: flex;
+        flex: auto;
+        max-width: 884px;
+        justify-content: space-between;
     }
 }
 
 @media (max-width: 1024px) {
+    .docBtn {
+        display: none;
+    }
     .col {
         display: flex;
         justify-content: center;
@@ -43,15 +54,19 @@
         position: inherit;
         display: flex;
     }
+    .cardsCol {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .mobileCenteredCol {
+        flex: auto;
+    }
     .card {
         position: inherit;
     }
     .mainContainer {
         display: flex;
         flex-direction: column;
-    }
-    .mainCard {
-        display: flex;
-        margin-top: 0;
     }
 }

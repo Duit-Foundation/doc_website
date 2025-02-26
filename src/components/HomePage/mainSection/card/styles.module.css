@@ -1,8 +1,11 @@
 .card {
     width: 388px;
+    max-width: 388px;
+    height: 330px;
+    max-height: 330px;
     color: white;
     border-radius: 48px;
-    margin: .5rem 0 0 .5rem;
+    margin-top: .5rem;
     position: relative;
 }
 
@@ -30,7 +33,7 @@
 }
 
 .hText {
-    padding: 3rem 2rem 1rem 2rem;
+    padding: 2.5rem 2rem 1rem 2rem;
     color: black;
 }
 
@@ -40,12 +43,12 @@
 }
 
 .hDescription {
-    font-size: 0.8em;
+    font-size: 1em;
     color: grey;
 }
 
 .hBtn {
-    margin-top: 1.5rem;
+    margin: 0px 0px 15px 85px;
     width: 200px;
     height: 48px;
     border: 1px solid transparent;
@@ -56,7 +59,6 @@
     font-weight: 600;
     text-align: center;
     color: #F6F6F6;
-    margin-left: 3rem;
 }
 
 .hBtn:hover {
@@ -84,6 +86,30 @@
     font-weight: 400;
     line-height: 140%;
     letter-spacing: -.72px;
+}
+
+.antiRadiusContainer {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: #E1E2E9;
+    left: -.5rem;
+    top: -.5rem;
+    z-index: -1;
+}
+
+.antiRadius {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-top-left-radius: 48px;
+    background-color: var(--ifm-background-color);
+}
+
+@media (max-width: 1024px) {
+    .antiRadiusContainer {
+        display: none;
+    }
 }
 
 @media (max-width: 425px) {

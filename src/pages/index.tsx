@@ -16,7 +16,9 @@ export default function Home(): JSX.Element {
       <main>
         <MainSection />
         <PromoSection />
-        <BrowserOnly children={() => <Divider />} />
+        <section className='container'>
+          <BrowserOnly children={() => <Divider />} />
+        </section>
         <OpportunitySection />
       </main>
     </Layout>
