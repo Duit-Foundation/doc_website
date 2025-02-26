@@ -21,6 +21,7 @@ export default function Card(prop): JSX.Element {
       ) : (
         <button className={styles.hBtn} onClick={prop.handleOnCLick}>{prop.btnText}</button>
       )}
+      {prop.hasAntiRadius ? <div className={styles.antiRadiusContainer}><div className={styles.antiRadius}></div></div> : null}
     </div>
   );
 }

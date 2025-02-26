@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import Card from "./card";
 import MainCard from "./mainCard";
+import DocBtn from './docBtn';
 
 type Card = {
   icon: React.ComponentType;
@@ -8,6 +9,7 @@ type Card = {
   bgColor: string;
   title: string;
   description: string;
+  hasAntiRadius?: boolean;
 };
 
 const cards: Card[] = [
@@ -20,6 +22,7 @@ const cards: Card[] = [
     title: "Будь быстрее всех",
     description:
       "Доведите свой показатель Time-to-Market до новых вершин, снижая сроки сроки доставки обновлений до пользователя",
+    hasAntiRadius: true
   },
   {
     icon: require("@site/static/img/HomePage/mainSection/card2/blocks.svg")
@@ -45,21 +48,32 @@ const cards: Card[] = [
 
 export default function HomepageFeatures(): JSX.Element {
   return (
-    <section className={styles.features}>
-      <div className={`row ${styles.row}`}>
-        <div className={styles.mainContainer}>
-          <div className={styles.mainCard}>
-            <MainCard />
+    <section className={`container ${styles.container}`}>
+      <div className={`row ${styles.centerdRow}`}>
+        <div className={`col ${styles.mobileCenteredCol}`}>
+          <div className="row">
+            <div className="col">
+              <div className={styles.mainCard}>
+                <MainCard />
+              </div>
+            </div>
           </div>
-          <div className={styles.cardContainer}>
-            <div className={styles.card}>
+          <div className={`row ${styles.centerdRow}`}>
+            <div className={`col ${styles.docBtn} ${styles.cardCol}`}>
+              <DocBtn />
+            </div>
+            <div className={`col ${styles.cardCol}`}>
               <Card {...cards[0]} />
             </div>
           </div>
         </div>
-        <div className={`${styles.col}`}>
-          <Card {...cards[1]} />
-          <Card {...cards[2]} />
+        <div className={`col ${styles.cardCol} ${styles.cardsCol}`}>
+          <div className="row">
+            <Card {...cards[1]} />
+          </div>
+          <div className="row">
+            <Card {...cards[2]} />
+          </div>
         </div>
       </div>
     </section>

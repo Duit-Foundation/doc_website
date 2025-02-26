@@ -62,6 +62,12 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    ['docusaurus-plugin-yandex-metrica', {
+      counterID: '100067824',
+    }],
+  ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',

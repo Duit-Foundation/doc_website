@@ -1,0 +1,28 @@
+.container {
+    border-radius: 0 0 48px 48px;
+    text-align: center;
+    padding: 24px 48px 48px 48px;
+    width: 488px;
+    background: url('@site/static/img/HomePage/mainSection/docBtn/bg.svg') #E1E2E9 -1px -10px no-repeat;
+}
+
+.btn {
+    width: 380px;
+    height: 72px;
+    border-radius: 48px;
+    font-weight: 600;
+    font-size: 24px;
+    text-align: center;
+    background-color: #2C323F;
+    color: #F6F6F6;
+    border: 1.5px solid #2C323F;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.btn:hover {
+    background-color: #E1E2E9;
+    color: #2C323F;
+    transition: all .3s ease-in;
+}
