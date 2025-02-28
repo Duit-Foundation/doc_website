@@ -341,5 +341,8 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "footer_docs": {
+    "message": "Docs"
   }
 }

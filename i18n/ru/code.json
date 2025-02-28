@@ -341,5 +341,8 @@
   },
   "main_card_doc_button": {
     "message": "Документация"
+  },
+  "footer_docs": {
+    "message": "Документация"
   }
 }
