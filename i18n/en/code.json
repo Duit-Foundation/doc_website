@@ -395,5 +395,23 @@
   },
   "opsec_title": {
     "message": "Duit features"
+  },
+  "promo_svg_client": {
+    "message": "Client"
+  },
+  "promo_svg_server": {
+    "message": "Server"
+  },
+  "promo_svg_ch1": {
+    "message": "Initial layout request"
+  },
+  "promo_svg_ch2": {
+    "message": "Layout formation and sending to the client"
+  },
+  "promo_svg_ch3": {
+    "message": "Interaction with UI, the client performs an action"
+  },
+  "promo_svg_ch4": {
+    "message": "Action processing, event generation, and sending to the client"
   }
 }

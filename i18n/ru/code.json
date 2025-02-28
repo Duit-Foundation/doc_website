@@ -395,5 +395,23 @@
   },
   "opsec_title": {
     "message": "Возможности Duit"
+  },
+  "promo_svg_client": {
+    "message": "Клиент"
+  },
+  "promo_svg_server": {
+    "message": "Сервер"
+  },
+  "promo_svg_ch1": {
+    "message": "Начальный запрос макета"
+  },
+  "promo_svg_ch2": {
+    "message": "Формирование макета и отправка клиенту"
+  },
+  "promo_svg_ch3": {
+    "message": "Взаимодействие с UI, клиент выполняет действие"
+  },
+  "promo_svg_ch4": {
+    "message": "Обработка действия, генерация события и отправка клиенту"
   }
 }
