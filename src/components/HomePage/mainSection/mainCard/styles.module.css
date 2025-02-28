@@ -15,7 +15,7 @@
     font-weight: 500;
     font-size: 64px;
     line-height: 68px;
-    letter-spacing: -3%;    
+    letter-spacing: -1.92px;    
     fill: #2C323F;
     margin-bottom: 24px;
 }
@@ -25,7 +25,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 33.6px;
-    letter-spacing: -3%;
+    letter-spacing: -.72px;
 }
 
 .btn {

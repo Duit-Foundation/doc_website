@@ -11,18 +11,20 @@
     height: 72px;
     border-radius: 48px;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 1.5rem;
     text-align: center;
     background-color: #2C323F;
     color: #F6F6F6;
-    border: 1.5px solid #2C323F;
+    /*border: 1.5px solid #2C323F;*/
+    border: 0;
     cursor: pointer;
     outline: none;
 
 }
 
 .btn:hover {
-    background-color: #E1E2E9;
-    color: #2C323F;
+    /*background-color: #E1E2E9;*/
+    background-color: rgba(44, 50, 63, 0.8);
+    color: #f6f6f6;
     transition: all .3s ease-in;
 }

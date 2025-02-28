@@ -1,8 +1,6 @@
 .card {
     width: 388px;
     max-width: 388px;
-    height: 330px;
-    max-height: 330px;
     color: white;
     border-radius: 48px;
     margin-top: .5rem;
@@ -34,17 +32,17 @@
 
 .hText {
     padding: 2.5rem 2rem 1rem 2rem;
-    color: black;
+    color: #2C323F;
 }
 
 .hTitle {
-    font-weight: 700;
-    font-size: 1.7em;
+    font-weight: 500;
+    font-size: 2rem;
 }
 
 .hDescription {
-    font-size: 1em;
-    color: grey;
+    font-size: 1.125rem;
+    color: #2C323F;
 }
 
 .hBtn {
@@ -78,7 +76,7 @@
     font-weight: 500;
     line-height: 140%;
     letter-spacing: -.72px;
-    margin-bottom: 8px;
+    margin-bottom: .5rem;
 }
 
 .description {
