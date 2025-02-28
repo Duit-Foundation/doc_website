@@ -9,6 +9,6 @@
   },
   "item.label.header_docs": {
     "message": "Docs",
-    "description": "Navbar item with label Docs"
+    "description": "Navbar item with label header_docs"
   }
 }

@@ -21,6 +21,6 @@
   },
   "item.label.header_docs": {
     "message": "Документация",
-    "description": "Navbar item with label Документация"
+    "description": "Navbar item with label header_docs"
   }
 }

@@ -356,5 +356,44 @@
   },
   "promo_description": {
     "message": "You define elements, states, and animations on the server side, and they are sent to the client regardless of the app version. Update your app's UI as needed — whether it's every hour or even more frequently"
+  },
+  "opsec_card1_title": {
+    "message": "Flexibility in use"
+  },
+  "opsec_card1_description": {
+    "message": "Easy integration with existing apps and powerful capabilities to modify base behavior."
+  },
+  "opsec_card2_title": {
+    "message": "Actions & Events"
+  },
+  "opsec_card2_description": {
+    "message": "When interacting with the interface, the user triggers an action described on the server side. In response to this action, generate numerous events to describe the new state of the UI and the behavior of the application."
+  },
+  "opsec_card3_title": {
+    "message": "Duit Components"
+  },
+  "opsec_card3_description": {
+    "message": "A templating tool that allows you to create reusable widget compositions. Fill them with data, improve code readability, and increase system performance."
+  },
+  "opsec_card4_title": {
+    "message": "Backend DSL"
+  },
+  "opsec_card4_description": {
+    "message": "An ecosystem of libraries for popular development languages like Go and TypeScript. Enjoy familiar layout semantics and protect yourself from errors when building layouts."
+  },
+  "opsec_card5_title": {
+    "message": "Custom widgets"
+  },
+  "opsec_card5_description": {
+    "message": "Make your UI brighter and development more enjoyable by integrating custom widget configurations into Duit."
+  },
+  "opsec_card6_title": {
+    "message": "Animations"
+  },
+  "opsec_card6_description": {
+    "message": "Implement animations of any complexity in a familiar way, achieving maximum control and performance."
+  },
+  "opsec_title": {
+    "message": "Duit features"
   }
 }
