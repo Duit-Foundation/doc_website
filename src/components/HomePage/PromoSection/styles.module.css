@@ -26,3 +26,18 @@
     letter-spacing: -0.72px;
     color: #2C323F;
 }
+
+@media (max-width: 996px) {
+    .heading {
+        font-size: 2.5rem;
+        line-height: 102%;
+        letter-spacing: -1.2px;
+        margin-bottom: 1rem;
+    }
+    .description {
+        font-size: 1.125rem;
+        line-height: 140%;
+        letter-spacing: -0.54px;
+        margin-bottom: 0;
+    }
+}

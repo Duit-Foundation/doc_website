@@ -14,7 +14,7 @@
     font-weight: 500;
     line-height: 140%;
     letter-spacing: -0.72px;
-    margin-bottom: .5px;
+    margin-bottom: .5rem;
     color: #2C323F;
 }
 .description p {
@@ -26,9 +26,9 @@
 }
 .features {
     display: flex;
-    align-items: center;
-    padding: 2rem 0;
-    width: 100%;
+    /*align-items: center;*/
+    margin: 4rem 0 2rem 0;
+    /*width: 100%;*/
 }
 
 .row {
@@ -44,6 +44,14 @@
     }
     .container {
         margin: 0;
+    }
+}
+
+@media (max-width: 996px) {
+    .heading {
+        font-size: 2.5rem;
+        line-height: 102%;
+        letter-spacing: -1.2px;
     }
 }
 
