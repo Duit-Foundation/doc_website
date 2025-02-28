@@ -3,12 +3,12 @@ import Card from "../card";
 import Translate from "@docusaurus/Translate";
 import { useHistory } from "react-router-dom";
 
-const title1 = "Duit - backend-driven UI ";
-const title2 = "фреймворк с открытым ";
-const title3 = "исходным кодом";
+const title1 = <Translate>main_card_t1</Translate>; //Duit - backend-driven UI 
+const title2 = <Translate>main_card_t2</Translate>; //фреймворк с открытым 
+const title3 = <Translate>main_card_t3</Translate>; //исходным кодом
 const description =
-  "Реализация BDUI уже никогда не будет настолько простой";
-const btnText = <Translate>Документация</Translate>;
+  <Translate>main_card_description</Translate>; // Реализация BDUI уже никогда не будет настолько простой
+const btnText = <Translate>main_card_doc_button</Translate>;
 
 export default function MainCard(): JSX.Element {
   const history = useHistory();
@@ -16,7 +16,6 @@ export default function MainCard(): JSX.Element {
 
   const data = {
     bgColor: "#E1E2E9",
-    title: title1 + title2 + title3,
     description,
     btnText,
     handleOnCLick,
@@ -26,7 +25,9 @@ export default function MainCard(): JSX.Element {
     <div className={styles.container}>
       <div className={styles.mainCard}>
         <div className={styles.header}>
-          {title1+title2+title3}
+          {title1}
+          {title2}
+          {title3}
         </div>
         <div className={styles.description}>
           {description}

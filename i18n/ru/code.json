@@ -305,5 +305,41 @@
   "theme.tags.tagsPageTitle": {
     "message": "Теги",
     "description": "The title of the tag list page"
+  },
+  "card1_tile": {
+    "message": "Будь быстрее всех"
+  },
+  "card1_description": {
+    "message": "Доведите свой показатель Time-to-Market до новых вершин, снижая сроки сроки доставки обновлений до пользователя"
+  },
+  "card2_title": {
+    "message": "Одна реализация - множество платформ"
+  },
+  "card2_description": {
+    "message": "Используйте все преимущества Flutter, создавая консистентный UI для множества целевых платформ"
+  },
+  "card3_title": {
+    "message": "Бесшовные обновления UI"
+  },
+  "card3_description": {
+    "message": "Распространяйте обновленный UI даже на тех пользователей, которые не спешат устанавливать новые версии"
+  },
+  "doc_button": {
+    "message": "Документация"
+  },
+  "main_card_t1": {
+    "message": "Duit - backend-driven UI "
+  },
+  "main_card_t2": {
+    "message": "фреймворк с открытым "
+  },
+  "main_card_t3": {
+    "message": "исходным кодом"
+  },
+  "main_card_description": {
+    "message": "Реализация BDUI уже никогда не будет настолько простой"
+  },
+  "main_card_doc_button": {
+    "message": "Документация"
   }
 }

@@ -2,7 +2,7 @@ import Translate from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 import { useHistory } from "react-router-dom";
 
-const btnText = <Translate>Документация</Translate>;
+const btnText = <Translate>doc_button</Translate>; //Документация
 
 export default function DocBtn(): JSX.Element {
       const history = useHistory();
