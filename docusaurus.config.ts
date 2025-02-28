@@ -82,7 +82,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'docs',
           position: 'right',
-          label: 'Документация',
+          label: 'header_docs',
         },
         // {
         //   position: 'right',

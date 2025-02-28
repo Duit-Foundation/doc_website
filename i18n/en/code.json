@@ -344,5 +344,17 @@
   },
   "footer_docs": {
     "message": "Docs"
+  },
+  "promo_p1": {
+    "message": "Your"
+  },
+  "promo_p2": {
+    "message": "application"
+  },
+  "promo_p3": {
+    "message": "lives on the server"
+  },
+  "promo_description": {
+    "message": "You define elements, states, and animations on the server side, and they are sent to the client regardless of the app version. Update your app's UI as needed — whether it's every hour or even more frequently"
   }
 }
