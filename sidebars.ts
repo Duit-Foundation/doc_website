@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
     'intro',
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'sidebar.get_started',
       link: {
         type: 'generated-index',
       },
@@ -29,7 +29,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: "Core concepts",
+      label: "sidebar.core_concepts",
       collapsed: true,
       link: {
         type: 'generated-index',
@@ -44,7 +44,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: "Advanced techniques",
+      label: "sidebar.advanced_tech",
       collapsed: true,
       link: {
         type: 'generated-index',
@@ -52,7 +52,7 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
-          label: "Компоненты",
+          label: "sidebar.components",
           collapsed: true,
           link: {
             type: 'doc',
@@ -66,7 +66,7 @@ const sidebars: SidebarsConfig = {
         'advanced_tech/transport_override',
         {
           type: 'category',
-          label: "Пользовательские виджеты",
+          label: "sidebar.custom_widgets",
           link: {
             type: 'doc',
             id: 'advanced_tech/custom/about',
@@ -82,7 +82,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: "API",
+      label: "sidebar.api",
       collapsed: true,
       link: {
         type: 'generated-index',
@@ -90,7 +90,7 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
-          label: "Dart API",
+          label: "sidebar.dart_api",
           link: {
             id: "dart_heading",
             type: 'doc',
