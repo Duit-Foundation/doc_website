@@ -1,0 +1,127 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Components - Server
+
+## Creating a New Component
+
+A component template object on the server side consists of two main parts: a unique identifier (`tag`) and a layout root (`layoutRoot`). To simplify the creation of new components, the Duit packages provide the `ComponentDescription` function.
+
+:::info
+Within a component, it is not advisable to explicitly set the `controlled = true` property or assign widget IDs. Such widgets will be treated as uncontrolled, and setting fixed widget IDs could lead to controller creation errors.
+:::
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const ExampleComponent = ComponentDescription("ExampleComponent",
+        Text(
+            {
+                attributes: {
+                    data: "Hellow, Duit!"
+                }
+            }
+        )
+    );
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    var ExampleComponent = duit_widget.NewComponentDescription(
+	    "ExampleComponent",
+        duit_widget.Text(
+            &duit_attributes.TextAttributes[duit_color.ColorRGBO]{
+                Data:                 "Hellow, Duit!",
+            }, "", false),
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Data Binding
+
+Data binding in a widget layout involves assigning attribute values to composite components that will be received from the server. This is managed by the `refs` property of the attribute object, which holds a collection of `ValueReference` objects.
+
+Each `ValueReference` object has three main components:
+- `attributeKey` — the name of the attribute property (e.g., `data`), where the value will be placed.
+- `objectKey` — the key of the property inside the data-containing object.
+- `defaultValue` — an optional parameter used if no matching value is found.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const ExampleComponent = ComponentDescription("ExampleComponent",
+        Text(
+            {
+                attributes: {
+                    data: "Hellow, Duit!",
+                    refs: [
+                        {
+                            attributeKey: "data",
+                            objectKey: "text",
+                            defaultValue: "Hellow, world!",
+                        },
+                        // Ref("data", "text"), //shortand
+                    ]
+                }
+            }
+        )
+    );
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    var ExampleComponent = duit_widget.NewComponentDescription(
+        "ExampleComponent",
+        duit_widget.Text(
+            &duit_attributes.TextAttributes[duit_color.ColorRGBO]{
+                Data:                 "Hellow, Duit!",
+                ValueReferenceHolder: duit_attributes.ValueReferenceHolder{
+                    Refs: []*duit_attributes.ValueRef{
+                        {
+                            AttributeKey: "data",
+                            ObjectKey:    "text",
+                            DefaultValue: "Hellow, world!",
+                        },
+                        //duit_attributes.Ref("data", "text", "Hellow, world!"), //shortand
+                    },
+                },
+            }, common.NO_ID, false),
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Using Components in Layouts
+
+Adding components to your layout code involves using the `Component` widget, which takes the target component tag and a data object for filling it as parameters.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Component({
+        tag: ExampleComponent.tag,
+        data: {
+            text: "Hellow, Duit!",
+        },
+        id: "some_id_value",
+    })
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    duit_widget.Component(
+        map[string]interface{}{
+            "text": "Hellow, Duit!",	
+        }, ExampleComponent.Tag, "some_id_value",
+    )
+    ```
+  </TabItem>
+</Tabs>
+
+## Updating Component State
+
+Widgets within a component are always uncontrolled, meaning they can't be updated directly via a controller. 
+To update a single component, use the standard approach with an `UpdateEvent` event type.
+
+Components are controlled widgets by default, so to update their state, you need to explicitly specify a unique ID and send back to the client a new event that describes the change using a data object.

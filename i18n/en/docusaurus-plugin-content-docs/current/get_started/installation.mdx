@@ -1,0 +1,33 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installing Dependencies
+
+Duit is an ecosystem of libraries and tools. Therefore, to use this tool, you'll need to install the necessary dependencies.
+
+## Client
+
+For basic use of Duit, you need to install the [flutter_duit](https://pub.dev/packages/flutter_duit) package.
+
+```text 
+flutter pub add flutter_duit
+```
+
+## Server
+
+Two DSL libraries for working with Duit on the server side are currently available, being actively developed, and supported: [duit_js](https://github.com/Duit-Foundation/duit_js) for projects using JavaScript/TypeScript and [duit_go](https://github.com/Duit-Foundation/duit_go) for projects using GoLang.
+
+Install the appropriate package using one of the following commands:
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+      ```text
+      npm install duit_js
+      ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+      ```text
+      go get github.com/Duit-Foundation/duit_go/v3
+      ```
+  </TabItem>
+</Tabs>

@@ -3,24 +3,32 @@
     "message": "Далее",
     "description": "The label for version current"
   },
-  "sidebar.docs.category.Getting Started": {
+  "sidebar.docs.category.sidebar.get_started": {
     "message": "Начало работы",
-    "description": "The label for category Getting Started in sidebar docs"
+    "description": "The label for category sidebar.get_started in sidebar docs"
   },
-  "sidebar.docs.category.Core concepts": {
+  "sidebar.docs.category.sidebar.core_concepts": {
     "message": "Ключевые концепции",
-    "description": "The label for category Core concepts in sidebar docs"
+    "description": "The label for category sidebar.core_concepts in sidebar docs"
   },
-  "sidebar.docs.category.Advanced techniques": {
+  "sidebar.docs.category.sidebar.advanced_tech": {
     "message": "Продвинутые техники",
-    "description": "The label for category Advanced techniques in sidebar docs"
+    "description": "The label for category sidebar.advanced_tech in sidebar docs"
   },
-  "sidebar.docs.category.Components": {
+  "sidebar.docs.category.sidebar.components": {
     "message": "Компоненты",
-    "description": "The label for category Components in sidebar docs"
+    "description": "The label for category sidebar.components in sidebar docs"
   },
-  "sidebar.docs.category.Пользовательские виджеты": {
+  "sidebar.docs.category.sidebar.custom_widgets": {
     "message": "Пользовательские виджеты",
-    "description": "The label for category Пользовательские виджеты in sidebar docs"
+    "description": "The label for category sidebar.custom_widgets in sidebar docs"
+  },
+  "sidebar.docs.category.sidebar.api": {
+    "message": "API",
+    "description": "The label for category sidebar.api in sidebar docs"
+  },
+  "sidebar.docs.category.sidebar.dart_api": {
+    "message": "Dart API",
+    "description": "The label for category sidebar.dart_api in sidebar docs"
   }
 }

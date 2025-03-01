@@ -6,10 +6,11 @@ import Card3 from "./card3";
 import Card4 from "./card4";
 import Card5 from "./card5";
 import Card6 from "./card6";
+import Translate from "@docusaurus/Translate";
 
 type FeatureItem = {
   bgColor: string;
-  title: string;
+  title: JSX.Element;
   description: JSX.Element;
   Component: () => JSX.Element;
 };
@@ -17,72 +18,39 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     bgColor: "#EED6AA",
-    title: "Гибкость в использовании",
-    description: (
-      <>
-        Простая интеграция с существующим приложением и мощные возможности для
-        изменения базового поведения.
-      </>
-    ),
+    title: <Translate>opsec_card1_title</Translate>,
+    description: <Translate>opsec_card1_description</Translate>,
     Component: Card1,
   },
   {
     bgColor: "#BFEFAF",
-    title: "Действия и события",
-    description: (
-      <>
-        Взаимодействуя с интерфейсом, пользователь вызывает действие, которое
-        было описано на стороне сервера. В ответ на действие генерируйте
-        множество событий, для описания нового состояния UI и поведения
-        приложения.
-      </>
-    ),
+    title: <Translate>opsec_card2_title</Translate>,
+    description: <Translate>opsec_card2_description</Translate>,
     Component: Card2,
   },
   {
     bgColor: "#E1E2E9",
-    title: "Компоненты Duit",
-    description: (
-      <>
-        Инструмент шаблонизации, который позволяет создавать переиспользуемые
-        композиции виджетов. Наполняйте их данными, повышайте читаемость кода и
-        производительность системы.
-      </>
-    ),
+    // title: "Компоненты Duit",
+    title: <Translate>opsec_card3_title</Translate>,
+    description: <Translate>opsec_card3_description</Translate>,
     Component: Card3,
   },
   {
     bgColor: "#D0DCE1",
-    title: "DSL для бэкэнда",
-    description: (
-      <>
-        Экосистема библиотек для популярных в разработке языков: go и
-        typescript. Наслаждайтесь привычной семантикой верстки и защититесь от
-        ошибок при построении макетов.
-      </>
-    ),
+    title: <Translate>opsec_card4_title</Translate>,
+    description: <Translate>opsec_card4_description</Translate>,
     Component: Card4,
   },
   {
     bgColor: "#9DDBE7",
-    title: "Пользовательские виджеты",
-    description: (
-      <>
-        Делайте UI ярче, а разработку приятнее, интегрируя в Duit собственные
-        конфигурации виджетов.
-      </>
-    ),
+    title: <Translate>opsec_card5_title</Translate>,
+    description: <Translate>opsec_card5_description</Translate>, //Делайте UI ярче, а разработку приятнее, интегрируя в Duit собственные конфигурации виджетов.
     Component: Card5,
   },
   {
     bgColor: "#EBE5E2",
-    title: "Анимация",
-    description: (
-      <>
-        Реализуйте анимации любой сложности в привычном ключе, достигая
-        максимального контроля и производительности.
-      </>
-    ),
+    title: <Translate>opsec_card6_title</Translate>,
+    description: <Translate>opsec_card6_description</Translate>, // Реализуйте анимации любой сложности в привычном ключе, достигая максимального контроля и производительности.
     Component: Card6,
   },
 ];
@@ -107,7 +75,9 @@ export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className={`container ${styles.container}`}>
-        <Heading as="h1" className={styles.heading}>Возможности Duit</Heading>
+        <Heading as="h1" className={styles.heading}>
+          <Translate>opsec_title</Translate>
+        </Heading>
         <div className={styles.row}>
           {FeatureList.map((props, idx) => (
             <FeatureCard key={idx} {...props} />

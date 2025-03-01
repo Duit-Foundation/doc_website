@@ -1,6 +1,7 @@
 import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
 import Chat from "./Chat";
+import Translate from "@docusaurus/Translate";
 
 export default function PromoSection(): JSX.Element {
   return (
@@ -9,14 +10,21 @@ export default function PromoSection(): JSX.Element {
         <div className="row">
           <div className={`${styles.title} col col--7`}>
             <Heading as="h1" className={styles.heading}>
-              Ваше <span className={styles.yellow}>приложение</span> живет на
-              сервере
+            <Translate>promo_p1</Translate>  {/** Ваше */}
+            <span className={styles.yellow}>
+              <Translate>promo_p2</Translate> {/** приложение */}
+            </span>
+            <Translate>promo_p3</Translate> {/**живет на сервере */}
             </Heading>
+            
             <p className={styles.description}>
-              Вы определяете элементы, состояния и анимации на серверной
+              {/**!SECTION
+               * Вы определяете элементы, состояния и анимации на серверной
               стороне, и они отправляются клиенту независимо от версии
               приложения. Обновляйте UI приложения по мере необходимости — будь
               то каждый час или даже чаще.
+               */}
+              <Translate>promo_description</Translate>
             </p>
           </div>
           <div className="col col--5">

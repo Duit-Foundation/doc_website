@@ -1,0 +1,215 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Executing Dynamic Scripts
+
+:::warning
+This article is for informational purposes only.
+
+Using this approach can significantly affect the performance and security of your applications. Use it at your own risk.
+:::
+
+Although Duit provides a powerful system for managing state and interacting with servers, frequent server calls can sometimes be excessive.
+
+Let's consider the following scenario: On an authentication form in your application, there is a field where the user enters their phone number. We'll refer to this field simply as `phone`. A common requirement when implementing such widgets is validating input data as it is entered. In our case, we need to check whether the `phone` field matches the correct pattern.
+
+Here’s how this can be implemented using Duit:
+
+1. On the server side, associate the `TextField` widget responsible for entering the phone number with an action that sends the widget's current value to the backend.
+2. Validate the received value and send the validation result as the new widget state.
+3. Update the state.
+
+With this implementation, serious issues become apparent, such as frequent server calls for validation due to invoking an action for every newly entered character. Furthermore, this approach introduces side effects when updating attributes and degrades application performance.
+
+Since Duit doesn't natively support computed expressions, we propose an alternative approach: use an external script execution environment to interpret code, execute scripts, and return the execution result to the Dart side.
+
+:::info
+A fully implemented example of this approach can be found in the [**duit_hetu_extension**](https://github.com/Duit-Foundation/duit_hetu_extension) repository.
+:::
+
+When using scripts, we would need to associate the `TextField` widget responsible for entering the phone number with a [script action](core_concepts/actions_events.md#scriptaction) on the server side. This action would validate input parameters and return the widget's desired state based on the validation result. Additionally, we’d need to implement the necessary abstractions for handling scripts on the client side.
+
+Let’s delve into the details of each step required for implementation.
+
+## Choosing a Language and Execution Environment
+
+Dart is a compiled programming language. This means we won’t be able to execute Dart code obtained at runtime, such as a string or file.
+
+Given this limitation, one of the primary requirements for choosing a scripting language is the ability to interpret and execute code dynamically. Virtual machines for other programming languages (including Dart) fit this criterion.
+
+Examples of available execution environments include:
+
+1. [dart_eval](https://pub.dev/packages/dart_eval) - A compiler and interpreter for Dart bytecode, written in Dart, enabling dynamic code execution and delivery for Flutter and Dart AOT.
+2. [lua_dardo](https://pub.dev/packages/lua_dardo) - A Lua virtual machine written in Dart, implementing Lua 5.3.
+3. [hetu_script](https://pub.dev/packages/hetu_script) - A lightweight scripting language written entirely in Dart for embedding in Flutter apps.
+
+Going forward, all examples will focus on integrating `hetu_script` as the most efficient solution.
+
+## Implementing ScriptRunner
+
+The [ScriptRunner](api/dart_api/ScriptRunner.md) abstraction in Duit is responsible for handling and executing dynamic scripts. It accepts a generalized `TOptions` object as its sole constructor parameter, which is meant to pass configuration options to the execution environment.
+
+```dart
+final class HetuInitOptions {
+  Map<String, Function> externalFunctions;
+  ExternalHetuConfig config;
+
+  HetuInitOptions({
+    required this.config,
+    this.externalFunctions = const {},
+  });
+}
+```
+
+In this specific example, we've created a `HetuInitOptions` class that will configure the execution environment.
+
+---
+
+Next, we'll proceed with implementing the `ScriptRunner` itself.
+
+```dart
+final class _HetuScriptRunner extends ScriptRunner<HetuInitOptions> {
+  late final Hetu _hetuInstance;
+
+  _HetuScriptRunner({
+    required super.runnerOptions,
+  });
+
+  @override
+  Future<void> initWithTransport(Transport transport) async {
+    _hetuInstance = Hetu(
+      config: runnerOptions.config.toHetuConfig(),
+    )..init(
+        externalFunctions: {
+          ...runnerOptions.externalFunctions,
+          "request": (
+            String url,
+            Map<String, dynamic> meta,
+            Map<String, dynamic> body,
+          ) async {
+            return await transport.request(
+              url,
+              meta,
+              body,
+            );
+          }
+        },
+      );
+  }
+
+  @override
+  Future<Map<String, dynamic>?> runScript(
+    String functionName, {
+    String? url,
+    Map<String, dynamic>? meta,
+    Map<String, dynamic>? body,
+  }) async {
+    return await _hetuInstance.invoke(
+      functionName,
+      positionalArgs: [
+        url,
+        meta,
+        body,
+      ],
+    );
+  }
+
+  @override
+  Future<void> eval(String source) async {
+    await _hetuInstance.eval(source);
+  }
+}
+```
+
+The `ScriptRunner` abstraction requires overriding several methods. Let's examine their purpose in detail.
+
+### initWithTransport
+
+The `initWithTransport` method initializes the execution environment and receives a `Transport` object as a parameter. Ignore this parameter if your script doesn’t require network requests during execution. If network requests are necessary, you’ll need to implement the `request` method in the `Transport` class, which is otherwise optional.
+
+### eval
+
+The `eval` method compiles and interprets a script during the parsing phase of the Duit JSON representation. If a widget has an associated action, and that action is a `ScriptAction`, its data will be processed by the `eval` method.
+
+### runScript
+
+The `runScript` method is called during action execution. The required parameter `functionName` specifies the function to call. Parameters such as `url`, `meta`, and `body` will automatically be passed as arguments to the script during action invocation. Here, `url` corresponds to the request URL or event name, `meta` refers to metadata, and `body` refers to the request payload or action-related data derived from [action dependencies](/docs/core_concepts/actions_events#action-dependencies).
+
+---
+
+The final step in implementing the `ScriptRunner` class is extending the `UIDriver` class to assign an instance of `ScriptRunner` to the `scriptRunner` property.
+
+```dart
+//extension.dart
+
+extension HetuExtension on UIDriver {
+  void applyHetuExtensions(HetuInitOptions options) {
+    scriptRunner = _HetuScriptRunner(
+      runnerOptions: options,
+    );
+  }
+}
+
+<...>
+//main.dart
+
+late final DuitDriver driver;
+
+@override
+void initState() {
+    driver = DuitDriver.static(
+      layout,
+      transportOptions: HttpTransportOptions(
+        baseUrl: "http://localhost:3000",
+      ),
+    )..applyHetuExtensions(
+        HetuInitOptions(
+          config: ExternalHetuConfig(),
+        ),
+      );
+    super.initState();
+}
+
+```
+
+## Creating a ScriptAction
+
+Now let's see how to create a `ScriptAction`. The DSL libraries provide special functions to conveniently create such actions.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+const action = ScriptAction(
+      "script1", //event name
+      {
+          "sourceCode": "fun testFn() {...}", //sctipt text
+          "functionName": "testFn", //function name to call
+      },
+      [
+          {
+              id: "dependency1",
+              target: "value"
+          },
+      ],
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+action := NewScriptAction(
+		"scipt1", 
+		[]*ActionDependency{
+			{
+				Id:     "dependency1",
+				Target: "value",
+			},
+		}, 
+		&ScriptData{
+			SourceCode: `fun testFn() {...}`, //script text
+			FunctionName: "function name", //function name to call
+		},
+	)
+    ```
+  </TabItem>
+</Tabs>
+

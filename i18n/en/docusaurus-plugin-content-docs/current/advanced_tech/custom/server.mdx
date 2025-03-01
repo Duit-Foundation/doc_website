@@ -1,0 +1,81 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Custom Widgets - Server
+
+## Describing the Attribute Object Model
+
+To create a custom widget, you need to define an attribute object model. This ensures type safety when using the widget in layout creation.
+
+:::tip
+Use `ValueReferenceHolder` if you want the attributes of your custom widget to be marked for use within components.
+
+Use `AnimatedPropertyOwner` if you wish to support Duit animation in your custom widget.
+:::
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    interface SvgAttributes extends ValueReferenceHolder<SvgAttributes>, AnimatedPropertyOwner  {
+        width?: number;
+        height?: number;
+        content: string;
+    }
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    type SvgAttributes struct {
+    	ValueReferenceHolder
+    	animations.AnimatedPropertyOwner
+    	Width   float32 `json:"width,omitempty"`
+    	Height  float32 `json:"height,omitempty"`
+    	Content string  `json:"content,omitempty"`
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Creating a Constructor Function
+
+Constructor functions in the Duit DSL style help maintain consistent layout semantics and allow custom widgets to be used uniformly alongside basic widgets.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    //notexport classes as independent member
+    class _SvgWidget extends CustomWidget<SvgAttributes> {
+
+        constructor(attrs: SvgAttributes, tag: string, id?: string) {
+            super(attrs, tag, id, undefined, false);
+        }
+    }
+
+    //use functions as constructor
+    export const Svg = (attributes: SvgAttributes, id?: string) => new SvgWidget(attributes, "SvgCustomWidget", id);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    func Svg(attributes *SvgAttributes, id string, controlled bool) *duit_core.DuitElementModel {
+    	return new(duit_core.DuitElementModel).CreateElement(
+    		duit_core.Custom, //type = Custom
+    		id, // widget id
+    		"SvgCustomWidget", //unique tag for this type of widgets
+    		attributes, //attributes object
+    		nil, //related action
+    		controlled, //controlled or uncontrolled
+    		0, //may have child elements or not, where 0 means no
+    		nil, //data for conponents (nil at this case)
+    		nil, //custom widget subviews (children), if it has
+    	)
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+:::info
+Custom widgets **must** have a **unique tag**.
+:::
+
+After this setup, you can use the new functions to create layouts in the same manner as standard widgets supported by Duit.
