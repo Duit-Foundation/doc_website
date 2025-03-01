@@ -41,7 +41,7 @@ Local actions instantly perform associated events or groups of events. They are 
 
 ### ScriptAction
 
-A special type of action that includes a dynamic script in its definition, which will be executed in the integrated runtime environment. Read more about using scripts in the corresponding documentation [section]((advanced_tech/scripting.mdx)).
+A special type of action that includes a dynamic script in its definition, which will be executed in the integrated runtime environment. Read more about using scripts in the corresponding documentation [section](advanced_tech/scripting.mdx).
 
 ```json
 {
