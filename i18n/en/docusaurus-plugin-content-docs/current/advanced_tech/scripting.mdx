@@ -1,53 +1,53 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Выполнение динамических скриптов
+# Executing Dynamic Scripts
 
 :::warning
-Данная статья носит ознакомительный характер.
+This article is for informational purposes only.
 
-Использование подобного подхода может серьезным образом сказаться на производительности и безопасности ваших приложений. Используйте его на свой страх и риск.
+Using this approach can significantly affect the performance and security of your applications. Use it at your own risk.
 :::
 
-Duit реализует досточно мощную систему управления состоянием и взаимодействия с сервером, но в некоторых случаях частое обращение к серверу может быть избыточным.
+Although Duit provides a powerful system for managing state and interacting with servers, frequent server calls can sometimes be excessive.
 
-Предлагаю рассмореть следующий случай: на форме авторизации в приложении есть поле, в которое пользователь должен ввести свой номер телефона. Далее будем называть это поле просто `phone`. Частым требованием при реализации подобных виджетов является валидация входных данных при вводе. В нашем случае, нам требуется проверить, чтобы поле `phone` соответствовало правильному паттерну.
+Let's consider the following scenario: On an authentication form in your application, there is a field where the user enters their phone number. We'll refer to this field simply as `phone`. A common requirement when implementing such widgets is validating input data as it is entered. In our case, we need to check whether the `phone` field matches the correct pattern.
 
-Как это можно реализовать средствами Duit:
+Here’s how this can be implemented using Duit:
 
-1. На стороне сервера связать с виджетом `TextField`, который отвечает за ввод телефона, действие, которое будет отправлять текущее значение виджета на бекенд.
-2. Валидируем полученное значение, отправляем в качестве результата валидации новое состояние виджета.
-3. Обновляем состояние.
+1. On the server side, associate the `TextField` widget responsible for entering the phone number with an action that sends the widget's current value to the backend.
+2. Validate the received value and send the validation result as the new widget state.
+3. Update the state.
 
-При такой реализации невооруженным глазом видны серьезные проблемы, например частое обращение к серверу для валидации данных за счет вызова действия на каждый новый введенный символ. И, конечно, такое использование порождает side-effects при обновлении атрибутов и снижает производительность приложения.
+With this implementation, serious issues become apparent, such as frequent server calls for validation due to invoking an action for every newly entered character. Furthermore, this approach introduces side effects when updating attributes and degrades application performance.
 
-Поскольку в Duit не реализована обработка вычисляемых выражений, для реализации подобной функциональности предлагается пойти другим путем - использовать стороннюю среду выполнения для интерпретирования кода, выполнения скрипта и возврата результата выполнения на строну Dart.
+Since Duit doesn't natively support computed expressions, we propose an alternative approach: use an external script execution environment to interpret code, execute scripts, and return the execution result to the Dart side.
 
 :::info
-Пример с полноценной реализацией данного подхода можно найти в репозитории [**duit_hetu_extension**](https://github.com/Duit-Foundation/duit_hetu_extension)
+A fully implemented example of this approach can be found in the [**duit_hetu_extension**](https://github.com/Duit-Foundation/duit_hetu_extension) repository.
 :::
 
-При использовании скриптов, нам было бы необходимо связать на стороне сервера с виджетом `TextField`, который отвечает за ввод телефона, [действие-скрипт](core_concepts/actions_events.md#scriptaction), которое будет валидировать входные параметры и возвращать нужное состояние виджета в зависимости от результата валидации. А также реализовать необходимые для обработки скрипотов абстракции на клиентской стороне.
+When using scripts, we would need to associate the `TextField` widget responsible for entering the phone number with a [script action](core_concepts/actions_events.md#scriptaction) on the server side. This action would validate input parameters and return the widget's desired state based on the validation result. Additionally, we’d need to implement the necessary abstractions for handling scripts on the client side.
 
-Рассмотрим подробно все необходимые для реализации шаги.
+Let’s delve into the details of each step required for implementation.
 
-## Выбор языка и среды выполенения
+## Choosing a Language and Execution Environment
 
-Dart - компилируемый язык программирования. Для нас это означает то, что мы не сможем выполнить в нашей программе Dart-код, который был получен нами в рантайме, например, в виде строки или файла.
+Dart is a compiled programming language. This means we won’t be able to execute Dart code obtained at runtime, such as a string or file.
 
-В связи с этим, одним из главных требований при выборе языка для реализации скриптов является возможность "на лету" интерпретировать полученный код и затем выполнять его. Для этих целей подходят виртуальные машины других языков программирования (в т.ч. и Dart).
+Given this limitation, one of the primary requirements for choosing a scripting language is the ability to interpret and execute code dynamically. Virtual machines for other programming languages (including Dart) fit this criterion.
 
-Пример доступных сред выполенения:
+Examples of available execution environments include:
 
-1. [dart_eval](https://pub.dev/packages/dart_eval) - компилятор и интерпретатор байт-кода для языка Dart, написанный на Dart, обеспечивающий динамическое выполнение и отправку кода для Flutter и Dart AOT.
-2. [lua_dardo](https://pub.dev/packages/lua_dardo) - виртуальная машина Lua, написанная на Dart и реализующая версию Lua5.3.
-3. [hetu_script](https://pub.dev/packages/hetu_script) - легковесный скриптовый язык, написанный исключительно на Dart для встраивания в приложения Flutter.
+1. [dart_eval](https://pub.dev/packages/dart_eval) - A compiler and interpreter for Dart bytecode, written in Dart, enabling dynamic code execution and delivery for Flutter and Dart AOT.
+2. [lua_dardo](https://pub.dev/packages/lua_dardo) - A Lua virtual machine written in Dart, implementing Lua 5.3.
+3. [hetu_script](https://pub.dev/packages/hetu_script) - A lightweight scripting language written entirely in Dart for embedding in Flutter apps.
 
-Далее все примеры будут рассматриваться в разрезе интеграции `hetu_script`, как наиболее производительного решения.
+Going forward, all examples will focus on integrating `hetu_script` as the most efficient solution.
 
-## Реализация ScriptRunner
+## Implementing ScriptRunner
 
-За обработку и выполнение динамических скриптов в Duit отвечает класс, реализующий абстракцию [ScriptRunner](api/dart_api/ScriptRunner.md). В качестве единственного параметра конструктора он принимает объект обобoенного типа `TOptions`, который предназначен для передачи параметров конфигурации среды выполения.
+The [ScriptRunner](api/dart_api/ScriptRunner.md) abstraction in Duit is responsible for handling and executing dynamic scripts. It accepts a generalized `TOptions` object as its sole constructor parameter, which is meant to pass configuration options to the execution environment.
 
 ```dart
 final class HetuInitOptions {
@@ -61,11 +61,11 @@ final class HetuInitOptions {
 }
 ```
 
-В этом конкретном примере мы создали класс `HetuInitOptions`, который будет использоваться для конфигурации среды выполенения.
+In this specific example, we've created a `HetuInitOptions` class that will configure the execution environment.
 
 ---
 
-Следующим шагом будет реализация непосредственно `ScriptRunner`.
+Next, we'll proceed with implementing the `ScriptRunner` itself.
 
 ```dart
 final class _HetuScriptRunner extends ScriptRunner<HetuInitOptions> {
@@ -121,23 +121,23 @@ final class _HetuScriptRunner extends ScriptRunner<HetuInitOptions> {
 }
 ```
 
-Абстракция `ScriptRunner` требует переопределить ряд методов. Рассмотрим их назначение подробнее.
+The `ScriptRunner` abstraction requires overriding several methods. Let's examine their purpose in detail.
 
 ### initWithTransport
 
-Метод `initWithTransport` отвечает за инициализацию среды выполения и в качестве параметра функции принимает объект типа `Transport`. Игнорируйте этот параметр, если вам не требуется выполение сетевых запросов во время выполнения скрипта. Если же такая необходимость есть, то вам следует реализовать метод `request` в классе [`Transport`](api/dart_api/Transport.md), который в обычном случае не требует реализации.
+The `initWithTransport` method initializes the execution environment and receives a `Transport` object as a parameter. Ignore this parameter if your script doesn’t require network requests during execution. If network requests are necessary, you’ll need to implement the `request` method in the `Transport` class, which is otherwise optional.
 
 ### eval
 
-Метод `eval` выполняет компиляцию и интерпретацию скрипта на этапе парсинга JSON-структуры Duit представления. Если виджет имеет связанное действие и это действие является `ScriptAction`, то его данные будут обработаны методом `eval`.
+The `eval` method compiles and interprets a script during the parsing phase of the Duit JSON representation. If a widget has an associated action, and that action is a `ScriptAction`, its data will be processed by the `eval` method.
 
 ### runScript
 
-Метод `runScript` вызывается во время выполениния действия. Обязательный параметр `functionName` - название функции для вызова. Параметры `url`, `meta`, `body` во время вызова действия будут переданы в качестве аргументов в скрипт автоматически. Где `url` - адрес запроса или название события, `meta` - метаданные, `body` - тело запроса или полезные данные для выполнения действия, которые формируются из [зависимостей действия](/docs/core_concepts/actions_events#зависимости-действий).
+The `runScript` method is called during action execution. The required parameter `functionName` specifies the function to call. Parameters such as `url`, `meta`, and `body` will automatically be passed as arguments to the script during action invocation. Here, `url` corresponds to the request URL or event name, `meta` refers to metadata, and `body` refers to the request payload or action-related data derived from [action dependencies](/docs/core_concepts/actions_events#action-dependencies).
 
 ---
 
-Последним шагом в реализации класса `ScriptRunner` будет реализация расширения класса `UIDriver` для присвоения экземпляра класса `ScriptRunner` свойству `scriptRunner`.
+The final step in implementing the `ScriptRunner` class is extending the `UIDriver` class to assign an instance of `ScriptRunner` to the `scriptRunner` property.
 
 ```dart
 //extension.dart
@@ -172,9 +172,9 @@ void initState() {
 
 ```
 
-## Создание ScriptAction
+## Creating a ScriptAction
 
-Рассмотрим, как создать действие-скрипт. DSL-библиотеки предоставляют специальные функции для удобного создания подобных действий.
+Now let's see how to create a `ScriptAction`. The DSL libraries provide special functions to conveniently create such actions.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
