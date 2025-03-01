@@ -1,12 +1,10 @@
-# Интеграция с клиентским приложением
+# Integration with Client Application
 
-Изначально Duit проектировался с прицелом на максимальное упрощение интеграции с новыми и
-существующими приложениями, написанными на Flutter. Интеграция состоит из нескольких шагов:
+From the outset, Duit was designed to simplify integration with new and existing Flutter applications. The integration process consists of several steps:
 
-## Инициализация драйвера
+## Initializing the Driver
 
-Для работы Duit-представления обязательно необходимо создать экземпляр DuitDriver. На этом этапе мы
-можем применять к драйверу ранее созданные расширения.
+To use Duit, it's essential to create an instance of `DuitDriver`. At this stage, we can apply previously created extensions to the driver.
 
 ```dart
 late final DuitDriver driver;
@@ -32,11 +30,9 @@ void dispose() {
 }
 ```
 
-## Добавить host view
+## Adding host view
 
-Duit-представление может быть как отдельным виджетом, так и отображать контент целого экрана. Этот
-контент должен быть отображен в специальном контейнере, который обеспечивает корректную
-инициализацию и построение UI.
+A Duit representation can serve as a standalone widget or display content across an entire screen. This content must be displayed in a special container that ensures proper initialization and construction of the UI.
 
 ```dart
   @override
@@ -54,17 +50,17 @@ Widget build(BuildContext context) {
 }
 ```
 
-После этого при монтировании виджета DuitViewHost будет инциализирован с указанными выше
-параметрами, выполнит начальный запрос макета виджета/экрана и отобразит его.
+Once the DuitViewHost widget is mounted, it will initialize with the specified parameters, execute the initial layout request, and render the result.
 
-## Глобальные настройки
+## Global configuration
 
-Duit предоствляет публичный API для глобальной конфигурации фреймворка, регистрации компонентов и
-пользовательских виджетов.
+Duit offers a public API for globally configuring the framework, registering [components](advanced_tech/components/about.md), and [custom widgets](advanced_tech/custom/about.md).
 
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  DuitRegistry.configure();
   
   // Register custom widget
   DuitRegistry.register(

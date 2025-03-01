@@ -1,65 +1,47 @@
 # About Duit
 
-*Duit* - это активно развивающаяся экосистема open source библиотек и инструментов, призванная
-помочь
-разработчикам легко и эффективно реализовывать подход backend-driven UI в своих приложениях,
-написанных на Flutter.
+*Duit* is an actively growing open-source ecosystem of libraries and tools aimed at helping developers easily and effectively implement the backend-driven UI approach in their Flutter-based applications.
 
-## Зачем это нужно?
+## Why is it necessary?
 
-BDUI - это подход к разработке приложений, когда сервер управляет и данными, и версткой приложения.
+Backend-driven UI (BDUI) is an app development approach where the server controls both the data and the application layout.
 
-На момент начала разработки Duit существующие BDUI-решения были либо проприетарными разработками
-внутри
-компаний, либо не обеспечивали должной эффективности и удобства при работе. Для Flutter таких
-решений было еще меньше.
+When Duit was initially developed, existing BDUI solutions were either proprietary company developments or failed to provide adequate efficiency and ease of use. There were even fewer such solutions available for Flutter.
 
-Анализ недостатков существующих библиотек для реализации BDUI позволил выделить ряд факторов,
-которые обеспечат полноценную работу BDUI:
+By analyzing the deficiencies of existing BDUI implementation libraries, we identified several key factors required for seamless BDUI operations:
 
-- Быстродействие
-- Простота интеграции и использования
-- Расширяемость
-- DSL-библиотеки для бекенда
-- Эффективное обновление состояния UI
-- Обработка действий пользователя
+- High performance
+- Simplicity of integration and use
+- Scalability
+- Backend DSL libraries
+- Efficient UI state updates
+- User action handling
 
-Duit является мощным ответом на все эти запросы. Фреймворк является гибким инструментов, тем самым
-удовлетворяя широкий спектр требований.
+Duit is a robust solution addressing all these demands. As a versatile framework, it meets a broad spectrum of developer needs.
 
-## Концетрация на Flutter
+## Focused on Flutter
 
-Duit является фреймворком, созданным для использования в Flutter приложениях. Благодаря этому мы
-можем сохранить привычную Flutter-разработчикам семантику верстки на бекенде, тем самым уменьшая
-порог входа в технологию.
+Duit is a framework tailored for Flutter applications. By maintaining familiar Flutter-like layout semantics on the backend, we lower the learning curve for adopting this technology.
 
-На стороне сервера вы оперируете привычными атомарными блоками (Text, Column, Row и т.д.) и набором
-их свойств, а использования типизированных языков программирования позволяет избежать многих ошибок
-при присвоении свойствам значений.
+On the server-side, you work with well-known atomic components (like Text, Column, Row, etc.) and their associated properties. Using typed programming languages also prevents common mistakes when assigning property values.
 
-## Как это работает?
+## How does it work?
 
-Главная задача Duit - обработать входящий JSON (мета-описание UI или макет) и превратить его в UI. В
-типовом случае использования процесс работы выглядит так:
+Duit’s primary function is to process incoming JSON (a meta-description of UI or layout) and transform it into UI. A typical workflow involves the following steps:
 
-1. Создание экземпляра драйвера (настройка параметров)
-2. Build хост-виджета
-3. Инициализация драйвера хост-виджетом
-4. Выполнение запроса для получаения начального макета
-5. Получение ответа от сервера, декодинг, парсинг, обработка, построение объектной модели
-   представления
-6. Преобразование объектной модели представления в UI
+1. Instantiate the driver (configuring its parameters)
+2. Build the host widget
+3. Initialize the driver via the host widget
+4. Issue a request to retrieve the initial layout
+5. Decode, parse, process, and construct the presentation object model based on the server response
+6. Convert the presentation object model into UI
 
-В дальнейшем, при взаимодействии пользователя с элементами UI, происходит тригер пользовательских
-действий, описанных
-на стороне сервера (например, запрос на определенный эндпоинт). Сервер обрабатывает входящий запрос
-и генерирует новое событие, которое описывает новое состояние UI или поведение приложения.
+As users interact with UI elements, corresponding user actions defined on the server side are triggered (e.g., making a request to a particular endpoint). The server processes the incoming request and generates a new event describing the updated UI state or application behavior.
 
-## Поддержка
+## Support
 
-Duit поддерживается организацией [Duit-Foundation](https://github.com/Duit-Foundation/).
+Duit is maintained by the [Duit Foundation](https://github.com/Duit-Foundation/).
 
-Описать проблемы, запросы и пожелания по новому функционалу можно
-в [репозитории фреймворка](https://github.com/Duit-Foundation/flutter_duit/issues).
+Report issues, submit feature requests, or suggest improvements through the [framework repository](https://github.com/Duit-Foundation/flutter_duit/issues).
 
-Поддержать проект финансово можно перейдя [по ссылке](https://boosty.to/duit_foundation).
+Financial contributions to support the project can be made [via this link](https://boosty.to/duit_foundation).

@@ -1,6 +1,6 @@
 # DuitElement
 
-Класс-наследник [ElementTreeEntry](/docs/api/dart_api/ElementTreeEntry.md) и базовый класс для моделей виджетов Duit.
+Класс-наследник [ElementTreeEntry](api/dart_api/ElementTreeEntry.md) и базовый класс для моделей виджетов Duit.
 
 Он отвечает за:
 - Преобразование json в конкретные модели виджетов
