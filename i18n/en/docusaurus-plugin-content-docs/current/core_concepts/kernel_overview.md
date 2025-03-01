@@ -1,16 +1,13 @@
-# Пакет duit_kernel
+# The duit_kernel Package
 
-Библиотека flutter_duit зависит от пакета [duit_kernel](https://github.com/Duit-Foundation/duit_kernel). Он содержит базовые интерфейсы и
-классы, которые служат для стандартизации реализации базовых элементов фреймворка. Этот пакет решает
-несколько важных проблем:
+The flutter_duit library depends on the [duit_kernel](https://github.com/Duit-Foundation/duit_kernel) package. It contains fundamental interfaces and classes that standardize the implementation of core framework elements. This package addresses several critical challenges:
 
-- Отделение интерфейсов от реализаций для более гибкой разработки.
-- Предоставление возможности создавать собственные реализации фреймворка в рамках заданного контракта.
-- Возможность писать собственные расширения функционала фреймворка без необходимости
-  прямой зависимости от flutter_duit. [Пример](https://github.com/Duit-Foundation/duit_hetu_extension).
+- Separates interfaces from implementations for more flexible development.
+- Provides the ability to create custom framework implementations within predefined contracts.
+- Enables writing custom framework extensions without requiring a direct dependency on flutter_duit. [Example](https://github.com/Duit-Foundation/duit_hetu_extension).
 
-Подобное разделение фреймворка на две библиотеки, которые обновляются по разным причинам, создает более стабильный дизайн решения.
+Splitting the framework into two libraries, each updated for different reasons, results in a more stable design.
 
 :::info
-Начиная с версии v3.0.0 пакета duit_kernel, необходимые клиентской стороне сущности экспортируются пакетом flutter_duit. Это позволило избавиться от необходимости вручную добавлять в зависимости проекта kernel.
+Starting from version v3.0.0 of the duit_kernel package, entities required by the client side are exported by the flutter_duit package. This eliminates the need to manually add kernel to your project's dependencies.
 :::

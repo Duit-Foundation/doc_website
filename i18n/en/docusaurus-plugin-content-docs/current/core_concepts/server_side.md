@@ -1,22 +1,22 @@
-# DSL-библиотеки
+# DSL Libraries
 
-JSON - это превосходный формат описания структурированных данных. Но напрямую использовать его для создания мета-описаний целых экранов или сложных виджетов - плохая идея:
+JSON is an excellent format for describing structured data. However, directly using it to define entire screens or complex widgets is not ideal due to:
 
-- Риск опечаток, приводящих к ошибкам, которые тяжело отловить.
-- Многословность описания.
-- Отсуствие контроля клиент-серверного API.
+- Risk of typos leading to hard-to-detect errors.
+- Verbosity in description.
+- Lack of control over the client-server API.
 
-Для решения этих проблем существую специлизированные библиотеки для наиболее популярных в серверной разработке языков программирования, предоставляющие DSL, позволяющий избежать ненужных сложностей и потенциальных ошибок.
+Specialized libraries have been developed for popular server-side programming languages to address these problems. These libraries provide a domain-specific language (DSL) that avoids unnecessary complexity and potential errors.
 
-Сейчас таких библиотеки 2:
+There are currently two such libraries:
 
-- [duit_go](https://github.com/Duit-Foundation/duit_go) - DSL, написанный на Go
-- [duit_js](https://github.com/Duit-Foundation/duit_js) - DSL, написанный на TypeScript
+- [duit_go](https://github.com/Duit-Foundation/duit_go) - A DSL written in Go
+- [duit_js](https://github.com/Duit-Foundation/duit_js) - A DSL written in TypeScript
 
-В будущем планируется развитие подобного DSL и для языка программирования Dart!
+In the future, a similar DSL for the Dart programming language is planned.
 
 :::tip
-Использование этих библиотек при работе с Duit **строго рекомендуется**.
+Using these libraries when working with Duit is **strongly recommended**.
 
-В ходе развития проекта это обеспечит целостность контракта между клиентом и сервером, а также возможность использования продвинутой функциональности Duit.
+As the project evolves, this will ensure contract integrity between the client and server and enable advanced Duit functionalities.
 :::

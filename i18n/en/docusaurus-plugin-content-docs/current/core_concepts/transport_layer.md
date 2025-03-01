@@ -1,40 +1,31 @@
-# Транспортный слой
+# Transport Layer
 
-Duit обеспечивает возможность запроса и получения начального макета экрана/виджета, а также
-обработки действий, их публикации на сервер и получение событий в качестве ответа на выполненное
-действие. Все эти взаимодействия происходят благодаря транспортному слою, который реализует
-механизмы передачи данных по сети или при интеграции с нативным приложением.
+Duit enables the ability to request and receive the initial layout of screens/widgets, handle actions, publish them to the server, and receive events in response to executed actions. All these interactions occur through the transport layer, which implements mechanisms for transmitting data over the network or integrating with native applications.
 
-## Виды транспорта
+## Types of Transports
 
-Duit из коробки реализует два основных вида транспорта, предназначенныее для работы по определенным
-сетевым протоколам. Это `HttpTransport` и `WebSocketTransport` для http и ws соотвественно.
+Out-of-the-box, Duit supports two major types of transports designed to work with specific network protocols: `HttpTransport` and `WebSocketTransport` for HTTP and WS respectively.
 
-Реализация HttpTransport использует в качестве http-клиента
-пакет [http](https://pub.dev/packages/http).
+The `HttpTransport` implementation uses the [http](https://pub.dev/packages/http) package as its HTTP client.
 
-Реализация WebSocketTransport использует реализацию из пакета [dart:io](https://dart.dev/libraries/dart-io).
+The `WebSocketTransport` implementation utilizes the implementation provided by the [dart:io](https://dart.dev/libraries/dart-io) library.
 
-## Интерфейс транспорта
+## Transport Interface
 
-Все реализации транспортные слоя реализуют интерфейс `Transport`.
+All transport layer implementations adhere to the `Transport` interface.
 
-В этот интерфейс входят следующие методы:
+This interface includes the following methods:
 
-- `connect` - метод отвечает за выполенние запроса начального макета экрана/виджета
-- `dispose` - метод очистки ресурсов
-- `execute` - метод для выполнения действий
-- `request` - служебный метод для выполнения произвольных запросов или публикации событий.
-  Предназначен для использования внутренними инструментами Duit, например `ScriptRunner`.
+- `connect`: Responsible for executing the request for the initial screen/widget layout.
+- `dispose`: Cleans up resources.
+- `execute`: Executes actions.
+- `request`: A utility method for performing arbitrary requests or publishing events. Designed for internal use by Duit tools, e.g., `ScriptRunner`.
 
-## Конфигурация транспортного слоя
+## Configuring the Transport Layer
 
-Для конфигурации транспорта используются классы-наследники TransportOptions. Этот класс представляет
-собой базовую конфигурацию, необходимую для инициализации необходимого транспорта с указанными
-параметрами.
+Configuring the transport layer is done using classes derived from `TransportOptions`. This class represents the base configuration required to initialize the desired transport with specified parameters.
 
-Конфигурация транспорта происходит на этапе создания экземпляра DuitDriver путем передачи
-необходимого объекта `HttpTransportOptions` или `WebSocketTransportOptions`.
+Transport configuration occurs during the creation of a `DuitDriver` instance by passing the necessary `HttpTransportOptions` or `WebSocketTransportOptions` object.
 
 ```dart
   late final DuitDriver driver;
@@ -55,15 +46,11 @@ void initState() {
 }
 ```
 
-## Использование сторонних http-клиентов и сетевых протоколов
+## Using Third-Party HTTP Clients and Network Protocols
 
-Duit допускает возможность переопределение транспортного слоя для использования сторонних
-http-клиентов или реализации используемых в приложении сетевых протоколов вместо поддерживаемых из
-коробки.
+Duit allows overriding the transport layer to utilize third-party HTTP clients or implement networking protocols used in your application instead of those supported out-of-the-box.
 
-Для этого требуется создать собственные реализации интерфейсов `Transport` и `TransportOptions`.
-Подробнее о переопределении транспортного слоя можно узнать в
-соотвествующем [разделе](/docs/advanced_tech/transport_override) документации.
+To do so, you need to create custom implementations of the `Transport` and `TransportOptions` interfaces. You can learn more about overriding the transport layer in the corresponding section of the documentation [here](advanced_tech/transport_override.md).
 
 <!-- ## Роль транспорта в интеграции с нативными приложениями
 

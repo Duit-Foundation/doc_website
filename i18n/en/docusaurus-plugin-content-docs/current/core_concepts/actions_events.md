@@ -1,18 +1,18 @@
-# Действия и события
+# Actions and Events
 
-Важным свойством любого приложения является обработка действий пользователя и реакция пользовательского интерфейса (UI) на эти действия.
+One crucial aspect of any application is processing user actions and responding accordingly in the user interface (UI).
 
-Duit предоставляет мощный и расширяемый событийно-ориентированный API, который позволяет описывать на сервере специальные структуры, определяющие, как фреймворк должен реагировать на взаимодействие с элементами UI и то, каким образом должен быть изменен интерфейс в результате взаимодействия. За это отвечает Action&Event API.
+Duit provides a powerful and extensible event-oriented API that allows defining structures on the server to specify how the framework should react to user interactions with UI elements and how the interface should change as a result. This functionality is handled by the Action & Event API.
 
-## Действия
+## Actions
 
-Действие - описанная на стороне сервера структура, определяющая что должно произойти после взаимодействия.
+An action is a structure defined on the server that describes what should happen after an interaction.
 
-В Duit существует три основных типа действий. Они отличаются друг от друга тем, как они будут обработаны и какие механизмы фреймворка будут задействованы.
+In Duit, there are three main types of actions, distinguished by how they are processed and which framework mechanisms are involved.
 
 ### TransportAction
 
-TransportAction - действия, задействующие [транспортный слой](/docs/core_concepts/transport_layer) Duit. Описание действия содержит название эндпоинта на стороне сервера, к которому будет идти обращение в ходе выполнения, список зависимостей действия, а также опционально дополнительные данные (HttpActionMetainfo).
+TransportAction — actions that engage the [transport layer](core_concepts/transport_layer.md) of Duit. An action definition includes the name of the server-side endpoint to be accessed during execution, a list of action dependencies, and optionally additional data (HttpActionMetainfo).
 
 ```json
 {
@@ -30,7 +30,7 @@ TransportAction - действия, задействующие [транспор
 
 ### LocalAction
 
-Локальное действие мгновенно выполняет связанное событие или группу событий. Оно может быть полезно, когда надо изменить состояние UI, но обращение к серверу для этого не требуется.
+Local actions instantly perform associated events or groups of events. They are useful when you need to update the UI state without requiring server communication.
 
 ```json
 {
@@ -41,7 +41,7 @@ TransportAction - действия, задействующие [транспор
 
 ### ScriptAction
 
-Специальный тип действия, который содержит в своем описании динамический скрипт, который будет выполняться в интегрированной среде выполенения. Подробнее об использовании скриптов читайте в соотвествующем [разделе](/docs/advanced_tech/scripting) документации.
+A special type of action that includes a dynamic script in its definition, which will be executed in the integrated runtime environment. Read more about using scripts in the corresponding documentation [section]((advanced_tech/scripting.mdx)).
 
 ```json
 {
@@ -58,27 +58,25 @@ TransportAction - действия, задействующие [транспор
 }
 ```
 
-## Зависимости действий
+## Action Dependencies
 
-В ходе работы с приложением пользователь может использовать такие элементы UI, как TextField, CheckBox, Radio и тд. Использование подобных элементов подразумевает сбор и использование данных, которые ввел пользователь.
+During application usage, users may interact with UI elements such as TextFields, CheckBoxes, Radios, etc. Interacting with these elements often involves collecting and utilizing data entered by the user.
 
-Для работы с такими случаями `TransportAction` и `ScriptAction` обладают свойством `dependsOn`, которое является списоком объектов вида `{"tagret": "key_in_obj", "id":"id1"}` (где targer - ключ свойства результирущего объекта, а id - идентификатор контроллируемого виджета), из которых требуется собрать значения и использовать при выполнении действия.
+To handle such cases, `TransportAction` and `ScriptAction` possess a `dependsOn` property, which is a list of objects in the form `{"target": "key_in_obj", "id": "id1"}` (where `target` refers to the resulting object's property key, and `id` is the controlled widget's identifier). These objects represent data that needs to be gathered and used during action execution.
 
-При выполнении действия, для которого указаны зависимости, Duit попытается обратиться к контроллерам этих элементов для получения их текущих значений из атрибутов. Классы атрибутов, которые могут изменять в ходе работы свое хранимое значение и имеют геттер для его получения, наследуются от класса `AttendedModel<T>`. Например, класс [TextFieldAttributes](https://github.com/Duit-Foundation/flutter_duit/blob/main/lib/src/attributes/text_field_attrs.dart).
+When an action with declared dependencies is performed, Duit attempts to access controllers for these elements to retrieve their current attribute values. Attribute classes capable of changing stored values during runtime and providing getters for retrieval inherit from the `AttendedModel<T>` class. An example is the [TextFieldAttributes](https://github.com/Duit-Foundation/flutter_duit/blob/main/lib/src/attributes/text_field_attrs.dart) class.
 
-В ходе сбора данных согласно списку зависимостей будет создан результирующий объект с данными. Далее он будет передан транспортному слою, который способен подготовить его к передаче. Например, в случае с HTTP GET запросом, объект будет преобразован в query params и добавлен в URL запроса, а в случае POST запроса - добавлен в тело запроса.
+Based on the dependency list, a resultant object containing the collected data is constructed. This object is then passed to the transport layer, which prepares it for transmission. For instance, in an HTTP GET request, the object might be converted into query parameters and appended to the request URL, whereas in a POST request, it would be added to the request body.
 
-Используя этот механизм можно реализовывать формы, данные которых будут отправлены на сервер в ходе выполениния действия.
+This mechanism enables developers to implement forms whose data can be submitted to the server during action execution.
 
-## События
+## Events
 
-Событие - результат выполнения действия, описывает поведение UI после его успешного выполнения.
-Duit поддерживает несколько видов базовых действий, каждый из которых будет разобран ниже:
+Events are outcomes of actions that describe the UI's behavior post-action completion. Duit supports various types of events, each of which is detailed below:
 
 ### UpdateEvent
 
-Событие отвечает за обновление контрллируемых элементов интерфейса. Описание события содержит объект `updates`,
-в котором ключами являются id контрллируемых виджетов (для поиска и использования нужного контроллера), а значениями - новые атрибуты виджета.
+UpdateEvent handles updating controlled UI elements. Its description includes an `updates` object where keys correspond to controlled widget IDs (used to locate and employ the relevant controller), and values represent new widget attributes.
 
 ```json
 {
@@ -96,12 +94,12 @@ Duit поддерживает несколько видов базовых де�
 ```
 
 :::warning
-Парсинг новых атрибутов не поддерживает "плоские" значения. Если свойство является сложносоставным (например, TextStyle), оно должно повторять структуру оригинального класса.
+Parsing new attributes does not support "flat" values. If a property is compound (e.g., TextStyle), it must replicate the original class structure.
 :::
 
 ### AnimationTriggerEvent
 
-Событие, которое запускает связанную анимацию соотвествующего контроллера. Описание события состоит из метода запуска анимации, id контроллера и названия анимируемого свойства.
+This event triggers an animation tied to a specific controller. The event description comprises the animation trigger method, the controller ID, and the animated property name.
 
 ```json
 {
@@ -114,7 +112,7 @@ Duit поддерживает несколько видов базовых де�
 
 ### TimerEvent
 
-Событие, которое будет запущено по истечении таймера. Описание содержит вложенное событие или группу событий и длительность таймера.
+An event that will be triggered upon timer expiration. The description includes nested events or event groups and the timer duration.
 
 ```json
 {
@@ -126,7 +124,7 @@ Duit поддерживает несколько видов базовых де�
 
 ### SequencedEventGroup
 
-Группа событий, позволяющиая последовательно выполнять вложенные события с заданным интервалом.
+A group of events that allows sequential execution of nested events with a specified interval.
 
 ```json
 {
@@ -142,7 +140,7 @@ Duit поддерживает несколько видов базовых де�
 
 ### CommonEventGroup
 
-Группа событий, позволяющиая выполнять вложенные события.
+A group of events that allows executing nested events.
 
 ```json
 {
@@ -156,12 +154,12 @@ Duit поддерживает несколько видов базовых де�
 ```
 
 :::warning
-Порядок выполнения действий не гарантирован!
+Execution order of actions is not guaranteed!
 :::
 
-### NavigationEvent, OpenUrlEvent и CustomEvent
+### NavigationEvent, OpenUrlEvent, and CustomEvent
 
-Эта группа событий объединена в одну группу по причине того, что для их обработки необходимо передать в конструктов `DuitDriver` реализацию интерфейса `ExternalEventHandler`.
+These events are grouped together because handling them requires passing an implementation of the `ExternalEventHandler` interface to the `DuitDriver` constructor.
 
 ```dart
 abstract interface class ExternalEventHandler {
@@ -181,12 +179,12 @@ abstract interface class ExternalEventHandler {
 }
 ```
 
-NavigationEvent - событие обрабатывается методом `handleNavigation` и применяется в случаях, если необходимо выполнить переход на другой экран приложения, не являющийся Duit-экраном.
+NavigationEvent - An event processed by the `handleNavigation` method, applied when transitioning to another non-Duit screen within the application is required.
 
-OpenUrlEvent - событие обрабатывается методом `handleOpenUrl` и предназначено для открытия внешних ссылок в браузере устройства.
+OpenUrlEvent - An event processed by the `handleOpenUrl` method, intended for opening external links in the device's browser.
 
-CustomEvent - специальный тип события, позволяющий обрабатывать события, которые не были предусмотрены разработчиками. Полезно в случаях гибридной интеграции Duit с приложением.
+CustomEvent - A specialized event type enabling handling of unforeseen events. Useful in hybrid integrations involving Duit and other parts of the application.
 
 ### NullEvent
 
-Сервисное событие. Парсер событий возвращает его в том случае, если объект события не может быть корректно обработан.
+A service event returned by the event parser when the event object cannot be properly processed.

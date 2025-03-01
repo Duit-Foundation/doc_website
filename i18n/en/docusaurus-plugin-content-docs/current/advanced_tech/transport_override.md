@@ -1,12 +1,12 @@
-# Переопределение реализации транспортного слоя
+# Overriding the Transport Layer Implementation
 
-Зачастую разработчики при разработке своих приложений для работы с сетью использую сторонние пакеты, например [dio](https://pub.dev/packages/dio).
+Often, developers use third-party packages, such as [dio](https://pub.dev/packages/dio), for networking in their applications.
 
-Duit в рамках базовой реализации использует пакет [http](https://pub.dev/packages/http). Чтобы дать возможность разработчикам использовать привычные инструменты и интегрировать их с фреймворком или реализовывать работу с сетью в рамках других сетевых протоколов (gRPC, GQL) существует механика переопределения реализации транспортного слоя.
+While Duit's base implementation relies on the [http](https://pub.dev/packages/http) package, it allows developers to integrate their preferred tools or implement networking using other protocols (e.g., gRPC, GraphQL) by overriding the transport layer.
 
-## Реализация TransportOptions
+## Implementing TransportOptions
 
-Данный класс отвечает за конфигурацию транспортного слоя и используется при создании экземпляра `DuitDriver`. Класс может содержать любые необходимые для работы свойста. 
+This class handles the configuration of the transport layer and is utilized when creating an instance of `DuitDriver`. It can contain any properties necessary for operation.
 
 ```dart
 final class DioTransportOpions extends TransportOptions {
@@ -25,20 +25,20 @@ final class DioTransportOpions extends TransportOptions {
 }
 ```
 
-## Реализация Transport 
+## Implementing Transport
 
-Реализация абстрактного класса `Transport` отвечает за непосредственное взаимодействие с сетью (в нашем случае с помощью dio).
+The abstract class `Transport` handles direct interaction with the network (in our case, using dio).
 
-Класс требует реализовать 4 основных метода:
-1. connect - метод вызывается во время инициализации драйвера и служит для получения начального макета экрана или виджета.
-2. dispose - метод очистки ресурсов транспорта. Вызывается при уничтожении родительского драйвера.
-3. execute - метод, выполняющий заданное действие (http запрос). Возвращает новое событие или события.
-4. request - служебный метод для выполнения произвольного запроса по указаному URL с переданными данными.
+The class requires implementing four core methods:
+
+1. **connect** — Called during driver initialization to fetch the initial screen or widget layout.
+2. **dispose** — Cleans up transport resources. Invoked when the parent driver is destroyed.
+3. **execute** — Performs a given action (HTTP request) and returns a new event or set of events.
+4. **request** — Utility method for issuing arbitrary requests to a specified URL with supplied data.
 
 :::tip
-Реализация метода request обязательна только в тех случаях, когда транспорт используется совместно с интегрированной средой выполнения скриптов. Подробнее об этом можно узнать в соотвествующем [разделе](/docs/advanced_tech/scripting).
+Implementing the `request` method is only mandatory if the transport is used alongside an integrated script execution environment. Learn more in the corresponding [section](advanced_tech/scripting.mdx).
 :::
-
 
 ```dart
 final class DioTransport extends Transport {
@@ -73,9 +73,9 @@ final class DioTransport extends Transport {
 }
 ```
 
-## Расширение UIDriver
+## Extending UIDriver
 
-Расширения UIDriver являются безопасным способом переопределения некоторых базовых частей фреймворка, таких как `Transport` или `ScriptRunner`.
+UIDriver extensions offer a safe way to override certain foundational parts of the framework, such as `Transport` or `ScriptRunner`.
 
 ```dart
 extension DioExtension on UIDriver {

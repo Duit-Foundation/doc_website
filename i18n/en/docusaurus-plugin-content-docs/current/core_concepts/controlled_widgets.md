@@ -1,31 +1,19 @@
-# Управление состоянием UI
+# Managing UI State
 
-В Duit управления состоянием UI основано на трех основных компонентах: контролируемых
-виджетах, действиях и событиях. Контролируемые виджеты - концепция управления состоянием UI на
-основе явного указания того, что виджет может быть изменен извне.
+In Duit, managing UI state revolves around three core components: controlled widgets, actions, and events. Controlled widgets are a concept for externally controlling UI state by explicitly indicating which widgets can be modified.
 
-## Зачем это нужно?
+## Why is this necessary?
 
-Контроллируемые виджеты реализованы на базе StatefulWidget и используют жизненный цикл
-State для реализации механизма обновления состояния представления. При бездумном создании всех
-виджетов в Stateful варианте, мы накладываем на систему дополнительные накладные расходы на создание
-и хранение множетсва объектов State, которые нам никогда не пригодятся.
+Controlled widgets are built on top of StatefulWidgets and leverage the State lifecycle to implement the state update mechanism. Indiscriminately creating all widgets as Stateful introduces unnecessary overhead by generating and storing multiple State objects that we'll never use.
 
-Разделение виджетов и явное указание на то, может ли он быть обновлен извне - необходимая
-оптимизация для экономии ресурсов системы.
+Separating widgets and explicitly marking whether they can be updated externally is a necessary optimization to conserve system resources.
 
-## Устройство виджетов Duit
+## Structure of Duit Widgets
 
-Виджет Duit представляет собой обертку над конкретным виджетом Flutter и при обработке макета может
-создать
-один из
-двух вариантов виджетов:
-контроллируемый
-или неконтроллируемый. Это зависит от значения поля `controlled` модели элемента. Такая обертка
-служит для правильной передачи параметров виджета, а также управления внутренним
-состоянием контроллируемых виджетов.
+A Duit widget acts as a wrapper around a specific Flutter widget. When processing a layout, it can produce one of two widget variants:
+either controlled or uncontrolled. This distinction depends on the value of the `controlled` field in the element's model. This wrapper facilitates proper parameter transfer to the widget and manages the internal state of controlled widgets.
 
-Типовая модель виджета:
+A typical widget model looks like this:
 
 ```json
 {
@@ -38,9 +26,7 @@ State для реализации механизма обновления сос
 }
 ```
 
-Некоторые виджеты по умолчанию всегда являются контроллируемыми в связи с тем, что обеспечивают
-обработку пользовательского ввода, дозапрашивают данные для наполнения или просто выполняют
-связанные действия.
+Certain widgets are inherently controlled by default since they handle user input, dynamically fetch data for rendering, or simply perform related actions.
 
 - ElevatedButton
 - ListView.builder & ListView.separated
@@ -56,13 +42,7 @@ State для реализации механизма обновления сос
 - TextField
 - AnimationBuilder
 
-Еще одним важным отличием двух вариантов виджетов является то, как они получают данные для постоения
-сопоставленного виджета. Контроллируемые виджеты получают данные не напрямую из атрибутов элемента,
-а
-через связанный с виджетом контроллер. Благодаря наличию контроллера реализовано управление
-состоянием
-контроллируемого виджета, а также обработка взаимодействия пользователя и UI с помощью выполнения
-связынных с элементом интерфейса действий.
+Another significant difference between the two widget types lies in how they acquire data for constructing the mapped widget. Controlled widgets do not directly derive data from element attributes; instead, they rely on a controller associated with the widget. Through this controller, managed state control and user interaction handling—via actions linked to UI elements—are implemented.
 
 ```dart
 // Simple widget variant
@@ -80,15 +60,10 @@ final class DuitControlledText extends StatefulWidget with AnimatedAttributes {
 }
 ```
 
-## Контроллер
+## Controller
 
-Контроллеры представляют собой объект, который реализует интерфейс `UIElementController`. Он
-обеспечивает двунаправленную связь между драйвером и виджетами, помогает в обработке дейтствий, а
-также отвечает за обновление состояние виджета.
+Controllers are objects that implement the `UIElementController` interface. They facilitate bidirectional communication between the driver and widgets, assist in action processing, and manage widget state updates.
 
-При создании нового контроллируемого виджета, Duit осуществляет подписку виджета на изменение
-атрибутов контроллера.
+When creating a new controlled widget, Duit subscribes the widget to changes in the controller's attributes.
 
-При получении нового события, например события `update`, драйвер находит необходимый контроллер и
-вызывает метод, отвечающий за обновление текущих атрибутов виджета. После этого контроллер
-уведомляем виджет о том, что атрибуты были изменены извне и что надо перестроиться.
+Upon receiving a new event, such as an `update` event, the driver locates the appropriate controller and invokes the method responsible for refreshing the widget's current attributes. Afterward, the controller notifies the widget that its attributes have been externally altered and that it needs to rebuild itself.
