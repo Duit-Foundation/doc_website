@@ -1,17 +1,13 @@
-# Пользовательские виджеты - клиент
+# Custom Widgets - Client
 
-## Создание класса атрибутов виджета
+## Creating a Widget Attributes Class
 
-Класс атрибутов пользовательского виджета отвечает за корректный парсинг свойств виджета из JSON, а
-также его копирование.
+The attributes class for a custom widget is responsible for parsing widget properties correctly from JSON and copying them.
 
 :::tip
-Метод `dispatchInternalCall` необходимо реализовать только в том случае, если виджет может работать
-с
-анимациями.
+You only need to implement the `dispatchInternalCall` method if the widget can work with animations.
 
-Для анимации виджета средствами Duit, наследуйте свой класс атрибутов от класса
-`AnimatedPropertyOwner`.
+To animate a widget using Duit, inherit your attributes class from the `AnimatedPropertyOwner` class.
 :::
 
 ```dart
@@ -57,18 +53,17 @@ class SvgWidgetAttributes implements DuitAttributes<SvgWidgetAttributes> {
 }
 ```
 
-## Создание класса модели виджета
+## Creating a Widget Model Class
 
-Модель виджета – составляющая объектной модели макета. Она хранит ссылки на все необходимые для
-дальнейшей работы объекты и служебную информацию о виджете:
+The widget model is a component of the layout's object model. It stores references to all necessary objects and metadata about the widget:
 
-- id – уникальный идентификатор виджета;
-- attributes – атрибуты виджета (для неконтролируемых виджетов);
-- viewController – контроллер виджета (только для контролируемых виджетов);
-- controlled – флаг типа виджета;
-- subviews – дочерние виджеты (при наличии).
+- `id` – Unique widget identifier;
+- `attributes` – Widget attributes (for uncontrolled widgets);
+- `viewController` – Widget controller (only for controlled widgets);
+- `controlled` – Flag indicating the widget type;
+- `subviews` – Child widgets (if present).
 
-Все модели пользовательских виджетов должны наследоватьcя от класса `CustomUiElement`.
+All custom widget models must inherit from the `CustomUiElement` class.
 
 ```dart
 final class SvgWidget extends CustomUiElement {
@@ -85,10 +80,9 @@ final class SvgWidget extends CustomUiElement {
 
 ```
 
-## Фабрика атрибутов
+## Attributes Factory
 
-Фабрика атрибутов – функция, которая преобразует JSON в атрибуты виджета. На этом этапе допустимы
-преобразования JSON в соответствии с потребностями разработки.
+The attributes factory is a function that converts JSON into widget attributes. At this stage, transformations of JSON according to development needs are permissible.
 
 ```dart
 DuitAttributes svgAttributeFactory(String type,
@@ -99,10 +93,9 @@ DuitAttributes svgAttributeFactory(String type,
 }
 ```
 
-## Фабрика модели
+## Model Factory
 
-Фабрика модели – функция, где происходит создание экземпляра модели виджета и передача необходимых
-значений в конструктор.
+The model factory is a function where an instance of the widget model is created, and necessary values are passed to its constructor.
 
 ```dart
 ElementTreeEntry svgModelFactory(String id,
@@ -121,13 +114,11 @@ ElementTreeEntry svgModelFactory(String id,
 }
 ```
 
-## Build фабрика
+## Build Factory
 
-Build-фабрика – функция, где на основе данных из модели виджета создаётся виджет Flutter. Для
-получения данных из модели используется приведение типа к типу модели или, как в примере ниже, к
-типу атрибута.
+The build factory is a function where a Flutter widget is created based on data from the widget model. To retrieve data from the model, type casting is used, converting the data either to the model type or, as shown in the example below, to the attribute type.
 
-На этом этапе также осуществляется передача дочерних виджетов в целевой виджет (при необходимости).
+At this stage, child widgets are also passed to the target widget (if applicable).
 
 ```dart
 Widget svgBuildFactory(ElementTreeEntry model, [
@@ -143,11 +134,9 @@ Widget svgBuildFactory(ElementTreeEntry model, [
 }
 ```
 
-## Регистрация виджета
+## Registering a Widget
 
-Регистрация виджета в DuitRegistry осуществляется с помощью метода `DuitRegistry.register` и позволяет
-встроить функции-фабрики в пайплайн обработки. **Важно**: тег пользовательского виджета должен совпадать
-с тегом, который используется на сервере.
+Registering a widget in `DuitRegistry` is done using the `DuitRegistry.register` method, which allows embedding factory functions into the processing pipeline. **Note:** The custom widget's tag must match the tag used on the server.
 
 ```dart
 DuitRegistry.register(

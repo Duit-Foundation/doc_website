@@ -1,13 +1,13 @@
-# Компоненты - клиент
+# Components - Client Side
 
-Использование компонентов на стороне клиента подразумевает лишь один шаг - регистрацию макетов в `DuitRegistry`.
+Utilizing components on the client side involves just one step: registering layouts in the `DuitRegistry`.
 
-## Регистрация компонентов
+## Registering Components
 
 :::info
-**Важно**: все зарегистрированные компоненты после обработки будут находиться в памяти приложения.
+**Important:** All registered components remain in memory after processing.
 
-Используейте эту возможность с умом. Рекомендуемые кейсы использования компонентов: отрисовка динамических списков, сложносоставные переиспользуемые элементы UI.
+Use this capability wisely. Recommended use cases include rendering dynamic lists and reusable, complex UI elements.
 :::
 
 ```dart
@@ -21,12 +21,12 @@ void main() async {
 }
 ```
 
-Регистрация коллекции компонентов происходит с помощью метода `DuitRegistry.registerComponents`. 
-Этот метод в качестве параметра принимает `List<Map<String, dynamic>>`, где каждый элемент списка - объект `ComponentDescription`.
-В ходе регистрации компонентов происходит их первичная обработка путем рекурсивного обхода JSON и создания ссылок на объекты атрибутов.
+Registration of a collection of components is accomplished using the `DuitRegistry.registerComponents` method.
+This method accepts a `List<Map<String, dynamic>>` as a parameter, where each list item is a `ComponentDescription` object.
+During registration, components undergo preliminary processing by recursively traversing the JSON and linking attribute objects.
 
 :::tip
-В примере кода регистрации загрузка набора компонентов происходит при каждом запуске приложения. 
+In the code example, loading a set of components happens every time the application starts.
 
-Для минимизации времени инициализации приложения рекомендуется применять кеширование результатов запроса.
+To minimize application startup time, consider caching the results of the request.
 :::

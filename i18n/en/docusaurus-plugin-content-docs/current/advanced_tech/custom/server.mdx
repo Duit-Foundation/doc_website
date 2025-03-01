@@ -1,16 +1,16 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Пользовательские виджеты - сервер
+# Custom Widgets - Server
 
-## Описание модели объекта атрибутов
+## Describing the Attribute Object Model
 
-Для создания пользовательского виджета вы должны создать модель объекта атрибутов. Это обеспечивает типобезопасность при использовании виджета при создании макетов.
+To create a custom widget, you need to define an attribute object model. This ensures type safety when using the widget in layout creation.
 
 :::tip
-Используйте `ValueReferenceHolder`, если хотите, чтобы атрибуты вашего пользовательского виджета могли быть размечены для использования в составе компонентов.
+Use `ValueReferenceHolder` if you want the attributes of your custom widget to be marked for use within components.
 
-Используйте `AnimatedPropertyOwner`, если хотите поддерживать Duit-анимацию в вашем пользовательском виджете.
+Use `AnimatedPropertyOwner` if you wish to support Duit animation in your custom widget.
 :::
 
 <Tabs groupId="lang">
@@ -36,9 +36,9 @@ import TabItem from '@theme/TabItem';
   </TabItem>
 </Tabs>
 
-## Создание функции-конструктора
+## Creating a Constructor Function
 
-Функции-конструкторы в стиле DSL Duit помогают сохранить общую семантику верстки макетов и использовать пользовательские виджеты единообразно с базовыми виджетами.
+Constructor functions in the Duit DSL style help maintain consistent layout semantics and allow custom widgets to be used uniformly alongside basic widgets.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
@@ -75,9 +75,7 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 
 :::info
-
-Пользовательские виджеты **обязательно** должны иметь **уникальный тег**.
-
+Custom widgets **must** have a **unique tag**.
 :::
 
-После этого можно использовать новые функции для создания макетов так же, как и для стандартных виджетов, поддерживаемых Duit.
+After this setup, you can use the new functions to create layouts in the same manner as standard widgets supported by Duit.

@@ -1,25 +1,15 @@
-# О пользовательских виджетах
+# About Custom Widgets
 
-## В чем проблема?
+## What Is the Problem?
 
-Экосистема пакетов Flutter помогает находить готовые решения на любой случай жизни. Многие из
-публикуемых на pub.dev пакетов экспортируют в своём составе те или иные виджеты. Duit пропагандирует
-dependency-free подход к разработке, подразумевающий минимизацию использования внешних зависимостей
-во фреймворке. Поэтому виджеты из open-source библиотек не могут быть включены в состав библиотеки
-Duit. К тому же, это потребовало бы значительных усилий на дальнейшую поддержку.
+The Flutter ecosystem offers ready-made solutions for almost any situation. Many packages published on pub.dev export various widgets as part of their composition. Duit advocates a dependency-free development approach, minimizing reliance on external dependencies within the framework. Thus, widgets from open-source libraries cannot be included in the Duit library. Moreover, doing so would demand considerable effort for ongoing support.
 
-В противовес этому подходу существует требование обеспечить работу с уже разработанными виджетами (
-например, использование виджетов из состава UI-кита) совместно с Duit, а также передачу данных для
-их конфигурации.
+Conversely, there's a requirement to support already developed widgets (e.g., using widgets from a UI kit) alongside Duit, including transferring configuration data for these widgets.
 
-## В чем состоит решение?
+## What's the Solution?
 
-Duit предоставляет API для создания и регистрации специальных функций-фабрик, позволяющих
-пользователям встраивать свои реализации виджетов в пайплайн обработки. Регистрация пользовательских
-виджетов осуществляется с помощью статического метода класса `DuitRegistry.register`.
+Duit provides an API for creating and registering special factory functions, allowing users to embed their own widget implementations into the processing pipeline. Custom widget registration is achieved using the static method `DuitRegistry.register` of the `DuitRegistry` class.
 
 :::info
-Зарегистрированный виджет будет доступен глобально всем экземплярам `DuitDriver`,
-которые были инициализированы в приложении.
+A registered widget will be globally accessible to all instances of `DuitDriver` initialized within the application.
 :::
-

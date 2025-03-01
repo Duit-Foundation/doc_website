@@ -1,14 +1,14 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Компоненты - сервер
+# Components - Server
 
-## Создание нового компонента
+## Creating a New Component
 
-Объект-макет компонента на стороне сервера состоит из 2 основных частей: уникального идентификатора (tag) и макета (layoutRoot). Для облегчения создания новых компонентов пакеты duit предоставляют функцию `ComponentDescription`.
+A component template object on the server side consists of two main parts: a unique identifier (`tag`) and a layout root (`layoutRoot`). To simplify the creation of new components, the Duit packages provide the `ComponentDescription` function.
 
 :::info
-В рамках компонента не рекомендуется явно устанавливать свойство controlled = true и id виджетов - такие виджеты будут обрабатываться как неконтроллируемые, а фиксированное значение id виджета приведет к ошибке создания контроллера.
+Within a component, it is not advisable to explicitly set the `controlled = true` property or assign widget IDs. Such widgets will be treated as uncontrolled, and setting fixed widget IDs could lead to controller creation errors.
 :::
 
 <Tabs groupId="lang">
@@ -38,14 +38,14 @@ import TabItem from '@theme/TabItem';
   </TabItem>
 </Tabs>
 
-## Разметка данных
+## Data Binding
 
-Разметка данных в макете виджета - это способ присваивания атрибутам составного компонента значений, которые будут переданных со стороны сервера.
-За это отвечае свойство `refs` объекта атрибутов, которое представляет из себя коллекцию объектов `ValueReference`.
-Объект `ValueReference` состоит из трех основных частей:
-- attributeKey - название свойства атрибута (в примере - data), куда будет помещено значение
-- objectKey - ключ свойства в объекте, содержащем данные
-- defaultValue - опциональный параметр, который будет использован в случае, если значение не будет найдено
+Data binding in a widget layout involves assigning attribute values to composite components that will be received from the server. This is managed by the `refs` property of the attribute object, which holds a collection of `ValueReference` objects.
+
+Each `ValueReference` object has three main components:
+- `attributeKey` — the name of the attribute property (e.g., `data`), where the value will be placed.
+- `objectKey` — the key of the property inside the data-containing object.
+- `defaultValue` — an optional parameter used if no matching value is found.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
@@ -92,9 +92,9 @@ import TabItem from '@theme/TabItem';
   </TabItem>
 </Tabs>
 
-## Использование компонентов в верстке
+## Using Components in Layouts
 
-Добавление компонентов в код макета происходит с помощью виджета Component, который принимает в качестве параметров тег целевого компонента и объект, содержащий данные для его заполнения.
+Adding components to your layout code involves using the `Component` widget, which takes the target component tag and a data object for filling it as parameters.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
@@ -119,9 +119,9 @@ import TabItem from '@theme/TabItem';
   </TabItem>
 </Tabs>
 
-## Обновление состояния компонента
+## Updating Component State
 
-Виджеты, входящие в состав компонента всегда являются некотроллируемыми, что исключает их прямое обновление через контроллер. 
-Для обновление одиночного компонента используется обычный подход с событием типа `UpdateEvent`. 
+Widgets within a component are always uncontrolled, meaning they can't be updated directly via a controller. 
+To update a single component, use the standard approach with an `UpdateEvent` event type.
 
-Компоненты по умолчанию являются контроллируемыми виджетами, поэтому для обновления его состояния требуется явно указать уникальный id и вернуть на клиент новое событие, которое опишет изменение с помощью объекта с данными.
+Components are controlled widgets by default, so to update their state, you need to explicitly specify a unique ID and send back to the client a new event that describes the change using a data object.
