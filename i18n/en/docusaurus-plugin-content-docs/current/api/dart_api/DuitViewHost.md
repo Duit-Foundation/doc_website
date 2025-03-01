@@ -1,3 +1,3 @@
 # DuitViewHost
 
-Виджет `DuitViewHost` отвечает за инициализацию связанного драйвера и подписку на обновления дерева виджетов в процессе работы Duit.
+The `DuitViewHost` widget is responsible for initializing the associated driver and subscribing to widget tree updates during Duit's operation.

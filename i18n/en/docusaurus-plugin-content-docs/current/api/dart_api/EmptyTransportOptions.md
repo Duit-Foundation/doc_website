@@ -1,5 +1,5 @@
 # EmptyTransportOptions
 
-Класс-заглушка, представляющий неконфигурированный транспорт.
+A stub class representing an unconfigured transport.
 
-Полезен при написании тестов.
+Useful when writing tests.

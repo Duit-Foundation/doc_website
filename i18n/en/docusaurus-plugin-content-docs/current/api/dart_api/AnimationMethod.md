@@ -1,6 +1,6 @@
 # AnimationMethod
 
-Enum определяет метод запуска анимации. Повторяет методы `AnimationController` (forward, repeat, reverse). Дополнительный метод `toggle` позволяет вызывать методы анимации в зависимости от текущего состояния. Например, если анимация завершилась, будет вызван метод `reverse`.
+The enum defines the animation launch method. Mirrors `AnimationController` methods (forward, repeat, reverse). The additional `toggle` method allows calling animation methods based on the current state. For example, if the animation has finished, the `reverse` method will be invoked.
 
 ```dart
 enum AnimationMethod {

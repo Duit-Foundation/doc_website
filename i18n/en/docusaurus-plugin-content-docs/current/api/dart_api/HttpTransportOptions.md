@@ -1,3 +1,3 @@
 # HttpTransportOptions
 
-Класс для конфигурации встоенной реализации HTTP-транспорта.
+A class for configuring the built-in HTTP transport implementation.

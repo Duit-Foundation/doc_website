@@ -1,6 +1,6 @@
 # TransportOptions
 
-Класс TransportOptions представляет базовые опции для настройки транспорта.
+The TransportOptions class represents the base options for configuring the transport.
 
 ```dart
 abstract class TransportOptions {

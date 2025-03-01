@@ -1,6 +1,6 @@
 # ElementTree
 
-Абстрактный класс представляющий структуру дерева элементов Duit. Предоставляет методы для работы с деревом элементов, таких как методы парсинга и отрисовки дерева в качестве дерева виджетов.
+An abstract class representing the structure of the Duit element tree. Provides methods for working with the element tree, such as parsing and rendering the tree as a widget tree.
 
 ```dart
 abstract class ElementTree {

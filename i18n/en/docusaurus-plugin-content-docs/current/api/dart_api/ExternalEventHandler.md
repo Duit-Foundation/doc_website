@@ -1,6 +1,6 @@
 # ExternalEventHandler
 
-Интерфейс, определяющий набор методов для обработки специальных типов событий, таких как `CustomEvent`, `NavigationEvent` и `OpenUrlEvent`.
+An interface that defines a set of methods for handling special event types, such as `CustomEvent`, `NavigationEvent`, and `OpenUrlEvent`.
 
 ```dart
 abstract interface class ExternalEventHandler {

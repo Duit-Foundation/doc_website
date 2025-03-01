@@ -1,14 +1,15 @@
 # DuitDriver
 
-Реализация [UIDriver](/docs/api/dart_api/UIDriver). Является важной частью Duit-предсавления и отвечает за координацию работы всех частей фреймворка: конфигурацию транспорта, выполнение действий, обработку событий, парсинг и отрисовку UI-элементов.
+Implementation of [UIDriver](/docs/api/dart_api/UIDriver). It is a crucial part of the Duit-presentation and coordinates the operation of all framework components: transport configuration, action execution, event handling, parsing, and rendering of UI elements.
 
 :::tip
-Экземпляр `DuitDriver` используется в связке c [DuitViewHost](/docs/api/dart_api/DuitViewHost), который инициализирует драйвер и подписывается на обновления дерева виджетов.
+The `DuitDriver` instance is used in conjunction with [DuitViewHost](/docs/api/dart_api/DuitViewHost), which initializes the driver and subscribes to widget tree updates.
 
-Функционал DuitViewHost можно реализовать самостоятельно для реализации иных требований к виджету.
+You can implement DuitViewHost functionality yourself to meet specific widget requirements.
 :::
 
-Предоставляет набор конструкторов под специфические задачи разработки:
-- **default** для реализации классического flow работы (запрос начального макета и отрисовка)
-- **static** для передачи макета в конструктор
-- **module** для использования Duit в качестве BDUI-движка в нативных приложениях
+Provides constructors tailored to specific development tasks:
+
+- **default** for implementing the classic workflow (initial layout request and rendering)
+- **static** for passing a layout to the constructor
+- **module** for using Duit as a BDUI engine in native applications

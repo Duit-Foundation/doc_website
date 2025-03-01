@@ -1,6 +1,6 @@
 # AnimatedPropertyOwner
 
-Класс для расширения классов атрибутов. Добавляет необходимые свойства для изменения состояния атрибутов в ходе анимации.
+The class for extending attribute classes. Adds necessary properties for modifying attribute states during animation.
 
 ```dart
 base class AnimatedPropertyOwner {
@@ -20,7 +20,7 @@ base class AnimatedPropertyOwner {
 }
 ```
 
-### Пример использования
+### Usage example
 
 ```dart
 final class SvgAttributes extends AnimatedPropertyOwner {

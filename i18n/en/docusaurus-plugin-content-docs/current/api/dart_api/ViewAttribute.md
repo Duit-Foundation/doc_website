@@ -1,6 +1,6 @@
 # ViewAttribute
 
-Класс-обертка для атрибутов виджетов. Предоставляет методы создания атрибутов, каста их к нужному типу, а также хранит сам объект атрибутов.
+A wrapper class for widget attributes. Provides methods for creating attributes, casting them to the required type, and stores the attribute object itself.
 
 ```dart
 final class ViewAttribute<T> {

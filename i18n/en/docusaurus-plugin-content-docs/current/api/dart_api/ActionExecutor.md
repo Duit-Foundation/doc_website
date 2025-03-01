@@ -1,6 +1,6 @@
 # ActionExecutor
 
-Интерфейс для реализации класса, отвечающего за выполнение действий. Используйте этот интерфейс для создания собственных реализаций `ActionExecutor`.
+The interface for implementing a class responsible for executing actions. Use this interface to create custom implementations of `ActionExecutor`.
 
 ```dart
 abstract class ActionExecutor {

@@ -1,6 +1,6 @@
 # UIDriver
 
-Интерфейс `UIDriver` представляет собой публичный API драйвера, управляющего представлением Duit.
+The `UIDriver` interface represents the public API of the driver that manages the Duit presentation.
 
 ```dart
 abstract interface class UIDriver {

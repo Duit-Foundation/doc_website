@@ -1,6 +1,6 @@
 # EventResolver
 
-Абстрактный класс представляющий обработчик базовых событий. Класс отвечает за обработку событий с сервера и передачу потока выполнения [UIDriver](/docs/api/dart_api/UIDriver.md).
+An abstract class representing a handler for basic events. This class is responsible for processing server events and passing execution flow to [UIDriver](/docs/api/dart_api/UIDriver.md).
 
 ```dart
 abstract class EventResolver {

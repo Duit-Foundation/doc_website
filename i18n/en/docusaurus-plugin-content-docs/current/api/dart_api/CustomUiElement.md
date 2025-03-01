@@ -1,6 +1,6 @@
 # CustomUiElement
 
-Базовый класс для создания моделей пользовательских виджетов.
+A base class for creating custom widget models.
 
 ```dart
 base class CustomUiElement extends DuitElement<dynamic> {

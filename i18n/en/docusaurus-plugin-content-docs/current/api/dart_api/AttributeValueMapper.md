@@ -1,7 +1,7 @@
 # AttributeValueMapper
 
-Служебный класс для сопоставления значений параметров с соответствующими свойствами виджета Flutter.
+A utility class for mapping parameter values to corresponding Flutter widget properties.
 
 :::info
-Со списком доступных методов можно ознакомиться в [репозитории](https://github.com/Duit-Foundation/flutter_duit/blob/main/lib/src/utils/params_mapper.dart) проекта.
+You can find a list of available methods in the project [repository](https://github.com/Duit-Foundation/flutter_duit/blob/main/lib/src/utils/params_mapper.dart).
 :::

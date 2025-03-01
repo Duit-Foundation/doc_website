@@ -1,9 +1,9 @@
 # UIElementController
 
-Интерфейс `UIElementController` представляет собой публичный API контроллера. Контроллер обеспечивает связь между драйвером и отдельным контроллируемым виджетом.
+The `UIElementController` interface represents the public API of the controller. The controller establishes a connection between the driver and individual controlled widgets.
 
 :::info
-Подробнее про роль контроллера можно прочитать в соотвествующем [разделе](/docs/core_concepts/controlled_widgets)
+Read more about the role of the controller in the corresponding [section](/docs/core_concepts/controlled_widgets).
 :::
 
 ```dart

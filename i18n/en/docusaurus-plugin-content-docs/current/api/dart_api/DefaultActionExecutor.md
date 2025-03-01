@@ -1,3 +1,3 @@
 # DefaultActionExecutor
 
-Базовая реализация [ActionExecutor](/docs/api/dart_api/ActionExecutor). Класс отвечает за обработку серверных действий и передачу потока выполнения [UIDriver](/docs/api/dart_api/UIDriver.md).
+Basic implementation of [ActionExecutor](api/dart_api/ActionExecutor). This class handles server-side actions and passes execution flow to [UIDriver](api/dart_api/UIDriver.md).

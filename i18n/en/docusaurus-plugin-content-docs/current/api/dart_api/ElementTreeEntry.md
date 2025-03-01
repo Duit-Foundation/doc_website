@@ -1,8 +1,8 @@
 # ElementTreeEntry
 
-Абстрактный базовый класс, представляющий узел дерева элементов Duit.
+An abstract base class representing a node in the Duit element tree.
 
-Класс `ElementTreeEntry` служит базовым классом для моделей элементов. Он сохраняет важные свойства, такие как тип, идентификатор и состояние элемента управления, а также атрибуты и контроллер представления для управления состоянием пользовательского интерфейса и взаимодействиями.
+The `ElementTreeEntry` class serves as the base class for element models. It retains important properties such as the element's type, identifier, and control state, as well as attributes and a presentation controller for managing user interface state and interactions.
 
 ```dart
 abstract base class ElementTreeEntry<T> {

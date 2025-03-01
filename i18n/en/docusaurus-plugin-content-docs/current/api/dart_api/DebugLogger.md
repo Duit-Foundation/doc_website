@@ -1,6 +1,6 @@
 # DebugLogger
 
-Интерфейс, представляющий контракт для реализаций логгера.
+An interface that represents a contract for logger implementations.
 
 ```dart
 abstract interface class DebugLogger {

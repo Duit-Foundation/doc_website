@@ -1,5 +1,5 @@
 # DuitRegistry
 
-Этот класс предоствляет набор статических методов для регистрации компонентов и пользовательских виджетов, а также верхнеуровневой конфигурации `UiDriver`.
+This class provides a set of static methods for registering components and custom widgets, as well as high-level configuration of `UiDriver`.
 
-Класс доступен глобально и зарегистрированные компоненты и пользовательские виджеты будут доступны всем экземплярам `DuitDriver`.
+The class is globally accessible, and registered components and custom widgets will be available to all instances of `DuitDriver`.

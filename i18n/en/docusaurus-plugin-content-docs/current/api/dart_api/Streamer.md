@@ -1,6 +1,6 @@
 # Streamer
 
-Дополнительный интерфейс для совместного использования с Transport. Позволяет реализовать обработку действий и событий для транспортов, которые используют постоянное соединение, например WebSocket.
+An additional interface used in conjunction with Transport. Allows implementing action and event handling for transports that use persistent connections, such as WebSocket.
 
 ```dart
 abstract class Streamer {

@@ -1,6 +1,6 @@
 # DefaultActionParser
 
-Базовая реализация интерфейса `Parser<ServerAction>`. Отвечает за корректный парсинг базового набора действий Duit. Возвращает `UnknownAction` в случае, если модель действиz невозмоджно обработать.
+Base implementation of the `Parser<ServerAction>` interface. Handles the correct parsing of Duit's basic set of actions. Returns `UnknownAction` if the action model cannot be processed.
 
 ```dart
 final class DefaultActionParser implements Parser<ServerAction> {

@@ -1,6 +1,6 @@
 # AnimationInterval
 
-Класс, описывающий интервал времени выполнения анимации. Используется при связывании нескольких `Tween` с одним контроллером анимации.
+A class representing the time interval for an animation. Used when associating multiple `Tween`s with a single animation controller.
 
 ```dart
 final class AnimationInterval {

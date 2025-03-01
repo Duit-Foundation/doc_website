@@ -1,6 +1,6 @@
 # DefaultEventParser
 
-Базовая реализация интерфейса `Parser<ServerEvent>`. Отвечает за корректный парсинг базового набора событий Duit. Возвращает `NullEvent` в случае, если модель действиz невозмоджно обработать.
+Base implementation of the `Parser<ServerEvent>` interface. Handles the correct parsing of Duit's basic set of events. Returns `NullEvent` if the event model cannot be processed.
 
 ```dart
 final class DefaultEventParser implements Parser<ServerEvent> {

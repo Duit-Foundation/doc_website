@@ -1,6 +1,6 @@
 # AnimatedAttributes
 
-Mixin `AnimatedAttributes` отвечает за объединение анимированных свойств с атрибутами целевого виджета.
+The `AnimatedAttributes` mixin is responsible for merging animated properties with the target widget's attributes.
 
 ```dart
 mixin AnimatedAttributes on Widget {

@@ -1,6 +1,6 @@
 # ScriptRunner
 
-Интерфейс для создания классов, отвечающих за обработку и запуск динамических скриптов в интегрированной среде выполения.
+An interface for creating classes responsible for handling and running dynamic scripts in the integrated execution environment.
 
 ```dart
 abstract base class ScriptRunner<TOptions> {
@@ -32,5 +32,5 @@ abstract base class ScriptRunner<TOptions> {
 ```
 
 :::tip
-Подробнее об использовании `ScriptRunner` можно узнать в соотвествующем [разделе](/docs/advanced_tech/scripting).
+Learn more about using ScriptRunner in the corresponding section.
 :::

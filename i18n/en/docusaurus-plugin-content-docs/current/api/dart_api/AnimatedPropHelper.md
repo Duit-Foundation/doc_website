@@ -1,6 +1,6 @@
 # AnimatedPropHelper
 
-Вспомогательное расширение типа для класса Map. Предоставляет геттеры для упрощения работы с JSON.
+An auxiliary extension for the Map class. Provides getters to simplify working with JSON data.
 
 ```dart
 extension type AnimatedPropHelper(Map<String, dynamic> json) implements Map {

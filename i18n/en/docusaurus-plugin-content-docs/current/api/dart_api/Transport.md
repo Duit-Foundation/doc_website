@@ -1,6 +1,6 @@
 # Transport
 
-Интерфейст реализации транспортного слоя, с которой взамодействует `UIDriver`. Предоставляет методы для работы фреймворка с сетью.
+Interface for the transport layer implementation that interacts with `UIDriver`. Provides methods for the framework to communicate over the network.
 
 ```dart
 abstract class Transport {

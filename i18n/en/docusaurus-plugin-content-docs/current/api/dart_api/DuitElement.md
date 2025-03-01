@@ -1,8 +1,9 @@
 # DuitElement
 
-Класс-наследник [ElementTreeEntry](api/dart_api/ElementTreeEntry.md) и базовый класс для моделей виджетов Duit.
+A subclass of [ElementTreeEntry](api/dart_api/ElementTreeEntry.md) and the base class for Duit widget models.
 
-Он отвечает за:
-- Преобразование json в конкретные модели виджетов
-- Создание и связку `UiElementController` с драйвером
-- Отрисовку виджетов на основе модели
+It is responsible for:
+
+- Converting JSON into concrete widget models
+- Creating and linking `UiElementController` with the driver
+- Rendering widgets based on the model

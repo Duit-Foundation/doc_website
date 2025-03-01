@@ -1,6 +1,6 @@
 # AnimationTrigger
 
-Enum `AnimationTrigger` определяет когда будет запущена анимация: при построении виджета или при выполнении действия.
+The `AnimationTrigger` enum specifies when the animation will be launched: during widget build or during action execution.
 
 ```dart
 enum AnimationTrigger {

@@ -1,6 +1,6 @@
 # DuitAttributes
 
-Интерфейс атрибутов. От него наследуются классы всех атрибутов Duit. Предоставляет методы для работы с атрибутами.
+The attributes interface. All Duit attribute classes inherit from it. Provides methods for working with attributes.
 
 ```dart
 abstract interface class DuitAttributes<T> {

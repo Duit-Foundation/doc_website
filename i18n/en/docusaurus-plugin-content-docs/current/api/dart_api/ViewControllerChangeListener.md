@@ -1,9 +1,9 @@
 # ViewControllerChangeListener
 
-Миксин `ViewControllerChangeListener` отслеживает изменения в контроллере элемента пользовательского интерфейса и соответствующим образом обновляет состояние виджета.
+The `ViewControllerChangeListener` mixin tracks changes in the user interface element's controller and appropriately updates the widget's state.
 
-`ViewControllerChangeListener` следует использовать с StatefulWidget и связанным с ним классом State. Он предоставляет механизм для прикрепления `State` к `UIElementController` и прослушивания обновлений в атрибутах контроллера. Когда происходит обновление контроллера, ViewControllerChangeListener запускает обновление состояния, позволяя пользовательскому интерфейсу отразить новые значения атрибута.
+`ViewControllerChangeListener` should be used with `StatefulWidget` and its associated `State` class. It provides a mechanism for attaching `State` to `UIElementController` and listening for updates in the controller's attributes. When the controller is updated, `ViewControllerChangeListener` triggers a state update, allowing the user interface to reflect the new attribute values.
 
 :::info
-Удаление слушателя событий и удаление связки с драйвером происходит в автоматическом режиме при вызове метода `dispose` в State.
+Event listener removal and unlinking from the driver occur automatically when the `dispose` method is called in `State`.
 :::
