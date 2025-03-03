@@ -1,19 +1,11 @@
 import styles from "./styles.module.css";
 import Card from "./card";
 import MainCard from "./mainCard";
-import DocBtn from './docBtn';
+import DocBtn from "./docBtn";
 import Translate from "@docusaurus/Translate";
+import type { Card as tCard } from "./types";
 
-type Card = {
-  icon: React.ComponentType;
-  svg: React.ComponentType;
-  bgColor: string;
-  title: JSX.Element;
-  description: JSX.Element;
-  hasAntiRadius?: boolean;
-};
-
-const cards: Card[] = [
+const cards: tCard[] = [
   {
     icon: require("@site/static/img/HomePage/mainSection/card1/clock-check.svg")
       .default,
@@ -21,10 +13,9 @@ const cards: Card[] = [
       .default,
     bgColor: "#2E930D",
     title: <Translate>card1_tile</Translate>, //Будь быстрее всех
-    description:
-      <Translate>card1_description</Translate>, // Доведите свой показатель Time-to-Market до новых вершин, снижая сроки сроки доставки обновлений до пользователя
+    description: <Translate>card1_description</Translate>, // Доведите свой показатель Time-to-Market до новых вершин, снижая сроки сроки доставки обновлений до пользователя
 
-    hasAntiRadius: true
+    hasAntiRadius: true,
   },
   {
     icon: require("@site/static/img/HomePage/mainSection/card2/blocks.svg")
@@ -33,8 +24,7 @@ const cards: Card[] = [
       .default,
     bgColor: "#0E9CB7",
     title: <Translate>card2_title</Translate>, //Одна реализация - множество платформ
-    description:
-      <Translate>card2_description</Translate>, //Используйте все преимущества Flutter, создавая консистентный UI для множества целевых платформ
+    description: <Translate>card2_description</Translate>, //Используйте все преимущества Flutter, создавая консистентный UI для множества целевых платформ
   },
   {
     icon: require("@site/static/img/HomePage/mainSection/card3/progress-check.svg")
@@ -43,8 +33,7 @@ const cards: Card[] = [
       .default,
     bgColor: "#FC9B00",
     title: <Translate>card3_title</Translate>, //Обновления Over the air
-    description:
-      <Translate>card3_description</Translate>, //Распространяйте обновленный UI даже на тех пользователей, которые не спешат устанавливать новые версии
+    description: <Translate>card3_description</Translate>, //Распространяйте обновленный UI даже на тех пользователей, которые не спешат устанавливать новые версии
   },
 ];
 

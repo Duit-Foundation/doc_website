@@ -7,13 +7,14 @@
 }
 
 .title {
-    margin: 1.5rem auto auto;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
 }
 
 .heading {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 500;
     line-height: 97%;
     letter-spacing: -2.4px;
