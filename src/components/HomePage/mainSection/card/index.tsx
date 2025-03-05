@@ -1,7 +1,8 @@
 import styles from "./styles.module.css";
 import Heading from "@theme/Heading";
+import { type Card } from "../types";
 
-export default function Card(prop): JSX.Element {
+export default function Card(prop: Card): JSX.Element {
   return (
     <div className={styles.card} style={{ backgroundColor: prop.bgColor }}>
       <div className={styles.img}>
@@ -10,7 +11,9 @@ export default function Card(prop): JSX.Element {
       </div>
       <div className={prop.icon ? styles.text : styles.hText}>
         <Heading as="h4" className={prop.icon ? styles.title : styles.hTitle}>
-          {prop.title}
+          {Array.isArray(prop.title)
+            ? prop.title.map((t, index) => <span key={index}>{t}</span>)
+            : prop.title}
         </Heading>
         <div className={prop.icon ? styles.description : styles.hDescription}>
           {prop.description}
@@ -19,9 +22,15 @@ export default function Card(prop): JSX.Element {
       {prop.icon ? (
         <></>
       ) : (
-        <button className={styles.hBtn} onClick={prop.handleOnCLick}>{prop.btnText}</button>
+        <button className={styles.hBtn} onClick={prop.handleOnCLick}>
+          {prop.btnText}
+        </button>
       )}
-      {prop.hasAntiRadius ? <div className={styles.antiRadiusContainer}><div className={styles.antiRadius}></div></div> : null}
+      {prop.hasAntiRadius ? (
+        <div className={styles.antiRadiusContainer}>
+          <div className={styles.antiRadius}></div>
+        </div>
+      ) : null}
     </div>
   );
 }
