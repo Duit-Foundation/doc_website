@@ -77,7 +77,19 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'advanced_tech/scripting',
+        'advanced_tech/themes',
         // 'advanced_tech/native',
+      ],
+    },
+    {
+      type: 'category',
+      label: "sidebar.cookbook",
+      collapsed: true,
+      link: {
+        type: 'generated-index',
+      },
+      items: [
+        "cookbook/animations",
       ],
     },
     {
