@@ -14,11 +14,11 @@ export default function Home(): JSX.Element {
       description="Backend-driver UI framwork for Flutter"
     >
       <main>
-        <MainSection />
-        <PromoSection />
-        <section className="container">
+        {/* <MainSection /> */}
+        {/* <PromoSection /> */}
+        {/* <section className="container">
           <BrowserOnly children={() => <Divider />} />
-        </section>
+        </section> */}
         <OpportunitySection />
       </main>
     </Layout>

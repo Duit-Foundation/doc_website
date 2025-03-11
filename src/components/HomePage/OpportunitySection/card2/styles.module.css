@@ -2,50 +2,12 @@
     position: relative;
 }
 
-.img1 {
+.img {
     position: absolute;
-    top: 125px;
-    left: 270px;
-}
-
-.img2 {
-    position: absolute;
-    top: 215px;
-    left: 335px;
-}
-
-.img3 {
-    position: absolute;
-    top: 70px;
-    left: 270px;
-}
-
-.img4 {
-    position: absolute;
-    top: 275px;
-    left: 40px;
-}
-
-.img5 {
-    position: absolute;
-    top: 155px;
-    left: 35px;
-}
-
-.img6 {
-    position: absolute;
-    top: 70px;
-    left: 125px;
-}
-
-.img7 {
-    position: absolute;
-    top: 80px;
-    left: 35px;
 }
 
 .bg {
-    margin-top: 70px;
+    margin-top: 50px;
     margin-bottom: -7px;
     border-radius: 8px;
 }
