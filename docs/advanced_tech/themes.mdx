@@ -1,0 +1,244 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Темы
+
+Говоря о темах подразумевается не совсем то, к чему привыкли обычные Flutter разработчики: глобальные стили виджетов, цветовые схемы и тд. В рамках Duit темы - это мощная функция, которая решает несколько ключевых задач:
+
+- Определение набора свойств виджетов, которые будут использоваться во всем приложении
+- Уменьшение размера макетов экранов за счет выделения повторябщихся свойств в темы
+- Поддежка дизайн-системы на стороне сервера
+
+## Принцип работы тем
+
+Применение тем к виджетам состоит из нескольких этапов:
+
+- Получение json-темы из источника данных
+- Преобразование json темы в токены темы (токенизация)
+- Слияние объекта атрибута виджета и контента токена темы
+
+Загрузка темы реализуется с помощью классов, реализующих интерфейса `ResourceLoader<T>`.
+
+За токенизацию объекта темы отвечает класс `ThemePreprocessor`
+
+## Создание темы
+
+На текущем этапе DSL-библиотеки не имеют специфических классов или функций, которые помогут создавать и валидировать темы на строне бекенда. Тема предствляет собой хеш-таблицу следующего вида:
+
+```json
+{
+    "text_bold": {
+        "type": "Text"
+        "data": {
+            "fontSize": 18.0,
+            "fontWeight": 700,
+        },
+    },
+    "text_secondary": {
+        "type": "Text"
+        "data": {
+            "fontSize": 14.0,
+            "fontWeight": 400,
+        },
+    },
+    "col_space_btw": {
+        "type": "Column",
+        "data": {
+            "mainAxisAlignment": "spaceBetween",
+        },
+    },
+    "custom_widget_theme1": {
+        "type": "CustomWidgetTagInsteadOfWidgetType",
+        "data": {
+            "some_property": "some_value",
+        },
+    },
+}
+```
+
+Ключами хеш-таблицы являются названия тем. Названия должны быть уникальными, но вы можете создать неограниченное количество тем для виджетов одного типа.
+
+Значениями хеш-таблицы являются объекты, которые представляют собой объекты токенов темы, которые в свою очередь состоят из `type` - типа виджета для которого будет использована конкретная тема и `data` - объекта атрибутов виджета.
+
+:::info
+Темы поддерживаются в том числе и для пользовательских виджетов.
+
+Чтобы тема корректно применялась к атрибутам виджета, свойство `type` должно содержать тэг пользовательского виджета, а не его базовый тип (Custom).
+:::
+
+---
+
+## Инициализация темы
+
+### Загрузчик темы
+
+Прежде чем тема станет доступна для виджетов, ее следует инициализаровать. Duit из коробки предоставляет два загрузчика тем:
+
+- `AssetThemeLoader` для создания темы из json-файла, хранящегося в ассетах приложения
+- `StaticThemeLoader` для создания темы из `Map<String, dynamic>`
+
+Для более гибкой настройки процесса инициализации рекомендуется использовать собственную реализацию интерфейса `ResourceLoader<DuitTheme>`.
+
+```dart
+final class DioThemeLoader implements ResourceLoader<DuitTheme> {
+  final Dio dio;
+  final String path;
+
+  DioThemeLoader(
+    this.dio,
+    this.path,
+  );
+
+  @override
+  Future<DuitTheme> load() async {
+    final res = await dio.get(path); //load theme json
+    final tokenizer = ThemePreprocessor(); //create tokenizer
+
+    return tokenizer.tokenize(res.data); //return tokenized theme
+  }
+}
+```
+
+После получения json, который содержит тему, следует использовать класс `ThemePreprocessor` для выполнения токенизации (преобразования `MapEntry` в экземпляры класса `ThemeToken`).
+
+### Токены темы
+
+Токены - это специальные объекты, хранящие атрибуты виджета, которые будут использоваться при слиянии объектов атрибутов и атрибутами темы. 
+Они используются для более гибкой настройки процесса валидации входящих параметров при обработке темы.
+
+```dart
+abstract class ThemeToken {
+  final Set<String> excludedFields;
+  final Map<String, dynamic> _data;
+  final String type;
+
+  Map<String, dynamic> get widgetTheme => _data;
+
+  const ThemeToken(
+    this.excludedFields,
+    this._data,
+    this.type,
+  );
+}
+```
+
+Пристальное внимание следует обратить на свойство `Set<String> excludedFields`. 
+Это множество, содержащее названия полей, которые не должны быть включены в атрибуты темы виджета. 
+Механиз токенизации позволяет валидировать входящие атрибуты и убедиться, что они соответствуют ожидаемым.
+
+В случае, если одно из свойств находится в сете `excludedFields`, будет выброшено исключение.
+
+### Расширение и переопределение поведения препроцессора
+
+В рамках реализации препроцессора существуют два способа расширения поведения:
+
+- `overrideWidgetTokenizer` - переопределение создания токена для конкретного типа виджета. Полезно в тех случаях, когда вы хотите изменить список исключенных полей.
+- `customWidgetTokenizer` - добавление обработки нового типа виджета в препроцессор. Полезно в тех случаях, когда вы хотите добавить не реализованые ранее темы виджетов или использовать темы для пользовательских виджетов.
+
+В обоих случаях следует вернуть экземпляр класса `ThemeToken` или `null`, если вы не хотите переопределить поведение. Также вы можете создавать свои собственные классы `ThemeToken` для удобства.
+
+```dart
+//Create override token for text widget theme
+final class OverrideTextThemeToken extends ThemeToken {
+  OverrideTextThemeToken(Map<String, dynamic> data)
+      : super(
+          const {}, //allow override all fields
+          data,
+          "Text",
+        );
+}
+
+
+//Create token for custom widget
+final class CustomWidgetThemeToken extends ThemeToken {
+  CustomWidgetThemeToken(Map<String, dynamic> data)
+      : super(
+          const {}, //allow override all fields
+          data,
+          "ExampleCustomWidget",
+        );
+}
+
+
+final class DioThemeLoader implements ResourceLoader<DuitTheme> {
+    <...>
+
+    //Add custom token
+  ThemeToken? _customTokenizer(
+    String type,
+    Map<String, dynamic> themeData,
+  ) {
+    switch (type) {
+      case "ExampleCustomWidget":
+        return CustomWidgetThemeToken(themeData);
+    }
+
+    return null;
+  }
+
+    //Override default text token
+  ThemeToken? _overrideWidgetTokenizer(
+    String type,
+    Map<String, dynamic> themeData,
+  ) {
+    switch (type) {
+      case "Text":
+        return OverrideTextThemeToken(themeData);
+    }
+
+    return null;
+  }
+
+  @override
+  Future<DuitTheme> load() async {
+    final res = await dio.get(path); //load theme json
+    final tokenizer = ThemePreprocessor(); //create tokenizer
+
+    final tokenizer = ThemePreprocessor(
+      customWidgetTokenizer: _customTokenizer,
+      overrideWidgetTokenizer: _overrideWidgetTokenizer,
+    );
+
+    return tokenizer.tokenize(res.data);
+  }
+}
+```
+
+В приведенном выше примере кода мы расширили изначальный код загрузчика темы, добавив туда методы для добавление абсолютно нового токена и переопределения поведения препроцессора для виджета типа `Text`.
+
+---
+
+## Использование темы в DSL-библиотеке
+
+Для многих виджетов, которые реализованы в DSL-библиотеках был добавлен ряд новых опциональных свойств, которые позволяют конфигурировать виджеты для использования тем.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    export interface ThemeConsumer {
+      theme?: string;
+      ignoreTheme?: boolean;
+      overrideRule?: keyof typeof ThemeOverrideRule;
+    }
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    type ThemeConsumer struct {
+      Theme string `json:"theme,omitempty"`
+      IgnoreTheme bool `json:"ignoreTheme,omitempty"`
+      OverrideRule ThemeOverrideRule `json:"overrideRule,omitempty"`
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+Взглянем подробнее на новые свойства атрибутов виджетов.
+
+- Свойство `theme` это строковый ключ, уникальное название 
+токена темы, который вы хотите применить в виджете.
+- Свойство `ignoreTheme` указывает на то, следует ли конкретному виджету 
+игнорировать указанную темы. По умолчанию имеет значение `false`.
+- Свойство `overrideRule` определяет то, будет ли тема перезаписывать свойства 
+оригинального объекта своим содержимым или будет добавлять только новые свойства. 
+По умолчанию имеет значение `themeOverlay=0` и не перезаписывает оригинальные свойства.
