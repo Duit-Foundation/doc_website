@@ -83,17 +83,6 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: "sidebar.cookbook",
-      collapsed: true,
-      link: {
-        type: 'generated-index',
-      },
-      items: [
-        "cookbook/animations",
-      ],
-    },
-    {
-      type: 'category',
       label: "sidebar.api",
       collapsed: true,
       link: {
