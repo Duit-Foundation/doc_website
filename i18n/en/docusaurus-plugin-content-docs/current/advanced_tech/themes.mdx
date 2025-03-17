@@ -1,0 +1,239 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Themes
+
+Talking about themes here isn't quite what regular Flutter developers are accustomed to: global widget styles, color schemes, etc. Within Duit, themes are a powerful feature that solve several key challenges:
+
+- Define a set of widget properties to be used throughout the application
+- Reduce the size of screen layouts by isolating repetitive properties into themes
+- Support design systems on the server side
+
+## How Themes Work
+
+Applying themes to widgets involves several stages:
+
+- Retrieve the JSON theme from a data source
+- Convert the JSON theme into theme tokens (tokenization)
+- Merge the widget attribute object with the theme token content
+
+Theme loading is implemented using classes that implement the `ResourceLoader<T>` interface.
+
+The `ThemePreprocessor` class is responsible for tokenizing the theme object.
+
+## Theme Creation
+
+Currently, DSL libraries lack specific classes or functions to help create and validate themes on the backend. A theme is represented as a hash table in the following format:
+
+```json
+{
+    "text_bold": {
+        "type": "Text"
+        "data": {
+            "fontSize": 18.0,
+            "fontWeight": 700,
+        },
+    },
+    "text_secondary": {
+        "type": "Text"
+        "data": {
+            "fontSize": 14.0,
+            "fontWeight": 400,
+        },
+    },
+    "col_space_btw": {
+        "type": "Column",
+        "data": {
+            "mainAxisAlignment": "spaceBetween",
+        },
+    },
+    "custom_widget_theme1": {
+        "type": "CustomWidgetTagInsteadOfWidgetType",
+        "data": {
+            "some_property": "some_value",
+        },
+    },
+}
+```
+
+The keys of the hash table are theme names. Names must be unique, but you can create an unlimited number of themes for widgets of the same type.
+
+The values of the hash table are objects that represent theme tokens, which consist of `type` — the widget type for which a specific theme will be used — and `data` — the widget attribute object.
+
+:::info
+Themes are supported for custom widgets as well.
+
+For a theme to be correctly applied to widget attributes, the `type` property must contain the custom widget's tag, not its base type (Custom).
+:::
+
+---
+
+## Theme Initialization
+
+### Theme Loader
+
+Before a theme can be applied to widgets, it must be initialized. Out of the box, Duit provides two theme loaders:
+
+- `AssetThemeLoader` for creating a theme from a JSON file stored in the app's assets
+- `StaticThemeLoader` for creating a theme from a `Map<String, dynamic>`
+
+For greater flexibility in the initialization process, it is recommended to use a custom implementation of the `ResourceLoader<DuitTheme>` interface.
+
+```dart
+final class DioThemeLoader implements ResourceLoader<DuitTheme> {
+  final Dio dio;
+  final String path;
+
+  DioThemeLoader(
+    this.dio,
+    this.path,
+  );
+
+  @override
+  Future<DuitTheme> load() async {
+    final res = await dio.get(path); //load theme json
+    final tokenizer = ThemePreprocessor(); //create tokenizer
+
+    return tokenizer.tokenize(res.data); //return tokenized theme
+  }
+}
+```
+
+After obtaining the JSON containing the theme, use the `ThemePreprocessor` class to perform tokenization (converting `MapEntry` into instances of the `ThemeToken` class).
+
+### Theme Tokens
+
+Tokens are special objects that store widget attributes to be used when merging attribute objects with theme attributes. 
+They are employed to provide greater flexibility in validating incoming parameters during theme processing.
+```dart
+abstract class ThemeToken {
+  final Set<String> excludedFields;
+  final Map<String, dynamic> _data;
+  final String type;
+
+  Map<String, dynamic> get widgetTheme => _data;
+
+  const ThemeToken(
+    this.excludedFields,
+    this._data,
+    this.type,
+  );
+}
+```
+
+Pay close attention to the `Set<String> excludedFields` property. 
+This set contains the names of fields that should not be included in the widget's theme attributes. 
+The tokenization mechanism validates incoming attributes to ensure they conform to expectations.
+
+If a property is found in the `excludedFields` set, an exception will be thrown.
+
+### Extending and Overriding Preprocessor Behavior
+
+There are two ways to extend preprocessor behavior within the implementation:
+
+- `overrideWidgetTokenizer` - Override token creation for a specific widget type. Useful when you want to modify the list of excluded fields.
+- `customWidgetTokenizer` - Add handling for a new widget type to the preprocessor. Useful when you want to introduce unsupported widget themes or apply themes to custom widgets.
+
+In both cases, you should return an instance of the `ThemeToken` class or `null` if you don’t want to override behavior. You can also create your own `ThemeToken` classes for convenience.
+
+```dart
+//Create override token for text widget theme
+final class OverrideTextThemeToken extends ThemeToken {
+  OverrideTextThemeToken(Map<String, dynamic> data)
+      : super(
+          const {}, //allow override all fields
+          data,
+          "Text",
+        );
+}
+
+
+//Create token for custom widget
+final class CustomWidgetThemeToken extends ThemeToken {
+  CustomWidgetThemeToken(Map<String, dynamic> data)
+      : super(
+          const {}, //allow override all fields
+          data,
+          "ExampleCustomWidget",
+        );
+}
+
+
+final class DioThemeLoader implements ResourceLoader<DuitTheme> {
+    <...>
+
+    //Add custom token
+  ThemeToken? _customTokenizer(
+    String type,
+    Map<String, dynamic> themeData,
+  ) {
+    switch (type) {
+      case "ExampleCustomWidget":
+        return CustomWidgetThemeToken(themeData);
+    }
+
+    return null;
+  }
+
+    //Override default text token
+  ThemeToken? _overrideWidgetTokenizer(
+    String type,
+    Map<String, dynamic> themeData,
+  ) {
+    switch (type) {
+      case "Text":
+        return OverrideTextThemeToken(themeData);
+    }
+
+    return null;
+  }
+
+  @override
+  Future<DuitTheme> load() async {
+    final res = await dio.get(path); //load theme json
+    final tokenizer = ThemePreprocessor(); //create tokenizer
+
+    final tokenizer = ThemePreprocessor(
+      customWidgetTokenizer: _customTokenizer,
+      overrideWidgetTokenizer: _overrideWidgetTokenizer,
+    );
+
+    return tokenizer.tokenize(res.data);
+  }
+}
+```
+
+In the above code example, we extended the original theme loader code by adding methods to introduce a completely new token and override the preprocessor behavior for widgets of type `Text`.
+
+---
+
+## Using Themes in DSL Libraries
+
+Several new optional properties have been introduced for many widgets implemented in DSL libraries, allowing you to configure widgets for theme usage.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    export interface ThemeConsumer {
+      theme?: string;
+      ignoreTheme?: boolean;
+      overrideRule?: keyof typeof ThemeOverrideRule;
+    }
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    type ThemeConsumer struct {
+      Theme string `json:"theme,omitempty"`
+      IgnoreTheme bool `json:"ignoreTheme,omitempty"`
+      OverrideRule ThemeOverrideRule `json:"overrideRule,omitempty"`
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+Let's take a closer look at the new widget attribute properties.
+
+- The `theme` property is a string key representing the unique name of the theme token you want to apply to the widget.
+- The `ignoreTheme` property indicates whether a specific widget should ignore the specified theme. By default, it is set to `false`.
+- The `overrideRule` property determines whether the theme will overwrite the original object's properties with its contents or merely add new ones. By default, it is set to `themeOverlay=0` and does not overwrite original properties.

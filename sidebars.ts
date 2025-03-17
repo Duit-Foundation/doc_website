@@ -77,6 +77,7 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'advanced_tech/scripting',
+        'advanced_tech/themes',
         // 'advanced_tech/native',
       ],
     },
