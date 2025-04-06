@@ -1,0 +1,65 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# BackdropFilter
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| BackdropFilter | :heavy_check_mark: | &cross;  | &cross; | [link](https://api.flutter.dev/flutter/widgets/BackdropFilter-class.html) |
+
+## Атрибуты
+
+```dart
+final class BackdropFilterAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<BackdropFilterAttributes> {
+  final BlendMode blendMode;
+  final ImageFilter filter;
+
+  const BackdropFilterAttributes({
+    required this.blendMode,
+    required this.filter,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+BackdropFilter(
+    {
+        id: "id",
+        attributes: {
+            filter: {
+                type: 0, // or "blur"
+                sigmaX: 6,
+                sigmaY: 6,
+                tileMode: "mirror",
+            },
+        },
+        controlled: false
+    },
+    //child
+);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	BackdropFilter[duit_painting.BlurImageFilter](
+		&duit_attributes.BackdropFilterAttributes[duit_painting.BlurImageFilter]{
+			Filter: &duit_painting.BlurImageFilter{
+				SigmaX:   6,
+				SigmaY:   6,
+				TileMode: duit_painting.TileModeMirror,
+			},
+		},
+		"id",
+		true,
+		nil, // child,
+	);
+    ```
+  </TabItem>
+</Tabs>
+

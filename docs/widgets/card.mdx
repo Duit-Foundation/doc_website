@@ -1,0 +1,79 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Card
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Card | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/Card-class.html) |
+
+## Атрибуты
+
+```dart
+final class CardAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<CardAttributes> {
+  final Color? color, shadowColor;
+  final double? elevation;
+  final ShapeBorder? shape;
+  final EdgeInsetsGeometry? margin;
+  final Clip? clipBehavior;
+  final bool semanticContainer, borderOnForeground;
+
+  const CardAttributes({
+    this.color,
+    this.shadowColor,
+    this.elevation,
+    this.shape,
+    this.margin,
+    this.clipBehavior,
+    this.semanticContainer = true,
+    this.borderOnForeground = true,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Card(
+    {
+        id: "id",
+        attributes: {
+            shadowColor: "#DCDCDC",
+            shape: {
+                type: ShapeBorderType.BeveledRectangleBorder,
+                side: {
+                    color: "#DCDCDC",
+                    width: 3,
+                },
+            }
+        },
+        controlled: false
+    }
+    //child,
+);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Card(
+		&duit_attributes.CardAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsAll, duit_decoration.BeveledRectangleBorder[duit_color.ColorString]]{
+			ShadowColor: duit_color.ColorString("black"),
+			Shape: &duit_decoration.BeveledRectangleBorder[duit_color.ColorString]{
+				Side: &duit_decoration.BorderSide[duit_color.ColorString]{
+					Color: "#DCDCDC",
+					Width: 3,
+				},
+			},
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

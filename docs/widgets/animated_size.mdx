@@ -1,0 +1,54 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedSize
+
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| AnimatedSize | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedSize-class.html) |
+
+## Атрибуты
+
+```dart
+final class AnimatedSizeAttributes
+    implements DuitAttributes<AnimatedSizeAttributes> {
+  final Duration duration, reverseDuration;
+  final Clip? clipBehavior;
+  final Curve curve;
+  final AlignmentGeometry? alignment;
+
+  AnimatedSizeAttributes({
+    required this.duration,
+    required this.reverseDuration,
+    required this.clipBehavior,
+    required this.curve,
+    required this.alignment,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+AnimatedSize(
+  {
+    id: "id",
+    attributes: {
+      duratuion: 1000,
+      curve: Curves.elasticIn
+    },
+    controlled: true,
+  },
+  //child
+);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    Not implemented
+    ```
+  </TabItem>
+</Tabs>
+
