@@ -1,0 +1,55 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Center
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Center | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Center-class.html) |
+
+## Атрибуты
+
+```dart
+final class CenterAttributes implements DuitAttributes<CenterAttributes> {
+  final double? widthFactor;
+  final double? heightFactor;
+
+  CenterAttributes({
+    this.widthFactor,
+    this.heightFactor,
+  });
+
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Center(
+        {
+            id: "id",
+            attributes: {
+                widthFactor: 1.2,
+                heightFactor: 0.6,
+            },
+            controlled: false
+        },
+        //child
+    );
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Center(&duit_attributes.CenterAttributes{
+		WidgthFactor: 1.2,
+		HeightFactor: 0.6,
+	},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

@@ -1,22 +1,21 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# WidgetName
-
-{/* 
-:heavy_check_mark:
-&cross;
- */}
-
+# Expanded
 
 | Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
 | - | - | - | - | - |
-| TypeName | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter) |
+| Expanded |  &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Expanded-class.html) |
 
 ## Атрибуты
 
 ```dart
-///
+class ExpandedAttributes implements DuitAttributes<ExpandedAttributes> {
+  final int? flex;
+
+  ExpandedAttributes({
+    required this.flex,
+  });
 ```
 
 ## Пример использования
@@ -24,12 +23,28 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
     ```typescript
-    ///
-    ```
+    Expanded(
+        {
+            attributes: {
+                flex: 1,
+            },
+            id: "id",
+            controlled: false
+        },
+        //child,
+    )
+        ```
   </TabItem>
   <TabItem value="go" label="Go">
     ```go
-    ///
+	Expanded(
+		&duit_attributes.ExpandedAttributes{
+			Flex: 1,
+		},
+		"id",
+		false,
+		nil, //child
+	)
     ```
   </TabItem>
 </Tabs>

@@ -1,0 +1,60 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# FittedBox
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| FittedBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/FittedBox-class.html) |
+
+## Атрибуты
+
+```dart
+final class FittedBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<FittedBoxAttributes> {
+  final BoxFit? fit;
+  final Clip? clipBehavior;
+  final AlignmentGeometry? alignment;
+
+  FittedBoxAttributes({
+    required this.clipBehavior,
+    required this.alignment,
+    required this.fit,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    FittedBox(
+        {
+            id: "id",
+            attributes: {
+                fit: "fill",
+                clipBehavior: "none",
+            },
+            controlled: false
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	FittedBox(
+		&duit_attributes.FittedBoxAttributes{
+			Fit: duit_flex.Fill,
+			ClipBehavior: duit_clip.None,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

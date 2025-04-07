@@ -1,0 +1,62 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# ConstrainedBox
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| ConstrainedBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html) |
+
+## Атрибуты
+
+```dart
+final class ConstrainedBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<ConstrainedBoxAttributes> {
+  final BoxConstraints constraints;
+
+  ConstrainedBoxAttributes({
+    required super.parentBuilderId,
+    required super.affectedProperties,
+    required this.constraints,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    ConstrainedBox(
+        {
+            attributes: {
+                constraints: {
+                    minWidth: 156,
+                    maxWidth: 300,
+                    minHeight: 60,
+                    maxHeight: 120
+                }
+            },
+            id: "id",
+            controlled: false
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    ConstrainedBox(
+        &duit_attributes.ConstrainedBoxAttributes{
+            MinWidth: 156,
+            MaxWidth: 300,
+            MinHeight: 60,
+            MaxHeight: 120,
+        },
+        "id",
+        false,
+        nil, //child
+)
+    ```
+  </TabItem>
+</Tabs>
+

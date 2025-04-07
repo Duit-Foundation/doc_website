@@ -1,0 +1,64 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Row
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Row | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Row-class.html) |
+
+## Атрибуты
+
+```dart
+sealed class FlexAttributes {
+  final MainAxisAlignment? mainAxisAlignment;
+  final MainAxisSize? mainAxisSize;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final TextDirection? textDirection;
+  final VerticalDirection? verticalDirection;
+  final Clip? clipBehavior;
+
+  FlexAttributes({
+    this.mainAxisAlignment,
+    this.mainAxisSize,
+    this.textDirection,
+    this.clipBehavior,
+    this.crossAxisAlignment,
+    this.verticalDirection,
+  });
+}
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Row(
+        {
+            id: "id",
+            attributes: {
+                mainAxisAlignment: "spaceBetween",
+                crossAxisAlignment: "center",
+            },
+            controlled: false,
+        },
+        [], //children
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Row(
+		&duit_attributes.FlexAttributes{
+			MainAxisAlignment:  duit_main_axis.SpaceBetween,
+			CrossAxisAlignment: duit_cross_axis.Center,
+		},
+		"id",
+		false,
+		nil, //children
+	)
+    ```
+  </TabItem>
+</Tabs>
+
