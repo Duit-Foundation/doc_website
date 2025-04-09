@@ -1,0 +1,128 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Transform
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Transform | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Transform-class.html) |
+
+## Атрибуты
+
+```dart
+base class TransformAttributes extends AnimatedPropertyOwner {
+  Offset? origin;
+  AlignmentGeometry? alignment;
+  bool transformHitTests;
+  FilterQuality? filterQuality;
+  String type;
+
+  TransformAttributes({
+    required this.type,
+    this.origin,
+    this.alignment,
+    this.transformHitTests = true,
+    this.filterQuality,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+
+final class ScaleTransform extends TransformAttributes
+    implements DuitAttributes<ScaleTransform> {
+  double? scale, scaleX, scaleY;
+
+  ScaleTransform({
+    this.scale,
+    this.scaleX,
+    this.scaleY,
+    super.origin,
+    super.alignment,
+    super.transformHitTests,
+    super.filterQuality,
+    super.type = 'scale',
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+
+final class TranslateTransform extends TransformAttributes
+    implements DuitAttributes<TranslateTransform> {
+  Offset? offset;
+
+  TranslateTransform({
+    this.offset,
+    super.origin,
+    super.alignment,
+    super.transformHitTests,
+    super.filterQuality,
+    super.type = 'translate',
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+
+final class RotateTransform extends TransformAttributes
+    implements DuitAttributes<RotateTransform> {
+  double? angle;
+
+  RotateTransform({
+    this.angle,
+    super.origin,
+    super.alignment,
+    super.transformHitTests,
+    super.filterQuality,
+    super.type = 'rotate',
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+
+final class FlipTransform extends TransformAttributes
+    implements DuitAttributes<FlipTransform> {
+  bool? flipX, flipY;
+
+  FlipTransform({
+    this.flipX,
+    this.flipY,
+    super.origin,
+    super.alignment,
+    super.transformHitTests,
+    super.filterQuality,
+    super.type = 'flip',
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Transform(
+        {
+            id: "id",
+            attributes: {
+                type: "scale",
+                data: {
+                    scale: 2,
+                },
+            },
+            controlled: false,
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Transform(
+		&duit_attributes.TransfromAttributes[duit_transform.ScaleTransfrom]{
+			Data: &duit_transform.ScaleTransfrom{
+				Scale: 2,
+			},
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

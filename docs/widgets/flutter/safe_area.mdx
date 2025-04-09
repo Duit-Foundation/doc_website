@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SafeArea
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SafeArea | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SafeArea-class.html) |
+
+## Атрибуты
+
+```dart
+final class SafeAreaAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<SafeAreaAttributes> {
+  final bool left, top, right, bottom;
+  final EdgeInsets? minimum;
+  final bool? maintainBottomViewPadding;
+
+  SafeAreaAttributes({
+    required this.left,
+    required this.top,
+    required this.right,
+    required this.bottom,
+    this.minimum,
+    this.maintainBottomViewPadding,
+    required super.affectedProperties,
+    required super.parentBuilderId,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SafeArea(
+        {
+            id: "id",
+            attributes: {
+                top: true,
+                bottom: false,
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	SafeArea(
+		&duit_attributes.SafeAreaAttributes[duit_edge_insets.EdgeInsetsAll]{
+			Top: duit_utils.BoolPtr(true),
+			Bottom: duit_utils.BoolPtr(false),
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

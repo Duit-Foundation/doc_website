@@ -1,0 +1,54 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RotatedBox
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| RotatedBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/RotatedBox-class.html) |
+
+## Атрибуты
+
+```dart
+final class RotatedBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<RotatedBoxAttributes> {
+  final int quarterTurns;
+
+  const RotatedBoxAttributes({
+    required this.quarterTurns,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RotatedBox(
+        {
+            id: "id",
+            attributes: {
+                quarterTurns: 1,
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RotatedBox(
+		&duit_attributes.RotatedBoxAttributes{
+			QuarterTurns: 1,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

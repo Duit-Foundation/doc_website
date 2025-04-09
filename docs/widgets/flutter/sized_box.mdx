@@ -1,0 +1,58 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SizedBox
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SizedBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SizedBox-class.html) |
+
+## Атрибуты
+
+```dart
+final class SizedBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<SizedBoxAttributes> {
+  num? width, height;
+
+  SizedBoxAttributes({
+    this.height,
+    this.width,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SizedBox(
+        {
+            id: "id",
+            attributes: {
+                width: 100,
+                height: 100,
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	SizedBox(
+		&duit_attributes.SizedBoxAttributes{
+			Width: 100,
+			Height: 100,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

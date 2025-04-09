@@ -1,0 +1,103 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Slider
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| TypeName | &cross; | :heavy_check_mark: | :heavy_check_mark: | [link](https://api.flutter.dev/flutter/material/Slider-class.html) |
+
+:::info
+Значение, хранимое виджетом, может быть использовано в качестве источника данных для действий.
+
+[Подробнее](docs/core_concepts/actions_events.md)
+:::
+
+## Атрибуты
+
+```dart
+final class SliderAttributes extends AttendedModel<double>
+    implements DuitAttributes<SliderAttributes> {
+  final double? min, max, secondaryTrackValue;
+  final int? divisions;
+  final String? label;
+  final Color? activeColor, inactiveColor, secondaryActiveColor, thumbColor;
+  final WidgetStateProperty<Color>? overlayColor;
+  final bool autofocus;
+  final ServerAction? onChanged, onChangeStart, onChangeEnd;
+  final SliderInteraction? allowedInteraction;
+
+  SliderAttributes({
+    required super.value,
+    this.min,
+    this.max,
+    this.secondaryTrackValue,
+    this.divisions,
+    this.label,
+    this.activeColor,
+    this.inactiveColor,
+    this.secondaryActiveColor,
+    this.thumbColor,
+    this.overlayColor,
+    this.autofocus = false,
+    this.onChanged,
+    this.onChangeStart,
+    this.onChangeEnd,
+    this.allowedInteraction,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Slider(
+        {
+            id: "id",
+            attributes: {
+                min: 0,
+                max: 100,
+                value: 25,
+                divisions: 5,
+                onChangeEnd: HttpAction(
+                    "/on_change_end",
+                    {
+                        method: "POST",
+                    },
+                    [
+                        {
+                            id: "id",
+                            target: "value",
+                        }
+                    ]
+                )
+            },
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Slider(
+		&duit_attributes.SliderAttributes[duit_core.RemoteAction, duit_color.ColorString]{
+			OnChangeEnd: &duit_core.RemoteAction{
+				Event: "/on_change_end",
+				DependsOn: []*duit_core.ActionDependency{
+					{
+						Id: "id",
+						Target: "value",
+					},
+				},
+			},
+			Min: 0,
+			Max: 100,
+			Value: 25,
+			Divisions: 5,
+		},
+		"id",
+	)
+    ```
+  </TabItem>
+</Tabs>
+

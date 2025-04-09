@@ -1,0 +1,57 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RepaintBoundary
+
+{/* 
+:heavy_check_mark:
+&cross;
+ */}
+
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| RepaintBoundary | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/RepaintBoundary-class.html) |
+
+## Атрибуты
+
+```dart
+final class RepaintBoundaryAttributes
+    implements DuitAttributes<RepaintBoundaryAttributes> {
+  final int? childIndex;
+
+  const RepaintBoundaryAttributes({
+    required this.childIndex,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RepaintBoundary(
+        {
+            id: "id",
+            attributes: {
+                childIndex: 0,
+            },
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RepaintBoundaryd(
+		&duit_attributes.RepaintBoundaryAttributes{
+			ChildIndex: 0,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
