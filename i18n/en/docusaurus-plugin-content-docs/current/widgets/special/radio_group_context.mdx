@@ -1,0 +1,96 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RadioGroupContext
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| TypeName | &cross;| :heavy_check_mark: | :heavy_check_mark: | - |
+
+The `RadioGroupContext` widget serves as a centralized handler and owner of the current state of a group of [`Radio`] widgets (/docs/widgets/flutter/radio)
+
+:::info
+The value stored by the widget can be used as a data source for actions.
+
+[More](/docs/core_concepts/actions_events)
+:::
+
+## Attributes
+
+```dart
+final class RadioGroupContextAttributes extends AttendedModel<dynamic>
+    implements DuitAttributes<RadioGroupContextAttributes> {
+  final dynamic groupValue;
+
+  RadioGroupContextAttributes({
+    super.value,
+    required this.groupValue,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RadioGroupContext(
+        {
+            id: "group_id",
+            attributes: {
+                groupValue: false,
+            },
+            action: HttpAction(
+                "/on_change",
+                {
+                    method: "POST",
+                },
+                [
+                    {
+                        id: "group_id",
+                        target: "group_value",
+                    }
+                ],
+            )
+        },
+        // Radio(
+        //     {
+        //         id: "id",
+        //         attributes: {
+        //             value: false,
+        //             toggleable: true,
+        //         },
+        //     }
+        // )
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RadioGroupContext(
+		&duit_attributes.RadioGroupContextAttributes[bool]{
+			GroupValue: false,
+		},
+		"group_id",
+		&duit_core.RemoteAction{
+			Event: "/on_change",
+			DependsOn: []*duit_core.ActionDependency{
+				{
+					Id: "group_id",
+					Target: "group_value",
+				},
+			},
+		},
+		nil,  //or
+		// Radio[bool, duit_color.ColorString](
+		// 	&duit_attributes.RadioAttributes[bool, duit_color.ColorString]{
+		// 		Value: false,
+		// 		Toggleable: true,
+		// 	},
+		// 	"",
+		// 	false,
+		// ),
+	)
+    ```
+  </TabItem>
+</Tabs>
+

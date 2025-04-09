@@ -1,0 +1,59 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Opacity
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Opacity | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Opacity-class.html) |
+
+## Attributes
+
+```dart
+abstract interface class _OpacityProps {
+  abstract final double opacity;
+}
+
+final class OpacityAttributes extends AnimatedPropertyOwner
+    implements _OpacityProps, DuitAttributes<OpacityAttributes> {
+  @override
+  final double opacity;
+
+  const OpacityAttributes({
+    required this.opacity,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Opacity(
+        {
+            id: "id",
+            attributes: {
+                opacity: 0.85
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Opacity(
+		&duit_attributes.OpacityAttributes{
+			Opacity: 0.85,
+		},
+		"",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

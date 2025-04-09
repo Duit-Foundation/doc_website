@@ -1,0 +1,110 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AppBar
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AppBar | :heavy_check_mark: | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/material/AppBar-class.html) |
+
+## Attributes
+
+```dart
+/// A class that represents the attributes for an AppBar widget.
+///
+/// This class contains all the customizable properties that can be applied to an AppBar,
+/// including visual properties like colors and dimensions, as well as child widgets
+/// like the leading widget, title, and actions.
+///
+/// Properties are divided into two main categories:
+/// - Widget properties (leading, title, bottom, etc.) that represent child widgets
+/// - Visual properties (colors, dimensions, etc.) that control the AppBar's appearance
+final class AppBarAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<AppBarAttributes> {
+  // NOTE: children properties with [Widget] type
+  final NonChildWidget? leading, title, bottom, flexibleSpace;
+  final List<NonChildWidget>? actions;
+
+  //NOTE: other attributes properties
+  final EdgeInsetsGeometry? actionsPadding;
+  final Color? backgroundColor, foregroundColor, surfaceTintColor, shadowColor;
+  final double bottomOpacity, toolbarOpacity;
+  final double? elevation,
+      scrolledUnderElevation,
+      toolbarHeight,
+      leadingWidth,
+      titleSpacing;
+  final bool automaticallyImplyLeading,
+      excludeHeaderSemantics,
+      forceMaterialTransparency,
+      primary;
+  final TextStyle? toolbarTextStyle, titleTextStyle;
+  final bool? centerTitle;
+  final ShapeBorder? shape;
+  final Clip? clipBehavior;
+
+  const AppBarAttributes({
+    required this.automaticallyImplyLeading,
+    required this.excludeHeaderSemantics,
+    required this.forceMaterialTransparency,
+    required this.primary,
+    required this.bottomOpacity,
+    required this.toolbarOpacity,
+    this.leading,
+    this.title,
+    this.actions,
+    this.bottom,
+    this.actionsPadding,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.surfaceTintColor,
+    this.shadowColor,
+    this.elevation,
+    this.scrolledUnderElevation,
+    this.toolbarHeight,
+    this.leadingWidth,
+    this.titleSpacing,
+    this.toolbarTextStyle,
+    this.titleTextStyle,
+    this.centerTitle,
+    this.shape,
+    this.clipBehavior,
+    this.flexibleSpace,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+AppBar({
+        backgroundColor: "#FF0000",
+        actionsPadding: EdgeInsetsUtils.only({
+            top: 0.0,
+            right: 12.0,
+            bottom: 0.0,
+            left: 12.0
+        }),
+        title: //child
+},
+    "id",
+);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+AppBar(
+	&duit_attributes.AppBarAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsLTRB, duit_decoration.RoundedRectangleBorder[duit_color.ColorString]]{
+		BackgroundColor: "#ff0000",
+		ActionsPadding:  [4]float32{12.0, 0.0, 0.0, 12.0},
+		Title: //child,
+	},
+	"id",
+)
+    ```
+  </TabItem>
+</Tabs>
+

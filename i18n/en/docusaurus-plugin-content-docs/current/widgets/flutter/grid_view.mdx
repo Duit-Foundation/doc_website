@@ -1,0 +1,231 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# GridView
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| GridView | &cross;| &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/GridView-class.html) |
+
+:::info
+The GridView.builder variant is always a controlled widget
+:::
+
+## Attributes
+
+```dart
+final class GridViewAttributes
+    implements DuitAttributes<GridViewAttributes>, DynamicChildHolder {
+  //Flutter GridView properties
+  final double mainAxisSpacing,
+      crossAxisSpacing,
+      childAspectRatio,
+      maxCrossAxisExtent;
+  final double? cacheExtent;
+  final Clip clipBehavior;
+  final DragStartBehavior dragStartBehavior;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final EdgeInsetsGeometry? padding;
+  final ScrollPhysics physics;
+  final bool? primary;
+  final bool reverse,
+      shrinkWrap,
+      addAutomaticKeepAlives,
+      addRepaintBoundaries,
+      addSemanticIndexes;
+  final Axis scrollDirection;
+  final int? semanticChildCount;
+  final String? restorationId;
+  final HitTestBehavior hitTestBehavior;
+  //GridView.count
+  final int crossAxisCount;
+
+  //Duit specific properties
+  final GridConstructor constructor;
+  final String sliverGridDelegateKey, sliverChildDelegateKey;
+  final Map<String, dynamic> sliverGridDelegateOptions;
+
+  //GridView.builder custom props
+  @override
+  final List<Map<String, dynamic>>? childObjects;
+  @override
+  final ArrayMergeStrategy? mergeStrategy;
+  @override
+  final double? scrollEndReachedThreshold;
+
+  const GridViewAttributes.common({
+    required this.sliverGridDelegateKey,
+    required this.sliverGridDelegateOptions,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.primary,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    this.shrinkWrap = false,
+    this.padding,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.clipBehavior = Clip.hardEdge,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.hitTestBehavior = HitTestBehavior.opaque,
+  })  : constructor = GridConstructor.common,
+        crossAxisCount = 0,
+        childAspectRatio = 0.0,
+        crossAxisSpacing = 0.0,
+        mainAxisSpacing = 0.0,
+        maxCrossAxisExtent = 0.0,
+        sliverChildDelegateKey = "",
+        childObjects = null,
+        mergeStrategy = null,
+        scrollEndReachedThreshold = null;
+
+  const GridViewAttributes.count({
+    required this.crossAxisCount,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.primary,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    this.shrinkWrap = false,
+    this.padding,
+    this.crossAxisSpacing = 0.0,
+    this.mainAxisSpacing = 0.0,
+    this.childAspectRatio = 1.0,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.clipBehavior = Clip.hardEdge,
+    this.hitTestBehavior = HitTestBehavior.opaque,
+  })  : constructor = GridConstructor.count,
+        maxCrossAxisExtent = 0.0,
+        sliverGridDelegateKey = "",
+        sliverChildDelegateKey = "",
+        childObjects = null,
+        mergeStrategy = null,
+        sliverGridDelegateOptions = const {},
+        scrollEndReachedThreshold = null;
+
+  const GridViewAttributes.builder({
+    required this.sliverGridDelegateKey,
+    required this.childObjects,
+    required this.mergeStrategy,
+    required this.scrollEndReachedThreshold,
+    required this.sliverGridDelegateOptions,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.primary,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    this.shrinkWrap = false,
+    this.padding,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.clipBehavior = Clip.hardEdge,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.hitTestBehavior = HitTestBehavior.opaque,
+  })  : constructor = GridConstructor.builder,
+        crossAxisCount = 0,
+        childAspectRatio = 0.0,
+        crossAxisSpacing = 0.0,
+        mainAxisSpacing = 0.0,
+        maxCrossAxisExtent = 0.0,
+        sliverChildDelegateKey = "";
+
+  const GridViewAttributes.extent({
+    required this.maxCrossAxisExtent,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.primary,
+    this.physics = const AlwaysScrollableScrollPhysics(),
+    this.shrinkWrap = false,
+    this.padding,
+    this.crossAxisSpacing = 0.0,
+    this.mainAxisSpacing = 0.0,
+    this.childAspectRatio = 1.0,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.clipBehavior = Clip.hardEdge,
+    this.hitTestBehavior = HitTestBehavior.opaque,
+  })  : constructor = GridConstructor.extent,
+        crossAxisCount = 0,
+        sliverGridDelegateKey = "",
+        sliverChildDelegateKey = "",
+        childObjects = null,
+        mergeStrategy = null,
+        sliverGridDelegateOptions = const {},
+        scrollEndReachedThreshold = null;
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+  GridView(
+      {
+          id: "id",
+          attributes: {
+              constructor: GridConstructor.builder,
+              sliverGridDelegateKey: "delegate1",
+              childObjects: [], //initial data
+              mergeStrategy: "addToEnd",
+              scrollDirection: "vertical",
+          },
+          action: HttpAction(
+              "/get_items",
+              {
+                  method: "GET"
+              },
+              [
+                  {
+                      id: "id",
+                      target: "some_field"
+                  }
+              ],
+          )
+      }
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    GridView[duit_core.RemoteAction, duit_edge_insets.EdgeInsetsAll](
+        &duit_attributes.GridViewBuilderAttributes[duit_edge_insets.EdgeInsetsAll]{
+          SliverGridDelegateKey:     "delegate1",
+          Builder:                   duit_builder.Builder{
+            ChildObjects: []*duit_core.DuitElementModel{},
+            MergeStrategy: duit_builder.AddToEnd,
+          },
+          DefautlGridViewAttributes: duit_attributes.DefautlGridViewAttributes[duit_edge_insets.EdgeInsetsAll]{
+            ScrollDirection: duit_flex.Vertical,
+          },
+        },
+        "id",
+        true,
+        &duit_core.RemoteAction{
+
+        },
+        nil, //children
+    )
+    ```
+  </TabItem>
+</Tabs>
+

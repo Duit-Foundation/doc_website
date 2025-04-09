@@ -1,0 +1,91 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Container
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Container | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Container-class.html) |
+
+## Attributes
+
+```dart
+abstract interface class _ContainerProps {
+  abstract final double? width, height;
+  abstract final Color? color;
+  abstract final Clip clipBehavior;
+  abstract final Decoration? decoration, foregroundDecoration;
+  abstract final BoxConstraints? constraints;
+  abstract final EdgeInsetsGeometry? padding, margin;
+  abstract final AlignmentGeometry? alignment, transformAlignment;
+}
+
+final class ContainerAttributes extends AnimatedPropertyOwner
+    implements _ContainerProps, DuitAttributes<ContainerAttributes> {
+  @override
+  final double? width, height;
+  @override
+  final Color? color;
+  @override
+  final Clip clipBehavior;
+  @override
+  final Decoration? decoration, foregroundDecoration;
+  @override
+  final BoxConstraints? constraints;
+  @override
+  final EdgeInsetsGeometry? padding, margin;
+  @override
+  final AlignmentGeometry? alignment, transformAlignment;
+
+  const ContainerAttributes({
+    required this.clipBehavior,
+    this.width,
+    this.height,
+    this.color,
+    this.decoration,
+    this.constraints,
+    this.padding,
+    this.margin,
+    this.alignment,
+    this.transformAlignment,
+    this.foregroundDecoration,
+    required super.affectedProperties,
+    required super.parentBuilderId,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+Container(
+    {
+        attributes: {
+            decoration: {
+                color: "#DCDCDC"
+            },
+        },
+        id: "id",
+        controlled: false,
+    },
+    //child
+)
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Container(
+		&duit_attributes.ContainerAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
+			Decoration: &duit_decoration.BoxDecoration[duit_color.ColorString]{
+				Color: "#DCDCDC",
+			},
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

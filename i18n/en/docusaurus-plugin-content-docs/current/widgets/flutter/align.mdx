@@ -1,0 +1,56 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Align
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Align | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Align-class.html) |
+
+## Attributes
+
+```dart
+final class AlignAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<AlignAttributes> {
+  final AlignmentGeometry? alignment;
+  final double? widthFactor, heightFactor;
+
+  const AlignAttributes({
+    this.alignment,
+    this.widthFactor,
+    this.heightFactor,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Align({
+        id: "id",
+        attributes: {
+            alignment: "center",
+        },
+        controlled: false,
+    },
+    //child
+);
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    Align(
+      &duit_attributes.AlignAttributes{
+        Alignment: duit_alignment.Center,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs>
+

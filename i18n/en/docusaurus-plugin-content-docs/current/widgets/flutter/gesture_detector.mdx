@@ -1,0 +1,106 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# GestureDetector
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| GestureDetector | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html) |
+
+## Attributes
+
+```dart
+class GestureDetectorAttributes
+    implements DuitAttributes<GestureDetectorAttributes> {
+  ServerAction? onTap,
+      onTapDown,
+      onTapUp,
+      onTapCancel,
+      onDoubleTap,
+      onDoubleTapDown,
+      onDoubleTapCancel,
+      onLongPressDown,
+      onLongPressCancel,
+      onLongPress,
+      onLongPressStart,
+      onLongPressMoveUpdate,
+      onLongPressUp,
+      onLongPressEnd,
+      onPanStart,
+      onPanDown,
+      onPanUpdate,
+      onPanEnd,
+      onPanCancel;
+  bool? excludeFromSemantics;
+  DragStartBehavior dragStartBehavior;
+  HitTestBehavior? behavior;
+
+  GestureDetectorAttributes({
+    this.onTap,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTapCancel,
+    this.onDoubleTap,
+    this.onDoubleTapDown,
+    this.onDoubleTapCancel,
+    this.onLongPressDown,
+    this.onLongPressCancel,
+    this.onLongPress,
+    this.onLongPressStart,
+    this.onLongPressMoveUpdate,
+    this.onLongPressUp,
+    this.onLongPressEnd,
+    this.onPanStart,
+    this.onPanDown,
+    this.onPanUpdate,
+    this.onPanEnd,
+    this.onPanCancel,
+    this.excludeFromSemantics,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.behavior,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    GestureDetector(
+        {
+            id: "id",
+            attributes: {
+                onTap: HttpAction("/some_endpoint", { method: "GET" }, [
+                    {
+                        id: "widget_id",
+                        target: "object_key",
+                    }
+                ]),
+            },
+            controlled: true,
+        },
+        // child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	GestureDetector(
+		&duit_attributes.GestureDetectorAttributes[duit_core.RemoteAction]{
+			OnTap: &duit_core.RemoteAction{
+				Event: "/some_endpoint",
+				DependsOn: []*duit_core.ActionDependency{
+					{
+						Id: "widget_id",
+						Target: "object_key",	
+					},
+				},
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

@@ -1,0 +1,106 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# CheckBox
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| CheckBox | &cross;  | :heavy_check_mark: | :heavy_check_mark: | [link](https://api.flutter.dev/flutter/material/Checkbox-class.html) |
+
+:::info
+The value stored by the widget can be used as a data source for actions.
+
+[More](/docs/core_concepts/actions_events)
+:::
+
+## Attributes
+
+```dart
+class CheckboxAttributes extends AttendedModel<bool>
+    implements DuitAttributes<CheckboxAttributes> {
+  final bool? autofocus;
+  final bool? isError;
+  final bool? tristate;
+  final String? semanticLabel;
+  final double? splashRadius;
+  final BorderSide? side;
+  final WidgetStateProperty<Color>? fillColor;
+  final WidgetStateProperty<Color>? overlayColor;
+  final Color? checkColor;
+  final Color? splashColor;
+  final Color? activeColor;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final VisualDensity visualDensity;
+
+  CheckboxAttributes({
+    required super.value,
+    this.autofocus,
+    this.checkColor,
+    this.tristate,
+    this.activeColor,
+    this.fillColor,
+    this.focusColor,
+    this.overlayColor,
+    this.splashColor,
+    this.splashRadius,
+    this.hoverColor,
+    this.isError,
+    this.semanticLabel,
+    this.side,
+    this.visualDensity = const VisualDensity(),
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    CheckBox(
+        {
+            id: "id",
+            controlled: true,
+            attributes: {
+                value: true,
+                overlayColor: {
+                    disabled: "#DCDCDC",
+                },
+            },
+            action: LocalExecutedAction(
+                UpdateEvent(
+                    {
+                        "other_id": {
+                            key: "value",
+                        },
+                    },
+                )
+            )
+        },
+    )
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	CheckBox(
+		&duit_attributes.CheckboxAttributes[duit_color.ColorString]{
+			Value: true,
+			OverlayColor: &duit_material.MaterialStateProperty[duit_color.ColorString]{
+				Disabled: "#DCDCDC",
+			},
+		},
+		"id",
+		&duit_core.LocalAction{
+			Payload: duit_core.UpdateEvent(
+				map[string]interface{}{
+					"other_id": map[string]interface{}{
+						"key": "value",
+					},
+				},
+			),
+		},
+	)
+    ```
+  </TabItem>
+</Tabs>
+

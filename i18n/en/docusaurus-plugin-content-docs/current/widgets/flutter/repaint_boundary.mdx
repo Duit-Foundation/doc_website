@@ -1,0 +1,51 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RepaintBoundary
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| RepaintBoundary | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/RepaintBoundary-class.html) |
+
+## Attributes
+
+```dart
+final class RepaintBoundaryAttributes
+    implements DuitAttributes<RepaintBoundaryAttributes> {
+  final int? childIndex;
+
+  const RepaintBoundaryAttributes({
+    required this.childIndex,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RepaintBoundary(
+        {
+            id: "id",
+            attributes: {
+                childIndex: 0,
+            },
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RepaintBoundaryd(
+		&duit_attributes.RepaintBoundaryAttributes{
+			ChildIndex: 0,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

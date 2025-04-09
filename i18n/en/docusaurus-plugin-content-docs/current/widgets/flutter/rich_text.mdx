@@ -1,0 +1,106 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RichText
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| RichText | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/RichText-class.html) |
+
+## Attributes
+
+```dart
+final class RichTextAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<RichTextAttributes> {
+  final InlineSpan? textSpan;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final bool? softWrap;
+  final TextOverflow? overflow;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final TextWidthBasis? textWidthBasis;
+  final TextHeightBehavior? textHeightBehavior;
+  final Color? selectionColor;
+  final TextScaler? textScaler;
+
+  const RichTextAttributes({
+    this.textSpan,
+    this.style,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.softWrap,
+    this.overflow,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+    this.selectionColor,
+    this.textScaler,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RichText(
+        {
+            id: "id",
+            attributes: {
+                textSpan: {
+                    children: [
+                        {
+                            text: "Hello",
+                            style: {
+                                color: "#FF0000",
+                            },
+                        },
+                        {
+                            text: " World",
+                            style: {
+                                color: "#DCDCDC",
+                            },
+                        }
+                    ]
+                }
+            },
+            controlled: false,
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RichText(
+		&duit_attributes.RichTextAttributes[duit_color.ColorString]{
+			TextSpan: &duit_text_properties.TextSpan[duit_color.ColorString]{
+				Children: []*duit_text_properties.TextSpan[duit_color.ColorString]{
+					{
+						Text: "Hello",
+						Style: &duit_text_properties.TextStyle[duit_color.ColorString]{
+							Color: "#FF0000",
+						},
+					},
+					{
+						Text: "World",
+						Style: &duit_text_properties.TextStyle[duit_color.ColorString]{
+							Color: "#DCDCDC",
+						},
+					},
+				},	
+			},
+		},
+		"id",
+		false,
+	)
+    ```
+  </TabItem>
+</Tabs>
+

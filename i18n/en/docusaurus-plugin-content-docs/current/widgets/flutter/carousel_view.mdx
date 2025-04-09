@@ -1,0 +1,95 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# CarouselView
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| TypeName | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/CarouselView-class.html) |
+
+## Attributes
+
+```dart
+final class CarouselViewAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<CarouselViewAttributes> {
+  final CarouselViewConstructor constructor;
+  final EdgeInsets? padding;
+  final Color? backgroundColor;
+  final double? elevation;
+  final ShapeBorder? shape;
+  final WidgetStateProperty<Color?>? overlayColor;
+  final double shrinkExtent, itemExtent;
+  final Axis scrollDirection;
+  final bool enableSplash, reverse, itemSnapping, consumeMaxWeight;
+  final List<int> flexWeights;
+  //  final ValueChanged<int>? onTap; //ServerAction needed?
+
+  const CarouselViewAttributes.common({
+    this.padding,
+    this.backgroundColor,
+    this.elevation,
+    this.shape,
+    this.overlayColor,
+    required this.itemSnapping,
+    required this.shrinkExtent,
+    required this.scrollDirection,
+    required this.enableSplash,
+    required this.reverse,
+    required super.affectedProperties,
+    required super.parentBuilderId,
+    required this.itemExtent,
+  })  : flexWeights = const [],
+        consumeMaxWeight = false,
+        constructor = CarouselViewConstructor.common;
+
+  const CarouselViewAttributes.weighted({
+    this.padding,
+    this.backgroundColor,
+    this.elevation,
+    this.shape,
+    this.overlayColor,
+    required this.itemSnapping,
+    required this.shrinkExtent,
+    required this.scrollDirection,
+    required this.enableSplash,
+    required this.reverse,
+    required this.flexWeights,
+    required this.consumeMaxWeight,
+    required super.affectedProperties,
+    required super.parentBuilderId,
+  })  : constructor = CarouselViewConstructor.weighted,
+        itemExtent = 0.0;
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    CarouselView(
+        {
+            id: "id",
+            attributes: {
+                constructor: "common",
+                itemExtent: 120.0,
+            },
+            controlled: false,
+        },
+        [], //children
+    );
+    ````
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	CarouselView(
+		&duit_attributes.CarouselViewAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsAll, duit_decoration.BeveledRectangleBorder[duit_color.ColorString]]{
+			Constructor: duit_attributes.CarouselViewCommon,	
+		},
+		"id",
+		false,
+		[]*duit_core.DuitElementModel{}, //children
+	)
+    ```
+  </TabItem>
+</Tabs>
+

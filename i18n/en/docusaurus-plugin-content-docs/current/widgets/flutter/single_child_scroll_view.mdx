@@ -1,0 +1,69 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SingleChildScrollView
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| SingleChildScrollView | &cross;  | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html) |
+
+## Attributes
+
+```dart
+class SingleChildScrollviewAttributes
+    implements DuitAttributes<SingleChildScrollviewAttributes> {
+  final Axis? scrollDirection;
+  final bool? reverse, primary;
+  final EdgeInsetsGeometry? padding;
+  final ScrollPhysics? physics;
+  final String? restorationId;
+  final Clip? clipBehavior;
+  final ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior;
+  final DragStartBehavior? dragStartBehavior;
+
+  SingleChildScrollviewAttributes({
+    required this.scrollDirection,
+    required this.reverse,
+    required this.primary,
+    required this.padding,
+    required this.physics,
+    required this.restorationId,
+    required this.clipBehavior,
+    required this.keyboardDismissBehavior,
+    required this.dragStartBehavior,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SingleChildScrollView(
+        {
+            id: "id",
+            attributes: {
+                scrollDirection: 'vertical',
+                clipBehavior: 'hardEdge',
+            },
+
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	SingleChildScrollView(
+		&duit_attributes.SingleChildScrollViewAttributes[duit_edge_insets.EdgeInsetsAll]{
+			ScrollDirection: duit_flex.Vertical,
+			ClipBehavior: duit_clip.HardEdge,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

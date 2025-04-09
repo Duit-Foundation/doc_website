@@ -1,0 +1,58 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# DecodaredBox
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| DecodaredBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/DecoratedBox-class.html) |
+
+## Attributes
+
+```dart
+final class DecoratedBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<DecoratedBoxAttributes> {
+  final Decoration? decoration;
+
+  DecoratedBoxAttributes({
+    required this.decoration,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    DecoratedBox(
+        {
+            attributes: {
+            decoration: {
+                color: "#DCDCDC",
+            }
+            },
+            id: "id",
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	DecoratedBox(
+		&duit_attributes.DecoratedBoxAttributes[duit_color.ColorString]{
+			Decoration: &duit_decoration.BoxDecoration[duit_color.ColorString]{
+				Color: "#DCDCDC",
+			},
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

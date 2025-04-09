@@ -1,0 +1,54 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# ColoredBox
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| ColoredBox | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/ColoredBox-class.html) |
+
+## Attributes
+
+```dart
+final class ColoredBoxAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<ColoredBoxAttributes> {
+  final Color color;
+
+  ColoredBoxAttributes({
+    required this.color,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    ColoredBox(
+        {
+            attributes: {
+                color: "#DCDCDC"
+            },
+            id: "id",
+            controlled: false,
+        },
+        //child
+)
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	ColoredBox(
+		&duit_attributes.ColoredBoxAttributes[duit_color.ColorString]{
+			Color: "#DCDCDC",
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
