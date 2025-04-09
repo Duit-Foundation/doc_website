@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Positioned
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Positioned | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Positioned-class.html) |
+
+## Атрибуты
+
+```dart
+final class PositionedAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<PositionedAttributes> {
+  final double? left, top, right, bottom;
+
+  PositionedAttributes({
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Positioned(
+        {
+            id: "id",
+            attributes: {
+                top: 10,
+                left: 20,
+                right: 30,
+                bottom: 40
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Positioned(
+      &duit_attributes.PositionedAttributes{
+        Top:    10,
+        Bottom: 20,
+        Left:   30,
+        Right:  40,
+      },
+      "",
+      false,
+      nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

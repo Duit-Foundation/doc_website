@@ -1,0 +1,60 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Padding
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Padding | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Padding-class.html) |
+
+## Атрибуты
+
+```dart
+final class PaddingAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<PaddingAttributes> {
+  final EdgeInsetsGeometry? padding;
+
+  PaddingAttributes({
+    this.padding,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Padding(
+        {
+            id: "id",
+            attributes: {
+                padding: EdgeInsetsUtils.symmetric({
+                    vertical: 12,
+                    horizontal: 24
+                }),
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Padding(
+		&duit_attributes.PaddingAttributes[duit_edge_insets.EdgeInsetsSymmentric]{
+			Padding: duit_edge_insets.EdgeInsetsSymmentric{
+				12.0, //vertical
+				24.0, //horizontal
+			},
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

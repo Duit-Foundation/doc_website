@@ -1,0 +1,53 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# IntrinsicWidth
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| IntrinsicWidth | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/IntrinsicWidth-class.html) |
+
+## Атрибуты
+
+```dart
+final class IntrinsicWidthAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<IntrinsicWidthAttributes> {
+  final double? stepWidth, stepHeight;
+
+  IntrinsicWidthAttributes(
+      {this.stepWidth,
+      this.stepHeight,
+      required super.affectedProperties,
+      required super.parentBuilderId});
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    IntrinsicWidth(
+        {
+            id: "id",
+            attributes: {
+                stepWidth: 100,
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	IntrinsicWidth(
+		&duit_attributes.IntrinsicWidthAttributes{
+			StepWidth: 100,
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

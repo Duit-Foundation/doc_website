@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedOpacity
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| AnimatedOpacity | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedOpacity-class.html) |
+
+## Атрибуты
+
+```dart
+abstract interface class _OpacityProps {
+  abstract final double opacity;
+}
+
+final class AnimatedOpacityAttributes extends ImplicitAnimatable
+    implements _OpacityProps, DuitAttributes<AnimatedOpacityAttributes> {
+  @override
+  final double opacity;
+
+  const AnimatedOpacityAttributes({
+    required this.opacity,
+    required super.duration,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedOpacity(
+        {
+            id: "id",
+            attributes: {
+                opacity: 0.85,
+                duratuion: 1000,
+            },
+            controlled: false,
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedOpacity(
+		&duit_attributes.AnimatedOpacityAttributes{
+			Opacity: 0.85,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

@@ -1,0 +1,85 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# RemoteSubtree
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| RemoteSubtree | &cross; | :heavy_check_mark: | &cross; | - |
+
+Виджет `RemoteSubtree` является аналогом виджета [Subtree](/docs/widgets/special/subtree.mdx) и имеет схожую механику обновления контента.
+Но отличие `RemoteSubtree` от `Subtree` заключается в том, что `RemoteSubtree` способен самостоятельно инциировать запрос собственного контента
+с сервера и отрисовать его.
+
+Виджет `RemoteSubtree` решает следующие проблемы:
+- Возможность динамически загружать контент в случаях, когда вы не хотите, чтобы новое поддерево виджетов передавалось с сервера в составе события
+- Уменьшение размера начального json-макета. Например, когда вы не хотите включать контент BottomSheet в начальный макет.
+
+В атрибутах виджета можно передать:
+- url для загрузки контента виджета
+- мета-информацию запроса (чаще всего это метод http запроса)
+- список зависимостей для формирования body запроса по аналогии с [действиями](/docs/core_concepts/actions_events.md)
+
+## Атрибуты
+
+```dart
+final class RemoteSubtreeAttributes
+    implements DuitAttributes<RemoteSubtreeAttributes> {
+  final Map<String, dynamic>? data;
+  final String downloadPath;
+  final Map<String, dynamic>? meta;
+  final Iterable<ActionDependency> dependencies;
+
+  RemoteSubtreeAttributes({
+    required this.downloadPath,
+    required this.dependencies,
+    this.data,
+    this.meta,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    RemoteSubtree(
+      {
+          id: "id",
+          attributes: {
+              downloadPath: "/some/url/to/download/layout",
+              meta: {
+                  method: "POST",
+              },
+              dependencies: [
+                  {
+                      id: "some_id",
+                      target: "some_target"
+                  },
+              ],
+          },
+      },
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	RemoteSubtree(
+		&duit_attributes.RemoteSubtreeAttributes{
+			DownloadPath: "/some/url/to/download/layout",
+			Meta: map[string]interface{}{
+				"method": "POST",
+			},
+			Dependencies: []*duit_core.ActionDependency{
+				{
+					Id: "some_id",
+					Target: "some_target",
+				},
+			},
+		},
+		"id",
+	)
+    ```
+  </TabItem>
+</Tabs>
+
