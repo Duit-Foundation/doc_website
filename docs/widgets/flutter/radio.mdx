@@ -1,0 +1,75 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Radio
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Radio | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/Radio-class.html) |
+
+:::info
+Виджет (или группа виджетов ) `Radio` работает только в том случае, если этот виджет
+является дочерним виджетом [`RadioGroupContext`](/docs/widgets/special/radio_group_context.mdx)
+:::
+
+## Атрибуты
+
+```dart
+final class RadioAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<RadioAttributes> {
+  final dynamic value;
+  final bool? toggleable, autofocus;
+  final Color? activeColor, focusColor, hoverColor;
+  final WidgetStateProperty<Color>? fillColor;
+  final WidgetStateProperty<Color>? overlayColor;
+  final double? splashRadius;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final VisualDensity? visualDensity;
+
+  RadioAttributes({
+    required this.value,
+    required this.toggleable,
+    required this.autofocus,
+    required this.activeColor,
+    required this.focusColor,
+    required this.hoverColor,
+    required this.fillColor,
+    required this.overlayColor,
+    required this.splashRadius,
+    required this.materialTapTargetSize,
+    required this.visualDensity,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Radio(
+        {
+            id: "id",
+            attributes: {
+                value: false,
+                toggleable: true,
+            },
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Radio[bool, duit_color.ColorString](
+		&duit_attributes.RadioAttributes[bool, duit_color.ColorString]{
+			Value: false,
+			Toggleable: true,
+		},
+		"",
+		false,
+	)
+    ```
+  </TabItem>
+</Tabs>
+

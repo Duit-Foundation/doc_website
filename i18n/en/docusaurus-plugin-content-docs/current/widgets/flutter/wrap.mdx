@@ -1,0 +1,70 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Wrap
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Wrap | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Wrap-class.html) |
+
+## Attributes
+
+```dart
+final class WrapAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<WrapAttributes> {
+  final Axis? direction;
+  final TextDirection? textDirection;
+  final VerticalDirection? verticalDirection;
+  final WrapAlignment? alignment, runAlignment;
+  final double spacing, runSpacing;
+  final WrapCrossAlignment? crossAxisAlignment;
+  final Clip? clipBehavior;
+
+  WrapAttributes({
+    required this.spacing,
+    required this.runSpacing,
+    this.direction = Axis.horizontal,
+    this.textDirection,
+    this.verticalDirection,
+    this.alignment = WrapAlignment.start,
+    this.runAlignment = WrapAlignment.start,
+    this.crossAxisAlignment = WrapCrossAlignment.start,
+    this.clipBehavior,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Wrap(
+        {
+            id: "id",
+            attributes: {
+                spacing: 12,
+                runSpacing: 24,
+            },
+            controlled: false,
+        },
+        [], //children
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Wrap(
+		&duit_attributes.WrapAttributes{
+			Spacing: 12,
+			RunSpacing: 24,
+		},
+		"id",
+		false,
+		nil, //children
+	)
+    ```
+  </TabItem>
+</Tabs>
+

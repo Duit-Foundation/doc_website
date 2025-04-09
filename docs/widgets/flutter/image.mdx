@@ -1,0 +1,89 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Image
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Image | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Image-class.html) |
+
+## Атрибуты
+
+```dart
+final class ImageAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<ImageAttributes> {
+  final ImageType type;
+  final String src;
+  final Uint8List byteData;
+  final double? scale, width, height;
+  final int? cacheWidth, cacheHeight;
+  final bool? isAntiAlias,
+      matchTextDirection,
+      gaplessPlayback,
+      excludeFromSemantics;
+  final FilterQuality? filterQuality;
+  final AlignmentGeometry? alignment;
+  final ImageRepeat? repeat;
+  final Color? color;
+  final BlendMode? colorBlendMode;
+  final BoxFit? fit;
+
+  ImageAttributes({
+    required this.type,
+    required this.src,
+    required this.byteData,
+    this.scale,
+    this.width,
+    this.height,
+    this.cacheWidth,
+    this.cacheHeight,
+    this.isAntiAlias,
+    this.matchTextDirection,
+    this.gaplessPlayback,
+    this.filterQuality,
+    this.alignment,
+    this.repeat,
+    this.color,
+    this.colorBlendMode,
+    this.fit,
+    this.excludeFromSemantics,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Image(
+        {
+            id: "id",
+            attributes: {
+                type: "network",
+                src: "https://via.assets.so/game.png?id=1&q=95&w=360&h=360&fit=fill",
+                width: 100,
+                height: 100,
+            },
+            controlled: false,
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Image(
+		&duit_attributes.ImageAttributes[duit_color.ColorString]{
+			Type: duit_painting.Network,
+			Src:  "https://via.assets.so/game.png?id=1&q=95&w=360&h=360&fit=fill",
+			Width: 100,
+			Height: 100,
+		},
+		"id",
+		false,
+	)
+    ```
+  </TabItem>
+</Tabs>
+

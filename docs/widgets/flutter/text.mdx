@@ -1,0 +1,66 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Text
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Text | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Text-class.html) |
+
+## Атрибуты
+
+```dart
+final class TextAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<TextAttributes> {
+  final String? data;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final bool? softWrap;
+  final TextOverflow? overflow;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final TextStyle? style;
+
+  TextAttributes({
+    required this.data,
+    this.textAlign,
+    this.textDirection,
+    this.softWrap,
+    this.overflow,
+    this.maxLines,
+    this.semanticsLabel,
+    this.style,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+  Text(
+      {
+          id: "id",
+          attributes: {
+              data: "Hello, Duit!"
+          },
+          controlled: false,
+      }
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Text(
+		&duit_attributes.TextAttributes[duit_color.ColorString]{
+			Data: "Hello, Duit!",
+		},
+		"id",
+		false,
+	)
+    ```
+  </TabItem>
+</Tabs>
+

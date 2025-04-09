@@ -1,0 +1,105 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# TextField
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| TextField | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/material/TextField-class.html) |
+
+## Attributes
+
+```dart
+final class TextFieldAttributes extends AttendedModel<String>
+    implements DuitAttributes<TextFieldAttributes> {
+  final InputDecoration? decoration;
+  final TextStyle? style;
+  final TextInputType? keyboardType;
+  final TextAlign? textAlign;
+  final TextAlignVertical? textAlignVertical;
+  final TextDirection? textDirection;
+  final String? obscuringCharacter;
+  final bool? obscureText,
+      autocorrect,
+      enableSuggestions,
+      expands,
+      readOnly,
+      showCursor,
+      enabled,
+      autofocus;
+  final int? maxLines, minLines, maxLength;
+
+  TextFieldAttributes({
+    this.decoration,
+    this.style,
+    this.keyboardType,
+    this.textAlign,
+    this.textAlignVertical,
+    this.textDirection,
+    this.obscuringCharacter,
+    this.obscureText,
+    this.autofocus,
+    this.maxLines,
+    this.autocorrect,
+    this.enabled,
+    this.enableSuggestions,
+    this.expands,
+    this.maxLength,
+    this.minLines,
+    this.readOnly,
+    this.showCursor,
+  }) : super(value: "");
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    TextField(
+        {
+            id: "id",
+            attributes: {
+                maxLines: 3,
+                obscureText: true,
+                obscuringCharacter: "^",
+            },
+            action: HttpAction(
+                "/on_change",
+                {
+                    method: "POST",
+                },
+                [
+                    {
+                        id: "id",
+                        target: "value",
+                    }
+                ],
+            )
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	TextField(
+		&duit_attributes.TextFieldAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
+			MaxLines: 3,
+			ObscureText: true,
+			ObscuringCharacter: "^",
+		},
+		"id",
+		&duit_core.RemoteAction{
+			Event: "/on_change",
+			DependsOn: []*duit_core.ActionDependency{
+				{
+					Id: "id",
+					Target: "value",
+				},
+			},
+		},
+	)
+    ```
+  </TabItem>
+</Tabs>
+

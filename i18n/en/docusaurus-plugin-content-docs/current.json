@@ -30,5 +30,17 @@
   "sidebar.docs.category.sidebar.dart_api": {
     "message": "Dart API",
     "description": "The label for category sidebar.dart_api in sidebar docs"
+  },
+  "sidebar.docs.category.sidebar.widgets": {
+    "message": "Widget list",
+    "description": "The label for category sidebar.widgets in sidebar docs"
+  },
+  "sidebar.docs.category.sidebar.flutter_widgets": {
+    "message": "Flutter widgets",
+    "description": "The label for category sidebar.widgets in sidebar docs"
+  },
+  "sidebar.docs.category.sidebar.special_widgets": {
+    "message": "Duit widgets",
+    "description": "The label for category sidebar.widgets in sidebar docs"
   }
 }

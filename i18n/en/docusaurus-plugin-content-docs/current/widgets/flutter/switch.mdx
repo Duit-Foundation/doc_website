@@ -1,0 +1,101 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Switch
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Switch | &cross;  | :heavy_check_mark: | :heavy_check_mark:| [link](https://api.flutter.dev/flutter/material/Switch-class.html) |
+
+:::info
+The value stored by the widget can be used as a data source for actions.
+
+[More](/docs/core_concepts/actions_events)
+:::
+
+## Attributes
+
+```dart
+final class SwitchAttributes extends AttendedModel<bool>
+    implements DuitAttributes<SwitchAttributes> {
+  final Color? activeColor,
+      focusColor,
+      hoverColor,
+      activeTrackColor,
+      inactiveTrackColor;
+  final WidgetStateProperty<Color>? overlayColor,
+      trackColor,
+      thumbColor,
+      trackOutlineColor;
+  final WidgetStateProperty<double>? trackOutlineWidth;
+  final double? splashRadius;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final bool? autofocus;
+
+  SwitchAttributes({
+    required super.value,
+    this.activeColor,
+    this.focusColor,
+    this.hoverColor,
+    this.activeTrackColor,
+    this.inactiveTrackColor,
+    this.overlayColor,
+    this.trackColor,
+    this.thumbColor,
+    this.trackOutlineColor,
+    this.trackOutlineWidth,
+    this.splashRadius,
+    this.materialTapTargetSize,
+    this.autofocus,
+  });
+
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Switch(
+        {
+            id: "id",
+            attributes: {
+                value: true,
+            },
+            action: HttpAction(
+                "/on_change",
+                {
+                    method: "POST",
+                },
+                [
+                    {
+                        id: "id",
+                        target: "value",
+                    }
+                ]
+            )
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Switch(
+		&duit_attributes.SwitchAttributes[duit_color.ColorString]{
+			Value: false,
+		},
+		"id",
+		&duit_core.RemoteAction{
+			Event: "/on_change",
+			DependsOn: []*duit_core.ActionDependency{
+				{
+					Id: "id",
+					Target: "value",
+				},
+			},
+		},
+	)
+    ```
+  </TabItem>
+</Tabs>
+

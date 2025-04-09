@@ -1,0 +1,86 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# LifecycleStateListener
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| LifecycleStateListener | &cross; | :heavy_check_mark: | &cross; | - |
+
+Виджет предназначен для вызова событий при изменении состояния приложения и реализован с помощью [WidgetsBindingObserver](https://api.flutter.dev/flutter/widgets/WidgetsBindingObserver-class.html).
+
+При изменении состояния приложения вызывается срабатывание соотвествующего действия, если оно было определено для этого вида события.
+
+## Атрибуты
+
+```dart
+class LifecycleStateListenerAttributes
+    implements DuitAttributes<LifecycleStateListenerAttributes> {
+  final ServerAction? onStateChanged,
+      onResumed,
+      onInactive,
+      onPaused,
+      onDetached,
+      onHidden;
+
+  LifecycleStateListenerAttributes({
+    this.onStateChanged,
+    this.onResumed,
+    this.onInactive,
+    this.onPaused,
+    this.onDetached,
+    this.onHidden,
+  }) : super() {
+    final haveStateCallbacks = onStateChanged != null ||
+        onResumed != null ||
+        onInactive != null ||
+        onPaused != null ||
+        onDetached != null ||
+        onHidden != null;
+
+    assert(
+        !haveStateCallbacks && onStateChanged != null ||
+            haveStateCallbacks && onStateChanged == null,
+        'The attribute must contain at least one action to listen to '
+        'the application lifecycle event, or a general callback');
+  }
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+  LifecycleEventListener(
+      {
+          id: "id",
+          attributes: {
+              onHidden: HttpAction(
+                  "/some_endpoint",
+                  {
+                      method: "POST",
+                  },
+                  [],
+              )
+          },
+      },
+      //child
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	LifecycleEvent(
+		&duit_attributes.LifecycleEventListenerAttributes[duit_core.RemoteAction]{
+			OnHidden: &duit_core.RemoteAction{
+				Event: "/some_endpoint",
+				DependsOn: []*duit_core.ActionDependency{},
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

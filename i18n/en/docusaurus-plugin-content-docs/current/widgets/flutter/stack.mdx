@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Stack
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Stack | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Stack-class.html) |
+
+## Attributes
+
+```dart
+final class StackAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<StackAttributes> {
+  final AlignmentGeometry? alignment;
+  final TextDirection? textDirection;
+  final StackFit? fit;
+  final Clip? clipBehavior;
+
+  StackAttributes({
+    required this.alignment,
+    this.textDirection,
+    required this.fit,
+    required this.clipBehavior,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Stack(
+        {
+            id: "id",
+            attributes: {
+                alignment: "center",
+                fit: "expand",
+            },
+        },
+        [], //children
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Stack(
+		&duit_attributes.StackAttributes{
+			Alignment: duit_alignment.TopCenter,
+			Fit:       duit_flex.Expand,
+		},
+		"id",
+		false,
+		nil, //children
+	)
+    ```
+  </TabItem>
+</Tabs>
+

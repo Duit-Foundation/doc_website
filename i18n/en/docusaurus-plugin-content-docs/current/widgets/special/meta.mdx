@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Meta
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Meta | &cross; | :heavy_check_mark: | &cross; | - |
+
+InheritedWidget that stores json containing meta information for the Duit view.
+
+:::info
+The value stored by the widget can be used as a data source for actions.
+
+[More](/docs/core_concepts/actions_events)
+:::
+
+The widget can be useful in cases:
+- When it is necessary to transmit additional information about the UI element in the layout, which can be used during the execution of actions.
+- When it is necessary to store an intermediate state
+
+## Attributes
+
+```dart
+final class MetaAttributes extends AttendedModel<Map<String, dynamic>>
+    implements DuitAttributes<MetaAttributes> {
+
+  MetaAttributes({
+    required super.value,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Meta(
+        {
+            id: "id",
+            attributes: {
+                key: "value",
+                key2: "value2",
+            }
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Meta(
+      &duit_attributes.MetaAttributes{
+        "key": "value",
+        "key2": "value2",
+      },
+      "id",
+      nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

@@ -1,0 +1,48 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Subtree
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Subtree | &cross;  | :heavy_check_mark: | &cross; | - |
+
+Виджет `Subtree` используется для управления поддеревьями виджетов. 
+Атрибуты виджета могут хранить json, который представляет собой новое или измененное поддерево виджетов. 
+Это позволяет изолировать поддерево виджетов и управлять им через обновление корневого элемента, динамически меняя контент `Subtree`.
+
+## Атрибуты
+
+```dart
+final class SubtreeAttributes implements DuitAttributes<SubtreeAttributes> {
+  final Map<String, dynamic>? data;
+
+  SubtreeAttributes({
+    this.data,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+  Subtree(
+      {
+          id: "id",
+          attributes: {...},
+      },
+      //child
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Subtree(
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

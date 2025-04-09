@@ -1,0 +1,90 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedContainer
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AnimatedContainer | :heavy_check_mark: | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html) |
+
+## Attributes
+
+```dart
+abstract interface class _ContainerProps {
+  abstract final double? width, height;
+  abstract final Color? color;
+  abstract final Clip clipBehavior;
+  abstract final Decoration? decoration, foregroundDecoration;
+  abstract final BoxConstraints? constraints;
+  abstract final EdgeInsetsGeometry? padding, margin;
+  abstract final AlignmentGeometry? alignment, transformAlignment;
+}
+
+final class AnimatedContainerAttributes extends ImplicitAnimatable
+    implements _ContainerProps, DuitAttributes<AnimatedContainerAttributes> {
+  @override
+  final double? width, height;
+  @override
+  final Color? color;
+  @override
+  final Clip clipBehavior;
+  @override
+  final Decoration? decoration, foregroundDecoration;
+  @override
+  final BoxConstraints? constraints;
+  @override
+  final EdgeInsetsGeometry? padding, margin;
+  @override
+  final AlignmentGeometry? alignment, transformAlignment;
+
+  const AnimatedContainerAttributes({
+    required this.clipBehavior,
+    this.width,
+    this.height,
+    this.color,
+    this.decoration,
+    this.constraints,
+    this.padding,
+    this.margin,
+    this.alignment,
+    this.transformAlignment,
+    this.foregroundDecoration,
+    required super.curve,
+    required super.duration,
+    required super.onEnd,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedContainer(
+        {
+            id: "id",
+            attributes: {
+                duratuion: 1000,
+                width: 100,
+            },
+        },
+        // child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedContainer(
+		&duit_attributes.AnimatedContainerAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
+			Width: 100,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

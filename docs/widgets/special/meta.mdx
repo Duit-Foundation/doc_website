@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Meta
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Meta | &cross; | :heavy_check_mark: | &cross; | - |
+
+InheritedWidget, который хранит json, содержащий мета-информацию для Duit-представления.
+
+:::info
+Значение, хранимое виджетом, может быть использовано в качестве источника данных для действий.
+
+[Подробнее](docs/core_concepts/actions_events.md)
+:::
+
+Виджет может быть полезен в случаях:
+- Когда требуется передавать в макете дополнительную информацию об элементе UI, которая может быть использована в ходе выполения действий.
+- Когда требуется хранение промежуточного состояния
+
+## Атрибуты
+
+```dart
+final class MetaAttributes extends AttendedModel<Map<String, dynamic>>
+    implements DuitAttributes<MetaAttributes> {
+
+  MetaAttributes({
+    required super.value,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Meta(
+        {
+            id: "id",
+            attributes: {
+                key: "value",
+                key2: "value2",
+            }
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Meta(
+      &duit_attributes.MetaAttributes{
+        "key": "value",
+        "key2": "value2",
+      },
+      "id",
+      nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+

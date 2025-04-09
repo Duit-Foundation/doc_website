@@ -1,0 +1,98 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# InkWell
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| InkWell | &cross; | :heavy_check_mark:| &cross; | [link](https://api.flutter.dev/flutter/material/InkWell-class.html) |
+
+## Attributes
+
+```dart
+final class InkWellAttributes implements DuitAttributes<InkWellAttributes> {
+  final ServerAction? onTap,
+      onDoubleTap,
+      onLongPress,
+      onTapDown,
+      onTapUp,
+      onTapCancel,
+      onSecondaryTapDown,
+      onSecondaryTapCancel,
+      onSecondaryTap,
+      onSecondaryTapUp;
+  final Color? focusColor, hoverColor, highlightColor, splashColor;
+  final WidgetStateProperty<Color>? overlayColor;
+  final double? radius;
+  final BorderRadius? borderRadius;
+  final ShapeBorder? customBorder;
+  final bool enableFeedback, excludeFromSemantics, autofocus, canRequestFocus;
+  final Duration? hoverDuration;
+  // final WidgetStatesController? statesController;
+
+  const InkWellAttributes({
+    required this.enableFeedback,
+    required this.excludeFromSemantics,
+    required this.autofocus,
+    required this.canRequestFocus,
+    this.onTap,
+    this.onDoubleTap,
+    this.onLongPress,
+    this.onTapDown,
+    this.onTapUp,
+    this.onTapCancel,
+    this.onSecondaryTapDown,
+    this.onSecondaryTapCancel,
+    this.onSecondaryTap,
+    this.onSecondaryTapUp,
+    this.focusColor,
+    this.hoverColor,
+    this.highlightColor,
+    this.splashColor,
+    this.overlayColor,
+    this.radius,
+    this.borderRadius,
+    this.customBorder,
+    this.hoverDuration,
+    // this.statesController,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    InkWell(
+        {
+            id: "id",
+            attributes: {
+                onTap: HttpAction(
+                    "/some_endpoint",
+                    {
+                        method: "GET"
+                    },
+                    []
+                ),
+            },
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	InkWell(
+		&duit_attributes.InkwellAttributes[duit_color.ColorString, duit_core.RemoteAction, duit_decoration.BeveledRectangleBorder[duit_color.ColorString]]{
+			OnTap: &duit_core.RemoteAction{
+				Event: "/some_endpoint",
+				DependsOn: []*duit_core.ActionDependency{},
+			},
+		},
+		"id",
+		nil,
+	)
+    ```
+  </TabItem>
+</Tabs>
+

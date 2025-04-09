@@ -1,0 +1,79 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Scaffold
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Scaffold | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/material/Scaffold-class.html) |
+
+## Атрибуты
+
+```dart
+final class ScaffoldAttributes implements DuitAttributes<ScaffoldAttributes> {
+  //TODO: implement Drawer and related props
+  final NonChildWidget? appBar,
+      body,
+      bottomNavigationBar,
+      floatingActionButton,
+      bottomSheet;
+  // final NonChildWidget? drawer;
+  // final NonChildWidget? endDrawer;
+  final Color? backgroundColor;
+  final bool extendBody, extendBodyBehindAppBar, primary;
+  final bool? resizeToAvoidBottomInset;
+  final AlignmentDirectional persistentFooterAlignment;
+  final List<NonChildWidget>? persistentFooterButtons;
+  final String? restorationId;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  const ScaffoldAttributes({
+    required this.extendBody,
+    required this.extendBodyBehindAppBar,
+    required this.primary,
+    required this.persistentFooterAlignment,
+    this.appBar,
+    this.backgroundColor,
+    this.body,
+    this.bottomNavigationBar,
+    // this.drawer,
+    // this.endDrawer,
+    this.floatingActionButton,
+    this.bottomSheet,
+    this.persistentFooterButtons,
+    this.restorationId,
+    this.floatingActionButtonLocation,
+    this.resizeToAvoidBottomInset,
+  });
+
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Scaffod(
+        {
+            id: "id",
+            attributes: {
+                body: undefined, //child
+                extendBody: true
+            },
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Scaffold(
+		&duit_attributes.ScaffoldAttributes[duit_color.ColorString]{
+			Body: nil, //child
+			ExtendBody: duit_utils.BoolPtr(true),
+		},
+		"id",
+	)
+    ```
+  </TabItem>
+</Tabs>
+

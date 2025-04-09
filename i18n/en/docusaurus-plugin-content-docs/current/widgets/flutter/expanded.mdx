@@ -1,0 +1,51 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Expanded
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Expanded |  &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Expanded-class.html) |
+
+## Attributes
+
+```dart
+class ExpandedAttributes implements DuitAttributes<ExpandedAttributes> {
+  final int? flex;
+
+  ExpandedAttributes({
+    required this.flex,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    Expanded(
+        {
+            attributes: {
+                flex: 1,
+            },
+            id: "id",
+            controlled: false
+        },
+        //child,
+    )
+        ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	Expanded(
+		&duit_attributes.ExpandedAttributes{
+			Flex: 1,
+		},
+		"id",
+		false,
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
