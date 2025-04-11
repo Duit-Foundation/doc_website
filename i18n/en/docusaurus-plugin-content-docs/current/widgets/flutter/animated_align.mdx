@@ -1,0 +1,63 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedAlign
+
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AnimatedAlign | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedAlign-class.html) |
+
+## Attributes
+
+```dart
+final class AnimatedAlignAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedAlignAttributes>, _AlignProps {
+  @override
+  final AlignmentGeometry alignment;
+  @override
+  final double? widthFactor, heightFactor;
+
+  const AnimatedAlignAttributes({
+    required this.alignment,
+    this.widthFactor,
+    this.heightFactor,
+    required super.duration,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+  AnimatedAlign(
+    {
+      id: "id",
+      attributes: {
+        alignment: "center",
+        duratuion: 1000,
+      },
+    },
+    //child
+  )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedAlign(
+		&duit_attributes.AnimatedAlignAttributes{
+			Alignment: duit_alignment.Center,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
