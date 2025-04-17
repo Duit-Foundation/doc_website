@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedRotation
+
+| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| AnimatedRotation | &cross;| :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedRotation-class.html) |
+
+## Атрибуты
+
+```dart
+final class AnimatedRotationAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedRotationAttributes> {
+  final double turns;
+  final Alignment alignment;
+  final FilterQuality? filterQuality;
+
+  const AnimatedRotationAttributes({
+    required this.turns,
+    required this.alignment,
+    required super.duration,
+    this.filterQuality,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedRotation(
+        {
+            id: "id",
+            attributes: {
+                turns: 3.14,
+                duratuion: 1000,
+            },
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedRotation(
+		&duit_attributes.AnimatedRotationAttributes{
+			Turns: 3.14,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
