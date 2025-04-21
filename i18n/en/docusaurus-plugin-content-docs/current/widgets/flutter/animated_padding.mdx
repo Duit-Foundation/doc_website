@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedPadding
+
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AnimatedPadding | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedPadding-class.html) |
+
+## Attributes
+
+```dart
+abstract interface class _PaddingProps {
+  abstract final EdgeInsetsGeometry padding;
+}
+
+final class AnimatedPaddingAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedPaddingAttributes>, _PaddingProps {
+  @override
+  final EdgeInsetsGeometry padding;
+
+  const AnimatedPaddingAttributes({
+    required super.duration,
+    required this.padding,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedPadding(
+        {
+            id: "",
+            attributes: {
+                padding: 12.0,
+                duratuion: 1000,
+            },
+        }
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedPadding(
+		&duit_attributes.AnimatedPaddingAttributes[duit_edge_insets.EdgeInsetsAll]{
+			Padding: 12.0,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
