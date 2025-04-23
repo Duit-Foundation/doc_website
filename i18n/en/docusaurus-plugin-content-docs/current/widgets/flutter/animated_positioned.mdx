@@ -1,0 +1,67 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedPositioned
+
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AnimatedPositioned | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedPositioned-class.html) |
+
+## Attributes
+
+```dart
+abstract interface class _PositionedProps {
+  abstract final double? left, top, right, bottom;
+}
+
+final class AnimatedPositionedAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedPositionedAttributes>, _PositionedProps {
+  @override
+  final double? left, top, right, bottom;
+
+  const AnimatedPositionedAttributes({
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
+    required super.duration,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedPositioned(
+        {
+            id: "id",
+            attributes: {
+                top: 0,
+                right: 0,
+                duratuion: 1000,
+            }
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedPositioned(
+		&duit_attributes.AnimatedPositionedAttributes{
+			Top: 0,
+			Right: 0,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
