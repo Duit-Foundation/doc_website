@@ -1,0 +1,62 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedScale
+
+
+| Type name | Supports animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| AnimatedScale | &cross;| :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedScale-class.html) |
+
+## Attributes
+
+```dart
+final class AnimatedScaleAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedScaleAttributes> {
+  final double scale;
+  final Alignment alignment;
+  final FilterQuality? filterQuality;
+
+  const AnimatedScaleAttributes({
+    required super.duration,
+    required this.scale,
+    required this.alignment,
+    this.filterQuality,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Usage
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedScale(
+        {
+            id: "id",
+            attributes: {
+                scale: 2.0,
+                duratuion: 1000,
+            },
+        },
+        //child
+    )
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+	AnimatedScale(
+		&duit_attributes.AnimatedScaleAttributes{
+			Scale: 2.0,
+			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
+				Duration: 1000,
+			},
+		},
+		"id",
+		nil, //child
+	)
+    ```
+  </TabItem>
+</Tabs>
+
