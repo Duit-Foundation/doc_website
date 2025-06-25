@@ -1,0 +1,117 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverAppBar
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverAppBar | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/SliverAppBar-class.html) |
+
+## Attributes
+
+```dart
+final class SliverAppBarAttributes implements DuitAttributes<SliverAppBarAttributes> {
+  final Widget? leading;
+  final bool automaticallyImplyLeading;
+  final Widget? title;
+  final List<Widget>? actions;
+  final Widget? flexibleSpace;
+  final PreferredSizeWidget? bottom;
+  final bool? floating;
+  final bool? pinned;
+  final bool? snap;
+  final bool? primary;
+  final double? expandedHeight;
+  final double? toolbarHeight;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? surfaceTintColor;
+  final double? elevation;
+  final double? scrolledUnderElevation;
+  final Color? shadowColor;
+  final ShapeBorder? shape;
+  final bool? forceElevated;
+  final Clip? clipBehavior;
+  final bool? stretch;
+  final double? stretchTriggerOffset;
+  final bool? onStretchTrigger;
+  final double? collapsedHeight;
+  final bool? centerTitle;
+  final bool? excludeHeaderSemantics;
+  final double? titleSpacing;
+  final double? toolbarOpacity;
+  final double? bottomOpacity;
+
+  const SliverAppBarAttributes({
+    this.leading,
+    this.automaticallyImplyLeading = true,
+    this.title,
+    this.actions,
+    this.flexibleSpace,
+    this.bottom,
+    this.floating,
+    this.pinned,
+    this.snap,
+    this.primary,
+    this.expandedHeight,
+    this.toolbarHeight,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.surfaceTintColor,
+    this.elevation,
+    this.scrolledUnderElevation,
+    this.shadowColor,
+    this.shape,
+    this.forceElevated,
+    this.clipBehavior,
+    this.stretch,
+    this.stretchTriggerOffset,
+    this.onStretchTrigger,
+    this.collapsedHeight,
+    this.centerTitle,
+    this.excludeHeaderSemantics,
+    this.titleSpacing,
+    this.toolbarOpacity,
+    this.bottomOpacity,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverAppBar({
+        id: "id",
+        attributes: {
+            title: "My App",
+            floating: true,
+            pinned: true,
+            expandedHeight: 200,
+            backgroundColor: "#2196F3",
+            elevation: 4
+        },
+        controlled: false,
+    },
+    //flexibleSpace
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverAppBar(
+      &duit_attributes.SliverAppBarAttributes{
+        Title: "My App",
+        Floating: true,
+        Pinned: true,
+        ExpandedHeight: 200,
+        BackgroundColor: duit_color.Color{R: 33, G: 150, B: 243, A: 255},
+        Elevation: 4,
+      },
+      "id",
+      false,
+      //flexibleSpace,
+    )
+    ```
+  </TabItem>
+</Tabs> 

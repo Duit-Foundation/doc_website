@@ -1,0 +1,73 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverList
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SliverList | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverList-class.html) |
+
+## Атрибуты
+
+```dart
+final class SliverListAttributes
+    implements DuitAttributes<SliverListAttributes>, DynamicChildHolder {
+  final bool addAutomaticKeepAlives, addRepaintBoundaries, addSemanticIndexes;
+
+  /// 0 - SliverList.list,
+  /// 1 - SliverList.builder,
+  /// 2 - SliverList.separated
+  final int type;
+  final Map<String, dynamic>? separator;
+  @override
+  final List<Map<String, dynamic>>? childObjects;
+  @override
+  final ArrayMergeStrategy? mergeStrategy;
+  @override
+  final double? scrollEndReachedThreshold;
+
+  SliverListAttributes({
+    required this.addAutomaticKeepAlives,
+    required this.addRepaintBoundaries,
+    required this.addSemanticIndexes,
+  })  : separator = null,
+        childObjects = null,
+        mergeStrategy = ArrayMergeStrategy.addToEnd,
+        scrollEndReachedThreshold = null,
+        type = 0;
+}
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverList({
+        id: "id",
+        attributes: {
+            addAutomaticKeepAlives: true,
+            addRepaintBoundaries: true,
+            addSemanticIndexes: true
+        },
+        controlled: false,
+    },
+    //delegate
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverList(
+      &duit_attributes.SliverListAttributes{
+        AddAutomaticKeepAlives: true,
+        AddRepaintBoundaries: true,
+        AddSemanticIndexes: true,
+      },
+      "id",
+      false,
+      //delegate,
+    )
+    ```
+  </TabItem>
+</Tabs> 

@@ -1,0 +1,57 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedSlide
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| AnimatedSlide | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedSlide-class.html) |
+
+## Attributes
+
+```dart
+final class AnimatedSlideAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedSlideAttributes> {
+  final Offset offset;
+
+  const AnimatedSlideAttributes({
+    required super.duration,
+    required this.offset,
+    super.curve,
+    super.onEnd,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedSlide({
+        id: "id",
+        attributes: {
+            offset: { x: 0.5, y: 0.0 },
+            duration: 300,
+            curve: "easeInOut"
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    AnimatedSlide(
+      &duit_attributes.AnimatedSlideAttributes{
+        Offset: duit_offset.Offset{X: 0.5, Y: 0.0},
+        Duration: 300 * time.Millisecond,
+        Curve: duit_animations.EaseInOut,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

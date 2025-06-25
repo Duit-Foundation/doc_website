@@ -1,0 +1,77 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedCrossFade
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| AnimatedCrossFade | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedCrossFade-class.html) |
+
+## Attributes
+
+```dart
+final class AnimatedCrossFadeAttributes extends ImplicitAnimatable
+    implements DuitAttributes<AnimatedCrossFadeAttributes> {
+  final Duration? reverseDuration;
+  final Curve firstCurve, secondCurve, sizeCurve;
+  final bool excludeBottomFocus;
+
+  /// Where 0 - [CrossFadeState.first], 1 - [CrossFadeState.second]
+  final int crossFadeState;
+  final AlignmentGeometry alignment;
+
+  const AnimatedCrossFadeAttributes({
+    required super.duration,
+    required this.reverseDuration,
+    required this.firstCurve,
+    required this.secondCurve,
+    required this.sizeCurve,
+    required this.excludeBottomFocus,
+    required this.crossFadeState,
+    required this.alignment,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedCrossFade({
+        id: "id",
+        attributes: {
+            duration: 300,
+            reverseDuration: 300,
+            firstCurve: "linear",
+            secondCurve: "linear",
+            sizeCurve: "linear",
+            excludeBottomFocus: true,
+            crossFadeState: 0,
+            alignment: "topCenter"
+        },
+        controlled: false,
+    },
+    [], //children
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    AnimatedCrossFade(
+      &duit_attributes.AnimatedCrossFadeAttributes{
+        Duration: 300 * time.Millisecond,
+        ReverseDuration: 300 * time.Millisecond,
+        FirstCurve: duit_animations.Linear,
+        SecondCurve: duit_animations.Linear,
+        SizeCurve: duit_animations.Linear,
+        ExcludeBottomFocus: true,
+        CrossFadeState: 0,
+        Alignment: duit_alignment.TopCenter,
+      },
+      "id",
+      false,
+      []*duit_core.DuitElement, //children
+    )
+    ```
+  </TabItem>
+</Tabs> 

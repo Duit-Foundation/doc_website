@@ -1,0 +1,61 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverAnimatedOpacity
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverAnimatedOpacity | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverAnimatedOpacity-class.html) |
+
+## Attributes
+
+```dart
+final class SliverAnimatedOpacityAttributes implements DuitAttributes<SliverAnimatedOpacityAttributes> {
+  final double opacity;
+  final Duration duration;
+  final Curve curve;
+  final bool alwaysIncludeSemantics;
+
+  const SliverAnimatedOpacityAttributes({
+    required this.opacity,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.linear,
+    this.alwaysIncludeSemantics = false,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverAnimatedOpacity({
+        id: "id",
+        attributes: {
+            opacity: 0.5,
+            duration: 300,
+            curve: "easeInOut",
+            alwaysIncludeSemantics: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverAnimatedOpacity(
+      &duit_attributes.SliverAnimatedOpacityAttributes{
+        Opacity: 0.5,
+        Duration: 300 * time.Millisecond,
+        Curve: duit_animations.EaseInOut,
+        AlwaysIncludeSemantics: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

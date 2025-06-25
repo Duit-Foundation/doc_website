@@ -1,0 +1,91 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverGrid
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SliverGrid | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverGrid-class.html) |
+
+## Атрибуты
+
+```dart
+final class SliverGridAttributes
+    implements DuitAttributes<SliverGridAttributes>, DynamicChildHolder {
+  final bool addAutomaticKeepAlives, addRepaintBoundaries, addSemanticIndexes;
+  final int crossAxisCount;
+  final double mainAxisSpacing, crossAxisSpacing, childAspectRatio, maxCrossAxisExtent;
+
+  //Duit specific properties
+  final GridConstructor constructor;
+  final String sliverGridDelegateKey, sliverChildDelegateKey;
+  final Map<String, dynamic> sliverGridDelegateOptions;
+
+  //GridView.builder custom props
+  @override
+  final List<Map<String, dynamic>>? childObjects;
+  @override
+  final ArrayMergeStrategy? mergeStrategy;
+  @override
+  final double? scrollEndReachedThreshold;
+
+  const SliverGridAttributes.count({
+    required this.crossAxisCount,
+    required this.crossAxisSpacing,
+    required this.mainAxisSpacing,
+    required this.childAspectRatio,
+    required this.addAutomaticKeepAlives,
+    required this.addRepaintBoundaries,
+    required this.addSemanticIndexes,
+  })  : constructor = GridConstructor.count,
+        maxCrossAxisExtent = 0.0,
+        sliverGridDelegateKey = "",
+        sliverChildDelegateKey = "",
+        childObjects = null,
+        mergeStrategy = null,
+        sliverGridDelegateOptions = const {},
+        scrollEndReachedThreshold = null;
+}
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverGrid.count({
+        id: "id",
+        attributes: {
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 1.0,
+            addAutomaticKeepAlives: true,
+            addRepaintBoundaries: true,
+            addSemanticIndexes: true
+        },
+        controlled: false,
+    },
+    //delegate
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverGridCount(
+      &duit_attributes.SliverGridAttributes{
+        CrossAxisCount: 2,
+        CrossAxisSpacing: 8,
+        MainAxisSpacing: 8,
+        ChildAspectRatio: 1.0,
+        AddAutomaticKeepAlives: true,
+        AddRepaintBoundaries: true,
+        AddSemanticIndexes: true,
+      },
+      "id",
+      false,
+      //delegate,
+    )
+    ```
+  </TabItem>
+</Tabs> 

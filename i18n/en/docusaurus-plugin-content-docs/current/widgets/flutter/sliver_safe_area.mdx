@@ -1,0 +1,65 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverSafeArea
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverSafeArea | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverSafeArea-class.html) |
+
+## Attributes
+
+```dart
+final class SliverSafeAreaAttributes implements DuitAttributes<SliverSafeAreaAttributes> {
+  final bool left;
+  final bool top;
+  final bool right;
+  final bool bottom;
+  final EdgeInsets minimum;
+
+  const SliverSafeAreaAttributes({
+    this.left = true,
+    this.top = true,
+    this.right = true,
+    this.bottom = true,
+    this.minimum = EdgeInsets.zero,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverSafeArea({
+        id: "id",
+        attributes: {
+            left: true,
+            top: true,
+            right: true,
+            bottom: true,
+            minimum: { left: 0, top: 0, right: 0, bottom: 0 }
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverSafeArea(
+      &duit_attributes.SliverSafeAreaAttributes{
+        Left: true,
+        Top: true,
+        Right: true,
+        Bottom: true,
+        Minimum: duit_edge_insets.EdgeInsets{},
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

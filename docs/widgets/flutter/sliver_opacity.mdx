@@ -1,0 +1,58 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverOpacity
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SliverOpacity | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverOpacity-class.html) |
+
+## Атрибуты
+
+```dart
+final class SliverOpacityAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<SliverOpacityAttributes>, DuitSliverProps {
+  final double opacity;
+
+  @override
+  final bool needsBoxAdapter;
+
+  const SliverOpacityAttributes({
+    required this.opacity,
+    required this.needsBoxAdapter,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverOpacity({
+        id: "id",
+        attributes: {
+            opacity: 0.5,
+            needsBoxAdapter: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverOpacity(
+      &duit_attributes.SliverOpacityAttributes{
+        Opacity: 0.5,
+        NeedsBoxAdapter: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

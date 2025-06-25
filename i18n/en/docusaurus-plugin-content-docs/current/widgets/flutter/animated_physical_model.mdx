@@ -1,0 +1,77 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedPhysicalModel
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| AnimatedPhysicalModel | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedPhysicalModel-class.html) |
+
+## Attributes
+
+```dart
+final class AnimatedPhysicalModelAttributes implements DuitAttributes<AnimatedPhysicalModelAttributes> {
+  final Color? color;
+  final double? elevation;
+  final Color? shadowColor;
+  final Clip clipBehavior;
+  final BorderRadius? borderRadius;
+  final ShapeBorder? shape;
+  final Duration duration;
+  final Curve curve;
+
+  const AnimatedPhysicalModelAttributes({
+    this.color,
+    this.elevation,
+    this.shadowColor,
+    this.clipBehavior = Clip.none,
+    this.borderRadius,
+    this.shape,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.linear,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedPhysicalModel({
+        id: "id",
+        attributes: {
+            color: "#FF5722",
+            elevation: 8.0,
+            shadowColor: "#000000",
+            clipBehavior: "antiAlias",
+            borderRadius: { topLeft: 8, topRight: 8, bottomLeft: 8, bottomRight: 8 },
+            duration: 300,
+            curve: "easeInOut"
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    AnimatedPhysicalModel(
+      &duit_attributes.AnimatedPhysicalModelAttributes{
+        Color: duit_color.Color{R: 255, G: 87, B: 34, A: 255},
+        Elevation: 8.0,
+        ShadowColor: duit_color.Color{R: 0, G: 0, B: 0, A: 255},
+        ClipBehavior: duit_clip.AntiAlias,
+        BorderRadius: &duit_border_radius.BorderRadius{
+          TopLeft: 8, TopRight: 8, BottomLeft: 8, BottomRight: 8,
+        },
+        Duration: 300 * time.Millisecond,
+        Curve: duit_animations.EaseInOut,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

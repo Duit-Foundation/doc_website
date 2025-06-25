@@ -1,0 +1,92 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# CustomScrollView
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| CustomScrollView | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/CustomScrollView-class.html) |
+
+## Attributes
+
+```dart
+final class CustomScrollViewAttributes implements DuitAttributes<CustomScrollViewAttributes> {
+  final Axis scrollDirection;
+  final bool reverse, shrinkWrap;
+  final bool? primary;
+  final ScrollPhysics? physics;
+  final Key? center;
+  final double anchor;
+  final double? cacheExtent;
+  final int? semanticChildCount;
+  final DragStartBehavior dragStartBehavior;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  final String? restorationId;
+  final Clip clipBehavior;
+  final HitTestBehavior hitTestBehavior;
+
+  const CustomScrollViewAttributes({
+    required this.scrollDirection,
+    required this.reverse,
+    required this.shrinkWrap,
+    required this.primary,
+    required this.physics,
+    required this.center,
+    required this.anchor,
+    required this.cacheExtent,
+    required this.semanticChildCount,
+    required this.dragStartBehavior,
+    required this.keyboardDismissBehavior,
+    required this.restorationId,
+    required this.clipBehavior,
+    required this.hitTestBehavior,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    CustomScrollView({
+        id: "id",
+        attributes: {
+            scrollDirection: "vertical",
+            reverse: false,
+            shrinkWrap: false,
+            primary: true,
+            physics: "bouncingScrollPhysics",
+            anchor: 0.0,
+            dragStartBehavior: "start",
+            keyboardDismissBehavior: "manual",
+            clipBehavior: "hardEdge",
+            hitTestBehavior: "opaque"
+        },
+        controlled: false,
+    },
+    //slivers
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    CustomScrollView(
+      &duit_attributes.CustomScrollViewAttributes{
+        ScrollDirection: duit_axis.Vertical,
+        Reverse: false,
+        ShrinkWrap: false,
+        Primary: true,
+        Physics: duit_scroll_physics.BouncingScrollPhysics,
+        Anchor: 0.0,
+        DragStartBehavior: duit_gestures.DragStartBehaviorStart,
+        KeyboardDismissBehavior: duit_scroll_view.KeyboardDismissBehaviorManual,
+        ClipBehavior: duit_clip.HardEdge,
+        HitTestBehavior: duit_hit_test.Opaque,
+      },
+      "id",
+      false,
+      //slivers,
+    )
+    ```
+  </TabItem>
+</Tabs> 

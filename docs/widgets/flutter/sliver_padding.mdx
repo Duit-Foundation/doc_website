@@ -1,0 +1,60 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverPadding
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SliverPadding | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverPadding-class.html) |
+
+## Атрибуты
+
+```dart
+final class SliverPaddingAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<SliverPaddingAttributes>, DuitSliverProps {
+  final EdgeInsetsGeometry padding;
+
+  @override
+  final bool needsBoxAdapter;
+
+  const SliverPaddingAttributes({
+    required this.padding,
+    required this.needsBoxAdapter,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverPadding({
+        id: "id",
+        attributes: {
+            padding: { left: 16, top: 8, right: 16, bottom: 8 },
+            needsBoxAdapter: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverPadding(
+      &duit_attributes.SliverPaddingAttributes{
+        Padding: duit_edge_insets.EdgeInsets{
+          Left: 16, Top: 8, Right: 16, Bottom: 8,
+        },
+        NeedsBoxAdapter: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 
