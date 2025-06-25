@@ -1,0 +1,71 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# FlexibleSpaceBar
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| FlexibleSpaceBar | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/FlexibleSpaceBar-class.html) |
+
+## Атрибуты
+
+```dart
+final class FlexibleSpaceBarAttributes extends AnimatedPropertyOwner
+    implements DuitAttributes<FlexibleSpaceBarAttributes> {
+  final NonChildWidget? title, background;
+  final EdgeInsetsGeometry? titlePadding;
+  final CollapseMode collapseMode;
+  final List<StretchMode> stretchModes;
+  final bool? centerTitle;
+  final double expandedTitleScale;
+
+  const FlexibleSpaceBarAttributes({
+    required this.collapseMode,
+    required this.stretchModes,
+    required this.expandedTitleScale,
+    this.titlePadding,
+    this.centerTitle,
+    this.title,
+    this.background,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    FlexibleSpaceBar({
+        id: "id",
+        attributes: {
+            collapseMode: "parallax",
+            stretchModes: ["zoomBackground"],
+            expandedTitleScale: 1.5,
+            centerTitle: true,
+            title: "My App"
+        },
+        controlled: false,
+    },
+    //background
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    FlexibleSpaceBar(
+      &duit_attributes.FlexibleSpaceBarAttributes{
+        CollapseMode: duit_collapse_mode.Parallax,
+        StretchModes: []duit_stretch_mode.StretchMode{duit_stretch_mode.ZoomBackground},
+        ExpandedTitleScale: 1.5,
+        CenterTitle: true,
+        Title: "My App",
+      },
+      "id",
+      false,
+      //background,
+    )
+    ```
+  </TabItem>
+</Tabs> 

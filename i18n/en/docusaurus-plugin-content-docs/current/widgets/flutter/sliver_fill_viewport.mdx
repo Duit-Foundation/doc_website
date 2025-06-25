@@ -1,0 +1,53 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverFillViewport
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverFillViewport | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverFillViewport-class.html) |
+
+## Attributes
+
+```dart
+final class SliverFillViewportAttributes implements DuitAttributes<SliverFillViewportAttributes> {
+  final double viewportFraction;
+  final bool padEnds;
+
+  const SliverFillViewportAttributes({
+    this.viewportFraction = 1.0,
+    this.padEnds = true,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverFillViewport({
+        id: "id",
+        attributes: {
+            viewportFraction: 1.0,
+            padEnds: true
+        },
+        controlled: false,
+    },
+    //delegate
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverFillViewport(
+      &duit_attributes.SliverFillViewportAttributes{
+        ViewportFraction: 1.0,
+        PadEnds: true,
+      },
+      "id",
+      false,
+      //delegate,
+    )
+    ```
+  </TabItem>
+</Tabs> 

@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# WidgetName
+# Widget Name
 
 {/* 
 :heavy_check_mark:
@@ -9,27 +9,44 @@ import TabItem from '@theme/TabItem';
  */}
 
 
-| Название типа| Поддерживает анимации | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
 | - | - | - | - | - |
-| TypeName | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter) |
+| WidgetName | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/WidgetName-class.html) |
 
-## Атрибуты
+## Attributes
 
 ```dart
-///
+final class WidgetNameAttributes implements DuitAttributes<WidgetNameAttributes> {
+  // attributes
+}
 ```
 
-## Пример использования
+## Usage Example
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
     ```typescript
-    ///
+    WidgetName({
+        id: "id",
+        attributes: {
+            // attributes
+        },
+        controlled: false,
+    },
+    //child
+);
     ```
   </TabItem>
   <TabItem value="go" label="Go">
     ```go
-    ///
+    WidgetName(
+      &duit_attributes.WidgetNameAttributes{
+        // attributes
+      },
+      "id",
+      false,
+      //child,
+    )
     ```
   </TabItem>
 </Tabs>

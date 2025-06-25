@@ -1,0 +1,93 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedPhysicalModel
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| AnimatedPhysicalModel | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedPhysicalModel-class.html) |
+
+## Атрибуты
+
+```dart
+final class AnimatedPhysicalModelAttributes extends ImplicitAnimatable
+    implements _PhysicalModelProps, DuitAttributes<AnimatedPhysicalModelAttributes> {
+  @override
+  final double elevation;
+  @override
+  final Color color;
+  @override
+  final Color shadowColor;
+  @override
+  final Clip clipBehavior;
+  @override
+  final BorderRadius? borderRadius;
+  @override
+  final BoxShape shape;
+
+  final bool animateColor, animateShadowColor;
+
+  const AnimatedPhysicalModelAttributes({
+    required this.elevation,
+    required this.color,
+    required this.shadowColor,
+    required this.clipBehavior,
+    this.borderRadius,
+    required this.shape,
+    required super.curve,
+    required super.duration,
+    required super.onEnd,
+    required this.animateColor,
+    required this.animateShadowColor,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AnimatedPhysicalModel({
+        id: "id",
+        attributes: {
+            elevation: 8.0,
+            color: "#FF5722",
+            shadowColor: "#000000",
+            clipBehavior: "antiAlias",
+            borderRadius: { topLeft: 8, topRight: 8, bottomLeft: 8, bottomRight: 8 },
+            shape: "rectangle",
+            duration: 300,
+            curve: "easeInOut",
+            animateColor: true,
+            animateShadowColor: true
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    AnimatedPhysicalModel(
+      &duit_attributes.AnimatedPhysicalModelAttributes{
+        Elevation: 8.0,
+        Color: duit_color.Color{R: 255, G: 87, B: 34, A: 255},
+        ShadowColor: duit_color.Color{R: 0, G: 0, B: 0, A: 255},
+        ClipBehavior: duit_clip.AntiAlias,
+        BorderRadius: &duit_border_radius.BorderRadius{
+          TopLeft: 8, TopRight: 8, BottomLeft: 8, BottomRight: 8,
+        },
+        Shape: duit_box_shape.Rectangle,
+        Duration: 300 * time.Millisecond,
+        Curve: duit_animations.EaseInOut,
+        AnimateColor: true,
+        AnimateShadowColor: true,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

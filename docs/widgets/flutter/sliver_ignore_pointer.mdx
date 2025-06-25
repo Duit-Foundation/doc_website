@@ -1,0 +1,56 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverIgnorePointer
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| SliverIgnorePointer | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverIgnorePointer-class.html) |
+
+## Атрибуты
+
+```dart
+final class SliverIgnorePointerAttributes
+    implements DuitAttributes<SliverIgnorePointerAttributes>, DuitSliverProps {
+  final bool ignoring;
+
+  @override
+  final bool needsBoxAdapter;
+
+  const SliverIgnorePointerAttributes({
+    required this.ignoring,
+    required this.needsBoxAdapter,
+  });
+```
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverIgnorePointer({
+        id: "id",
+        attributes: {
+            ignoring: true,
+            needsBoxAdapter: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverIgnorePointer(
+      &duit_attributes.SliverIgnorePointerAttributes{
+        Ignoring: true,
+        NeedsBoxAdapter: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

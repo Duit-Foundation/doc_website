@@ -1,0 +1,69 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverVisibility
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverVisibility | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverVisibility-class.html) |
+
+## Attributes
+
+```dart
+final class SliverVisibilityAttributes implements DuitAttributes<SliverVisibilityAttributes> {
+  final bool visible;
+  final bool maintainState;
+  final bool maintainAnimation;
+  final bool maintainSize;
+  final bool maintainSemantics;
+  final bool maintainInteractivity;
+
+  const SliverVisibilityAttributes({
+    required this.visible,
+    this.maintainState = false,
+    this.maintainAnimation = false,
+    this.maintainSize = false,
+    this.maintainSemantics = false,
+    this.maintainInteractivity = false,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverVisibility({
+        id: "id",
+        attributes: {
+            visible: true,
+            maintainState: false,
+            maintainAnimation: false,
+            maintainSize: false,
+            maintainSemantics: false,
+            maintainInteractivity: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverVisibility(
+      &duit_attributes.SliverVisibilityAttributes{
+        Visible: true,
+        MaintainState: false,
+        MaintainAnimation: false,
+        MaintainSize: false,
+        MaintainSemantics: false,
+        MaintainInteractivity: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

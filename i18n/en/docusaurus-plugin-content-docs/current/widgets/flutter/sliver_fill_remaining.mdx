@@ -1,0 +1,53 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# SliverFillRemaining
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| SliverFillRemaining | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/SliverFillRemaining-class.html) |
+
+## Attributes
+
+```dart
+final class SliverFillRemainingAttributes implements DuitAttributes<SliverFillRemainingAttributes> {
+  final bool hasScrollBody;
+  final bool fillOverscroll;
+
+  const SliverFillRemainingAttributes({
+    this.hasScrollBody = true,
+    this.fillOverscroll = false,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    SliverFillRemaining({
+        id: "id",
+        attributes: {
+            hasScrollBody: true,
+            fillOverscroll: false
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    SliverFillRemaining(
+      &duit_attributes.SliverFillRemainingAttributes{
+        HasScrollBody: true,
+        FillOverscroll: false,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

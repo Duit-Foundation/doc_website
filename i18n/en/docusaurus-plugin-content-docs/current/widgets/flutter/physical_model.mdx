@@ -1,0 +1,81 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# PhysicalModel
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| PhysicalModel | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/PhysicalModel-class.html) |
+
+## Attributes
+
+```dart
+final class PhysicalModelAttributes extends AnimatedPropertyOwner
+    implements _PhysicalModelProps, DuitAttributes<PhysicalModelAttributes> {
+  @override
+  final double elevation;
+  @override
+  final Color color;
+  @override
+  final Color shadowColor;
+  @override
+  final Clip clipBehavior;
+  @override
+  final BorderRadius? borderRadius;
+  @override
+  final BoxShape shape;
+
+  const PhysicalModelAttributes({
+    required this.elevation,
+    required this.color,
+    required this.shadowColor,
+    required this.clipBehavior,
+    this.borderRadius,
+    required this.shape,
+    required super.parentBuilderId,
+    required super.affectedProperties,
+  });
+}
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    PhysicalModel({
+        id: "id",
+        attributes: {
+            elevation: 8.0,
+            color: "#FF5722",
+            shadowColor: "#000000",
+            clipBehavior: "antiAlias",
+            borderRadius: { topLeft: 8, topRight: 8, bottomLeft: 8, bottomRight: 8 },
+            shape: "rectangle"
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    PhysicalModel(
+      &duit_attributes.PhysicalModelAttributes{
+        Elevation: 8.0,
+        Color: duit_color.Color{R: 255, G: 87, B: 34, A: 255},
+        ShadowColor: duit_color.Color{R: 0, G: 0, B: 0, A: 255},
+        ClipBehavior: duit_clip.AntiAlias,
+        BorderRadius: &duit_border_radius.BorderRadius{
+          TopLeft: 8, TopRight: 8, BottomLeft: 8, BottomRight: 8,
+        },
+        Shape: duit_box_shape.Rectangle,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 

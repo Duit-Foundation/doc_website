@@ -1,0 +1,49 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AbsorbPointer
+
+| Type Name | Supports Property Animations | Controlled by Default | Can Contain Related Action | Link |
+| - | - | - | - | - |
+| AbsorbPointer | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/AbsorbPointer-class.html) |
+
+## Attributes
+
+```dart
+final class AbsorbPointerAttributes implements DuitAttributes<AbsorbPointerAttributes> {
+  final bool absorbing;
+
+  const AbsorbPointerAttributes({
+    required this.absorbing,
+  });
+```
+
+## Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    AbsorbPointer({
+        id: "id",
+        attributes: {
+            absorbing: true
+        },
+        controlled: false,
+    },
+    //child
+);
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    AbsorbPointer(
+      &duit_attributes.AbsorbPointerAttributes{
+        Absorbing: true,
+      },
+      "id",
+      false,
+      //child,
+    )
+    ```
+  </TabItem>
+</Tabs> 
