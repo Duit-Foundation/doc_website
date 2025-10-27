@@ -31,6 +31,10 @@
     "message": "Dart API",
     "description": "The label for category sidebar.dart_api in sidebar docs"
   },
+  "sidebar.docs.category.sidebar.go_api": {
+    "message": "Go API",
+    "description": "The label for category sidebar.go_api in sidebar docs"
+  },
   "sidebar.docs.category.sidebar.widgets": {
     "message": "Widget list",
     "description": "The label for category sidebar.widgets in sidebar docs"
