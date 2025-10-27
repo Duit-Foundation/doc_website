@@ -60,14 +60,12 @@ Duit offers a public API for globally configuring the framework, registering [co
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  DuitRegistry.configure();
+  await DuitRegistry.initialize();
   
   // Register custom widget
   DuitRegistry.register(
     "widget_key",
-    modelFactory: mF,
-    buildFactory: bF,
-    attributesFactory: aF,
+    buildFactory: buildFactory,
   );
 
   // Register components

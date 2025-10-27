@@ -13,13 +13,11 @@ Talking about themes here isn't quite what regular Flutter developers are accust
 
 Applying themes to widgets involves several stages:
 
-- Retrieve the JSON theme from a data source
-- Convert the JSON theme into theme tokens (tokenization)
-- Merge the widget attribute object with the theme token content
+1. **Theme Initialization**: Convert the JSON theme data into a tokenized `DuitTheme` object using the `DuitThemePreprocessor` class and register it in `DuitRegistry`
+2. **Retrieve Theme Token**: When creating widget attributes, the corresponding token is retrieved by the theme key
+3. **Merge Attributes**: The widget attributes object is merged with the theme token attributes according to merge rules
 
-Theme loading is implemented using classes that implement the `ResourceLoader<T>` interface.
-
-The `ThemePreprocessor` class is responsible for tokenizing the theme object.
+All this logic is executed automatically when creating a `ViewAttribute` instance via the `ViewAttribute.from()` method.
 
 ## Theme Creation
 
@@ -70,36 +68,31 @@ For a theme to be correctly applied to widget attributes, the `type` property mu
 
 ## Theme Initialization
 
-### Theme Loader
+### Creating and Initializing a Theme
 
-Before a theme can be applied to widgets, it must be initialized. Out of the box, Duit provides two theme loaders:
+To work with themes in Duit, you need to:
 
-- `AssetThemeLoader` for creating a theme from a JSON file stored in the app's assets
-- `StaticThemeLoader` for creating a theme from a `Map<String, dynamic>`
-
-For greater flexibility in the initialization process, it is recommended to use a custom implementation of the `ResourceLoader<DuitTheme>` interface.
+1. Convert theme JSON data into a tokenized `DuitTheme` object using the `DuitThemePreprocessor` class
+2. Initialize the theme in the registry via the `DuitRegistry.initialize()` method
 
 ```dart
-final class DioThemeLoader implements ResourceLoader<DuitTheme> {
-  final Dio dio;
-  final String path;
-
-  DioThemeLoader(
-    this.dio,
-    this.path,
-  );
-
-  @override
-  Future<DuitTheme> load() async {
-    final res = await dio.get(path); //load theme json
-    final tokenizer = ThemePreprocessor(); //create tokenizer
-
-    return tokenizer.tokenize(res.data); //return tokenized theme
-  }
+// Example: loading a theme from JSON and initializing
+Future<void> initTheme() async {
+  // Option 1: theme from local JSON
+  final themeData = jsonDecode(await rootBundle.loadString('assets/theme.json'));
+  
+  // Option 2: theme from server
+  // final res = await dio.get('/theme');
+  // final themeData = res.data;
+  
+  final preprocessor = const DuitThemePreprocessor();
+  final theme = preprocessor.tokenize(themeData);
+  
+  await DuitRegistry.initialize(theme: theme);
 }
 ```
 
-After obtaining the JSON containing the theme, use the `ThemePreprocessor` class to perform tokenization (converting `MapEntry` into instances of the `ThemeToken` class).
+After obtaining the JSON data containing the theme, use the `DuitThemePreprocessor` class to perform tokenization (converting `MapEntry` into instances of the `ThemeToken` class).
 
 ### Theme Tokens
 
@@ -127,89 +120,88 @@ The tokenization mechanism validates incoming attributes to ensure they conform 
 
 If a property is found in the `excludedFields` set, an exception will be thrown.
 
+### Built-in Token Types
+
+`DuitThemePreprocessor` supports many built-in token types:
+
+- **TextThemeToken** - for `Text` type widgets
+- **ImageThemeToken** - for `Image` type widgets
+- **AttendedWidgetThemeToken** - for stateful widgets (Checkbox, Switch, TextField)
+- **AnimatedPropOwnerThemeToken** - for widgets owning animated properties
+- **ImplicitAnimatableThemeToken** - for widgets with implicit animations
+- **ExcludeGestureCallbacksThemeToken** - for gesture widgets (GestureDetector, InkWell)
+- **ExcludeChildThemeToken** - for widgets excluding child elements from themes (AppBar, Scaffold)
+- **DynamicChildHolderThemeToken** - for widgets with dynamic children (GridView, ListView)
+- **RadioThemeToken**, **RadioGroupContextThemeToken** - for radio buttons
+- **SliderThemeToken** - for sliders
+- **RichTextThemeToken** - for rich text
+
+For all other widget types, **DefaultThemeToken** is used.
+
 ### Extending and Overriding Preprocessor Behavior
 
 There are two ways to extend preprocessor behavior within the implementation:
 
-- `overrideWidgetTokenizer` - Override token creation for a specific widget type. Useful when you want to modify the list of excluded fields.
 - `customWidgetTokenizer` - Add handling for a new widget type to the preprocessor. Useful when you want to introduce unsupported widget themes or apply themes to custom widgets.
+- `overrideWidgetTokenizer` - Override token creation for a specific widget type. Useful when you want to modify the list of excluded fields for a built-in widget.
 
-In both cases, you should return an instance of the `ThemeToken` class or `null` if you don’t want to override behavior. You can also create your own `ThemeToken` classes for convenience.
+In both cases, you should return an instance of the `ThemeToken` class or `null` if you don't want to override behavior. You can also create your own `ThemeToken` classes for convenience.
 
 ```dart
-//Create override token for text widget theme
-final class OverrideTextThemeToken extends ThemeToken {
-  OverrideTextThemeToken(Map<String, dynamic> data)
-      : super(
-          const {}, //allow override all fields
-          data,
-          "Text",
-        );
-}
-
-
-//Create token for custom widget
+// Create a token for a custom widget
 final class CustomWidgetThemeToken extends ThemeToken {
   CustomWidgetThemeToken(Map<String, dynamic> data)
       : super(
-          const {}, //allow override all fields
+          const {}, // allow all fields
           data,
           "ExampleCustomWidget",
         );
 }
 
+// Override token for built-in Text widget
+final class OverrideTextThemeToken extends ThemeToken {
+  OverrideTextThemeToken(Map<String, dynamic> data)
+      : super(
+          const {"data"}, // disallow "data" field
+          data,
+          "Text",
+        );
+}
 
-final class DioThemeLoader implements ResourceLoader<DuitTheme> {
-    <...>
-
-    //Add custom token
-  ThemeToken? _customTokenizer(
-    String type,
-    Map<String, dynamic> themeData,
-  ) {
-    switch (type) {
-      case "ExampleCustomWidget":
-        return CustomWidgetThemeToken(themeData);
-    }
-
-    return null;
-  }
-
-    //Override default text token
-  ThemeToken? _overrideWidgetTokenizer(
-    String type,
-    Map<String, dynamic> themeData,
-  ) {
-    switch (type) {
-      case "Text":
-        return OverrideTextThemeToken(themeData);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<DuitTheme> load() async {
-    final res = await dio.get(path); //load theme json
-    final tokenizer = ThemePreprocessor(); //create tokenizer
-
-    final tokenizer = ThemePreprocessor(
-      customWidgetTokenizer: _customTokenizer,
-      overrideWidgetTokenizer: _overrideWidgetTokenizer,
-    );
-
-    return tokenizer.tokenize(res.data);
-  }
+// Usage in preprocessor
+Future<void> initThemeWithCustomTokens() async {
+  final preprocessor = DuitThemePreprocessor(
+    // Add handling for a new token
+    customWidgetTokenizer: (type, themeData) {
+      switch (type) {
+        case "ExampleCustomWidget":
+          return CustomWidgetThemeToken(themeData);
+      }
+      return null;
+    },
+    
+    // Override handling for built-in widget
+    overrideWidgetTokenizer: (type, themeData) {
+      switch (type) {
+        case "Text":
+          return OverrideTextThemeToken(themeData);
+      }
+      return null;
+    },
+  );
+  
+  final theme = preprocessor.tokenize(themeData);
+  await DuitRegistry.initialize(theme: theme);
 }
 ```
 
-In the above code example, we extended the original theme loader code by adding methods to introduce a completely new token and override the preprocessor behavior for widgets of type `Text`.
+In the above code example, we created a preprocessor with customizable tokenization logic for custom and built-in widgets.
 
 ---
 
 ## Using Themes in DSL Libraries
 
-Several new optional properties have been introduced for many widgets implemented in DSL libraries, allowing you to configure widgets for theme usage.
+Several new optional properties have been introduced for many widgets implemented in DSL libraries, allowing you to configure widgets for theme usage. These properties are defined in the `ThemeConsumer` interface.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
@@ -232,8 +224,122 @@ Several new optional properties have been introduced for many widgets implemente
   </TabItem>
 </Tabs>
 
-Let's take a closer look at the new widget attribute properties.
+### ThemeConsumer Properties
 
-- The `theme` property is a string key representing the unique name of the theme token you want to apply to the widget.
-- The `ignoreTheme` property indicates whether a specific widget should ignore the specified theme. By default, it is set to `false`.
-- The `overrideRule` property determines whether the theme will overwrite the original object's properties with its contents or merely add new ones. By default, it is set to `themeOverlay=0` and does not overwrite original properties.
+- **`theme`** - a string key representing the unique name of the theme token you want to apply to the widget.
+- **`ignoreTheme`** - indicates whether a specific widget should ignore the specified theme. By default, it is set to `false`.
+- **`overrideRule`** - defines how theme attributes are merged with widget attributes.
+
+### Merge Rules (overrideRule)
+
+The `overrideRule` property can take two values:
+
+- **`themeOverlay`** (default) - theme applies to existing widget properties but does not overwrite them. If a widget has a property that also exists in the theme, the widget's value takes priority.
+- **`themePriority`** - theme takes priority over widget properties. If a widget has a property that also exists in the theme, the theme's value will overwrite the widget's value.
+
+### Usage Example
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const textWidget: TextAttributes = {
+      data: "Hello World",
+      theme: "text_primary",
+      overrideRule: "themeOverlay",  // property data won't be overwritten
+      textAlign: "center"
+    };
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    textWidget := &TextAttributes{
+        Data: "Hello World",
+        ThemeConsumer: &ThemeConsumer{
+            Theme: "text_primary",
+            OverrideRule: ThemeOverlay,
+            IgnoreTheme: false,
+        },
+        TextAlign: duit_props.TextAlignCenter,
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+In this example, if the `text_primary` theme contains `fontSize: 18` and `color: "#FF0000"`, the widget will receive these properties, but its own properties (e.g., `textAlign: "center"` and `data: "Hello World"`) will be preserved.
+
+## Theme Merge Mechanism
+
+When creating widget attributes, the widget's properties are merged with the theme attributes:
+
+### Merge Algorithm
+
+1. **Check `ignoreTheme` flag**: If `ignoreTheme = true`, theme application is skipped.
+2. **Retrieve theme token**: The theme token is retrieved by the `theme` key from `DuitRegistry`.
+3. **Type check**: The token is applied only if its type matches the widget type.
+4. **Merge attributes** depending on `overrideRule`:
+   - **`themeOverlay`**: `{...token.widgetTheme, ...widgetAttributes}` - widget properties overwrite theme properties
+   - **`themePriority`**: `widgetAttributes.addAll(token.widgetTheme)` - theme properties overwrite widget properties
+
+### Examples
+
+Consider an example of the merge mechanism:
+
+```json
+{
+  "text_primary": {
+    "type": "Text",
+    "data": {
+      "fontSize": 18.0,
+      "fontWeight": 700,
+      "color": "#FF0000"
+    }
+  }
+}
+```
+
+**Example 1: themeOverlay (default)**
+
+Widget:
+```json
+{
+  "type": "Text",
+  "data": "Hello",
+  "theme": "text_primary",
+  "textAlign": "center"
+}
+```
+
+Merge result:
+```json
+{
+  "data": "Hello",
+  "textAlign": "center",
+  "fontSize": 18.0,
+  "fontWeight": 700,
+  "color": "#FF0000"
+}
+```
+
+**Example 2: themePriority**
+
+Widget:
+```json
+{
+  "type": "Text",
+  "data": "Hello",
+  "theme": "text_primary",
+  "overrideRule": "themePriority",
+  "textAlign": "center"
+}
+```
+
+Merge result:
+```json
+{
+  "data": "Hello",
+  "textAlign": "center",
+  "fontSize": 18.0,
+  "fontWeight": 700,
+  "color": "#FF0000"
+}
+```

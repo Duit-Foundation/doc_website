@@ -66,12 +66,12 @@ Duit предоствляет публичный API для глобальной
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  await DuitRegistry.initialize();
+
   // Register custom widget
   DuitRegistry.register(
     "widget_key",
-    modelFactory: mF,
-    buildFactory: bF,
-    attributesFactory: aF,
+    buildFactory: buildFactory,
   );
 
   // Register components

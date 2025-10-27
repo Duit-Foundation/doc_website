@@ -58,6 +58,45 @@ A special type of action that includes a dynamic script in its definition, which
 }
 ```
 
+## Action Execution Options
+
+Duit provides the ability to control the frequency of action execution through the `ExecutionOptions` mechanism. This is particularly useful for preventing excessive server requests and improving user experience.
+
+### ExecutionOptions
+
+Action execution options support two modifiers:
+
+- **`throttle`** - Limits the frequency of action execution. The action will execute at most once per specified time period. Subsequent calls within the period will be ignored.
+- **`debounce`** - Delays action execution until after a quiet period. Execution is delayed until the specified duration has passed without new calls.
+
+```json
+{
+    "executionType": 0,
+    "dependsOn": [...],
+    "event": "/some/endpoint",
+    "meta": {
+        "method": "POST"
+    },
+    "executionOptions": {
+        "modifier": "throttle",
+        "duration": 500
+    }
+}
+```
+
+Example for debounce:
+
+```json
+{
+    "executionType": 0,
+    "event": "/search",
+    "executionOptions": {
+        "modifier": "debounce",
+        "duration": 300
+    }
+}
+```
+
 ## Action Dependencies
 
 During application usage, users may interact with UI elements such as TextFields, CheckBoxes, Radios, etc. Interacting with these elements often involves collecting and utilizing data entered by the user.
@@ -97,16 +136,42 @@ UpdateEvent handles updating controlled UI elements. Its description includes an
 Parsing new attributes does not support "flat" values. If a property is compound (e.g., TextStyle), it must replicate the original class structure.
 :::
 
-### AnimationTriggerEvent
+### CommandEvent
 
-This event triggers an animation tied to a specific controller. The event description comprises the animation trigger method, the controller ID, and the animated property name.
+An event that sends a command to a controller for executing special operations. Commands allow the server to directly interact with widget controllers, triggering specific behaviors.
 
 ```json
 {
-  "type": "animationTrigger",
-  "method": 0, // 0 - forward, 1 - repeat, 2 - reverse, 3 - toggle
+  "type": "command",
   "controllerId": "some_id",
-  "animatedPropKey": "style"
+  "type": "animation",
+  "commandData": {
+    "animatedPropKey": "style",
+    "method": 0, // 0 - forward, 1 - repeat, 2 - reverse, 3 - toggle
+    "trigger": "auto" // auto, manual
+  }
+}
+```
+
+Commands support several types:
+
+- **`animation`** - Controls property animations
+- **`bottomSheet`** - Shows/hides modal bottom sheets
+- **`dialog`** - Shows/hides dialog windows
+
+Example command for showing a BottomSheet:
+
+```json
+{
+  "type": "command",
+  "controllerId": "overlay",
+  "type": "bottomSheet",
+  "commandData": {
+    "action": "open",
+    "content": {...},
+    "isScrollControlled": true,
+    "isDismissible": true
+  }
 }
 ```
 
