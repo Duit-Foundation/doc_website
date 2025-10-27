@@ -11,41 +11,6 @@ The widget is designed to trigger events when the application state changes and 
 
 When the application state changes, the corresponding action is triggered if it was defined for this type of event.
 
-## Attributes
-
-```dart
-class LifecycleStateListenerAttributes
-    implements DuitAttributes<LifecycleStateListenerAttributes> {
-  final ServerAction? onStateChanged,
-      onResumed,
-      onInactive,
-      onPaused,
-      onDetached,
-      onHidden;
-
-  LifecycleStateListenerAttributes({
-    this.onStateChanged,
-    this.onResumed,
-    this.onInactive,
-    this.onPaused,
-    this.onDetached,
-    this.onHidden,
-  }) : super() {
-    final haveStateCallbacks = onStateChanged != null ||
-        onResumed != null ||
-        onInactive != null ||
-        onPaused != null ||
-        onDetached != null ||
-        onHidden != null;
-
-    assert(
-        !haveStateCallbacks && onStateChanged != null ||
-            haveStateCallbacks && onStateChanged == null,
-        'The attribute must contain at least one action to listen to '
-        'the application lifecycle event, or a general callback');
-  }
-```
-
 ## Usage
 
 <Tabs groupId="lang">

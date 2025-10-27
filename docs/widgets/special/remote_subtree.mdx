@@ -20,24 +20,6 @@ import TabItem from '@theme/TabItem';
 - мета-информацию запроса (чаще всего это метод http запроса)
 - список зависимостей для формирования body запроса по аналогии с [действиями](/docs/core_concepts/actions_events.md)
 
-## Атрибуты
-
-```dart
-final class RemoteSubtreeAttributes
-    implements DuitAttributes<RemoteSubtreeAttributes> {
-  final Map<String, dynamic>? data;
-  final String downloadPath;
-  final Map<String, dynamic>? meta;
-  final Iterable<ActionDependency> dependencies;
-
-  RemoteSubtreeAttributes({
-    required this.downloadPath,
-    required this.dependencies,
-    this.data,
-    this.meta,
-  });
-```
-
 ## Пример использования
 
 <Tabs groupId="lang">
