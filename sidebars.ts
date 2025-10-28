@@ -40,15 +40,13 @@ const sidebars: SidebarsConfig = {
         'core_concepts/controlled_widgets',
         'core_concepts/transport_layer',
         'core_concepts/server_side',
+        'core_concepts/env'
       ],
     },
     {
       type: 'category',
       label: "sidebar.advanced_tech",
       collapsed: true,
-      link: {
-        type: 'generated-index',
-      },
       items: [
         {
           type: 'category',
@@ -121,9 +119,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: "sidebar.api",
       collapsed: true,
-      link: {
-        type: 'generated-index',
-      },
+
       items: [
         {
           type: 'category',
