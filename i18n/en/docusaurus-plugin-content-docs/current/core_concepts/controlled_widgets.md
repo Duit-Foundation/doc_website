@@ -47,14 +47,14 @@ Another significant difference between the two widget types lies in how they acq
 ```dart
 // Simple widget variant
 final class DuitText extends StatelessWidget with AnimatedAttributes {
-  final ViewAttribute<TextAttributes> attributes;
+  final ViewAttribute attributes;
 
 //other code
 }
 
 /// Controlled variant
 final class DuitControlledText extends StatefulWidget with AnimatedAttributes {
-  final UIElementController<TextAttributes> controller;
+  final UIElementController controller;
 
 //other code
 }
