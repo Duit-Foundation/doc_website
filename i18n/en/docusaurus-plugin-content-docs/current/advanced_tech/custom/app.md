@@ -2,6 +2,15 @@
 
 ## Creating a Widget Attributes Class
 
+:::info Deprecated
+Starting with the current version of Duit, developers no longer need to manually create widget attributes classes. The system automatically works with attributes through the widget controller.
+
+Access to attributes is done through the `ViewControllerChangeListener` mixin in StatefulWidget.
+:::
+
+<details>
+<summary>Old approach (not recommended)</summary>
+
 The attributes class for a custom widget is responsible for parsing widget properties correctly from JSON and copying them.
 
 :::tip
@@ -53,7 +62,18 @@ class SvgWidgetAttributes implements DuitAttributes<SvgWidgetAttributes> {
 }
 ```
 
+</details>
+
 ## Creating a Widget Model Class
+
+:::info Deprecated
+Starting with the current version of Duit, developers no longer need to manually create widget model classes. The system automatically creates models based on the JSON structure.
+
+The widget model class is no longer used in the new API.
+:::
+
+<details>
+<summary>Old approach (not recommended)</summary>
 
 The widget model is a component of the layout's object model. It stores references to all necessary objects and metadata about the widget:
 
@@ -77,10 +97,20 @@ final class SvgWidget extends CustomUiElement {
     tag: "SvgCustomWidget",
   );
 }
-
 ```
 
+</details>
+
 ## Attributes Factory
+
+:::info Deprecated
+Starting with the current version of Duit, developers no longer need to create an attributes factory. The system automatically parses attributes from JSON.
+
+The attributes factory is no longer used in the new API.
+:::
+
+<details>
+<summary>Old approach (not recommended)</summary>
 
 The attributes factory is a function that converts JSON into widget attributes. At this stage, transformations of JSON according to development needs are permissible.
 
@@ -93,7 +123,18 @@ DuitAttributes svgAttributeFactory(String type,
 }
 ```
 
+</details>
+
 ## Model Factory
+
+:::info Deprecated
+Starting with the current version of Duit, developers no longer need to create a model factory. The system automatically creates models based on the JSON structure.
+
+The model factory is no longer used in the new API.
+:::
+
+<details>
+<summary>Old approach (not recommended)</summary>
 
 The model factory is a function where an instance of the widget model is created, and necessary values are passed to its constructor.
 
@@ -114,35 +155,81 @@ ElementTreeEntry svgModelFactory(String id,
 }
 ```
 
+</details>
+
 ## Build Factory
 
-The build factory is a function where a Flutter widget is created based on data from the widget model. To retrieve data from the model, type casting is used, converting the data either to the model type or, as shown in the example below, to the attribute type.
+The build factory is a function where a Flutter widget is created based on data from the widget model.
 
-At this stage, child widgets are also passed to the target widget (if applicable).
+The build factory takes two parameters:
+
+- `ElementTreeEntry model` – the widget model containing all necessary data and controller
+- `Iterable<Widget> subviews` – child widgets (optional)
+
+Access to widget data is done through the controller (`model.viewController`). To obtain attributes in a StatefulWidget, use the `ViewControllerChangeListener` mixin.
 
 ```dart
-Widget svgBuildFactory(ElementTreeEntry model, [
+Widget svgBuildFactory(
+  ElementTreeEntry model, [
   Iterable<Widget> subviews = const {},
 ]) {
-  final data = model.attributes?.payload as SvgWidgetAttributes;
-
-  return SvgPicture.string(
-    data.content,
-    width: data.width,
-    height: data.height,
+  // Creating widget with controller
+  return SvgPictureWidget(
+    controller: model.viewController,
+    child: subviews.isEmpty ? null : subviews.first,
   );
+}
+
+class SvgPictureWidget extends StatefulWidget {
+  final UIElementController controller;
+  final Widget? child;
+
+  const SvgPictureWidget({
+    required this.controller,
+    this.child,
+  });
+
+  @override
+  State<SvgPictureWidget> createState() => _SvgPictureWidgetState();
+}
+
+class _SvgPictureWidgetState extends State<SvgPictureWidget>
+    with ViewControllerChangeListener {
+  @override
+  void initState() {
+    // Connecting to controller to receive updates
+    attachStateToController(widget.controller);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Getting data from attributes
+    final content = attributes.getString(key: "content") ?? "";
+    final width = attributes.getDouble(key: "width");
+    final height = attributes.getDouble(key: "height");
+
+    return SvgPicture.string(
+      content,
+      width: width,
+      height: height,
+      child: widget.child,
+    );
+  }
 }
 ```
 
 ## Registering a Widget
 
-Registering a widget in `DuitRegistry` is done using the `DuitRegistry.register` method, which allows embedding factory functions into the processing pipeline. **Note:** The custom widget's tag must match the tag used on the server.
+Registering a widget in `DuitRegistry` is done using the `DuitRegistry.register` method, which allows embedding a build factory into the processing pipeline. **Note:** The custom widget's tag must match the tag used on the server.
 
 ```dart
 DuitRegistry.register(
   "SvgCustomWidget",
-  modelFactory: svgModelFactory,
   buildFactory: svgBuildFactory,
-  attributesFactory: svgAttributeFactory,
 );
 ```
+
+:::note
+The `modelFactory` and `attributesFactory` methods are no longer used in the current API. The system automatically determines attribute and model types based on the JSON structure.
+:::

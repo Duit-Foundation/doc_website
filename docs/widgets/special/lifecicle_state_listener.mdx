@@ -11,41 +11,6 @@ import TabItem from '@theme/TabItem';
 
 При изменении состояния приложения вызывается срабатывание соотвествующего действия, если оно было определено для этого вида события.
 
-## Атрибуты
-
-```dart
-class LifecycleStateListenerAttributes
-    implements DuitAttributes<LifecycleStateListenerAttributes> {
-  final ServerAction? onStateChanged,
-      onResumed,
-      onInactive,
-      onPaused,
-      onDetached,
-      onHidden;
-
-  LifecycleStateListenerAttributes({
-    this.onStateChanged,
-    this.onResumed,
-    this.onInactive,
-    this.onPaused,
-    this.onDetached,
-    this.onHidden,
-  }) : super() {
-    final haveStateCallbacks = onStateChanged != null ||
-        onResumed != null ||
-        onInactive != null ||
-        onPaused != null ||
-        onDetached != null ||
-        onHidden != null;
-
-    assert(
-        !haveStateCallbacks && onStateChanged != null ||
-            haveStateCallbacks && onStateChanged == null,
-        'The attribute must contain at least one action to listen to '
-        'the application lifecycle event, or a general callback');
-  }
-```
-
 ## Пример использования
 
 <Tabs groupId="lang">

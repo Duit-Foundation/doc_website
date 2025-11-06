@@ -20,24 +20,6 @@ In widget attributes you can pass:
 - Request meta-information (usually this is the http request method)
 - List of dependencies for forming the request body similar to [actions](/docs/core_concepts/actions_events)
 
-## Attributes
-
-```dart
-final class RemoteSubtreeAttributes
-    implements DuitAttributes<RemoteSubtreeAttributes> {
-  final Map<String, dynamic>? data;
-  final String downloadPath;
-  final Map<String, dynamic>? meta;
-  final Iterable<ActionDependency> dependencies;
-
-  RemoteSubtreeAttributes({
-    required this.downloadPath,
-    required this.dependencies,
-    this.data,
-    this.meta,
-  });
-```
-
 ## Usage
 
 <Tabs groupId="lang">

@@ -11,17 +11,6 @@ import TabItem from '@theme/TabItem';
 Атрибуты виджета могут хранить json, который представляет собой новое или измененное поддерево виджетов. 
 Это позволяет изолировать поддерево виджетов и управлять им через обновление корневого элемента, динамически меняя контент `Subtree`.
 
-## Атрибуты
-
-```dart
-final class SubtreeAttributes implements DuitAttributes<SubtreeAttributes> {
-  final Map<String, dynamic>? data;
-
-  SubtreeAttributes({
-    this.data,
-  });
-```
-
 ## Пример использования
 
 <Tabs groupId="lang">

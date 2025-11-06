@@ -1,0 +1,449 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Fragments
+
+Fragment - это специальный тип виджета, предназначенный для реализации гибкого кеширования и обработки тех частей UI, которые могут быть созданы заранее и для создания которых не требуются данные в runtime. Использование этого типа виджетов позволяет эффективно декомпозировать большие экраны и оптимизировать производительность приложения.
+
+## Для чего нужны Fragment
+
+Fragment предоставляет механизм для предварительного создания и кеширования повторяющихся элементов интерфейса. Основные преимущества:
+
+- **Производительность**: Предварительно созданные фрагменты не требуют повторной обработки
+- **Декомпозиция**: Упрощает структуру больших экранов, разбивая их на переиспользуемые части
+- **Кеширование**: Статичные части UI создаются один раз и используются многократно
+- **Оптимизация**: Снижает нагрузку на runtime за счет переноса обработки на этап сборки
+
+## Как использовать Fragment
+
+Fragment использует два параметра:
+- `tag` (обязательный) - уникальный идентификатор фрагмента
+- `id` (необязательный) - идентификатор экземпляра виджета
+
+Фрагменты должны быть зарегистрированы в `DuitRegistry` перед использованием. При обработке виджета Fragment будет заменен содержимым, ассоциированным с указанным tag.
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    import { DuitView, Column, Container, Text, Fragment } from "duit_js";
+
+    function headerFragment() {
+        return Container({
+            attributes: {
+                color: "#4285F4",
+                padding: 16,
+            }
+        }).addChild(
+            Text({
+                attributes: {
+                    data: "Welcome to Duit!",
+                    style: {
+                        fontSize: 24,
+                        color: "#FFFFFF",
+                    }
+                }
+            })
+        );
+    }
+
+    function mainScreen() {
+        const builder = DuitView.builder();
+        
+        // Регистрируем фрагмент
+        builder.addComponents([
+            {
+                tag: "header",
+                layoutRoot: headerFragment()
+            }
+        ]);
+
+        const root = builder.createRootOfExactType(DuitElementType.column, {
+            mainAxisAlignment: "start"
+        });
+
+        root.addChildren([
+            // Используем зарегистрированный фрагмент
+            Fragment("header", "header-1"),
+            Container({
+                attributes: {
+                    padding: 16,
+                }
+            }).addChild(
+                Text({
+                    attributes: {
+                        data: "Main content goes here",
+                    }
+                })
+            )
+        ]);
+
+        return builder.build();
+    }
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    package main
+
+    import (
+        "github.com/Duit-Foundation/duit_go/v4/pkg/duit_widget"
+        "github.com/Duit-Foundation/duit_go/v4/pkg/duit_attributes"
+    )
+
+    func headerFragment() *duit_core.DuitElementModel {
+        return duit_widget.Container(
+            &duit_attributes.ContainerAttributes{
+                Color: "#4285F4",
+                Padding: &duit_attributes.EdgeInsets{
+                    Left: 16,
+                    Right: 16,
+                    Top: 16,
+                    Bottom: 16,
+                },
+            },
+            "header_container",
+        ).AddChild(
+            duit_widget.Text(
+                &duit_attributes.TextAttributes{
+                    Data: "Welcome to Duit!",
+                    Style: &duit_attributes.TextStyle{
+                        FontSize: 24,
+                        Color: "#FFFFFF",
+                    },
+                },
+                "header_text",
+            ),
+        )
+    }
+
+    func mainScreen() string {
+        builder := DuitView.Builder()
+        
+        root := builder.CreateRootOfExactType(duit_core.Column, &duit_attributes.ColumnAttributes{
+            MainAxisAlignment: duit_props.MainAxisAlignmentStart,
+        }, "root")
+
+        root.AddChildren(
+            // Используем зарегистрированный фрагмент
+            duit_widget.Fragment("header", "header-1"),
+            duit_widget.Container(
+                &duit_attributes.ContainerAttributes{
+                    Padding: &duit_attributes.EdgeInsets{
+                        All: 16,
+                    },
+                },
+                "content_container",
+            ).AddChild(
+                duit_widget.Text(
+                    &duit_attributes.TextAttributes{
+                        Data: "Main content goes here",
+                    },
+                    "content_text",
+                ),
+            ),
+        )
+
+        // Регистрируем фрагмент
+        embedded := []*ComponentDescription{
+            {
+                Tag: "header",
+                LayoutRoot: headerFragment(),
+            },
+        }
+
+        builder.SetEmbedded(embedded)
+
+        return builder.Build()
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Регистрация фрагментов
+
+Фрагменты должны быть зарегистрированы перед тем, как будут использованы в дереве виджетов. Это происходит через поле `embedded` в структуре ответа сервера.
+
+### Структура данных
+
+Фрагмент описывается объектом с полями:
+- `tag` - уникальный идентификатор фрагмента
+- `layoutRoot` - структура виджета, содержащаяся во фрагменте
+
+### Пример с несколькими фрагментами
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    import { 
+        DuitView, 
+        Column, 
+        Row, 
+        Container, 
+        Text, 
+        SizedBox,
+        Fragment,
+        DuitElementType 
+    } from "duit_js";
+
+    function cardFragment() {
+        return Container({
+            attributes: {
+                color: "#F5F5F5",
+                borderRadius: 8,
+                padding: 12,
+                boxShadow: [{
+                    color: "#CCCCCC",
+                    blurRadius: 4,
+                }]
+            }
+        }).addChild(
+            Column({
+                attributes: {
+                    crossAxisAlignment: "start",
+                }
+            }).addChildren([
+                Text({
+                    attributes: {
+                        data: "Card Title",
+                        style: { fontSize: 18, fontWeight: 600 }
+                    }
+                }),
+                SizedBox({ attributes: { height: 8 } }),
+                Text({
+                    attributes: {
+                        data: "Card description goes here",
+                        style: { fontSize: 14, color: "#666666" }
+                    }
+                })
+            ])
+        );
+    }
+
+    function sidebarFragment() {
+        return Container({
+            attributes: {
+                width: 200,
+                color: "#2C3E50",
+                padding: 16,
+            }
+        }).addChild(
+            Column({
+                attributes: {
+                    mainAxisAlignment: "start",
+                }
+            }).addChildren([
+                Text({
+                    attributes: {
+                        data: "Navigation",
+                        style: { 
+                            fontSize: 20, 
+                            fontWeight: 700,
+                            color: "#FFFFFF"
+                        }
+                    }
+                }),
+                SizedBox({ attributes: { height: 16 } }),
+                // ... navigation items
+            ])
+        );
+    }
+
+    function complexLayout() {
+        const builder = DuitView.builder();
+        
+        // Регистрируем несколько фрагментов
+        builder.addComponents([
+            {
+                tag: "card",
+                layoutRoot: cardFragment()
+            },
+            {
+                tag: "sidebar",
+                layoutRoot: sidebarFragment()
+            }
+        ]);
+
+        const root = builder.createRootOfExactType(
+            DuitElementType.row, 
+            {}
+        );
+
+        root.addChildren([
+            // Используем фрагмент сайдбара
+            Fragment("sidebar", "sidebar-1"),
+            // Используем фрагмент карточки
+            Fragment("card", "card-1"),
+            SizedBox({ attributes: { width: 16 } }),
+            Fragment("card", "card-2"),
+        ]);
+
+        return builder.build();
+    }
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    package main
+
+    import (
+        "github.com/Duit-Foundation/duit_go/v4/pkg/duit_widget"
+        "github.com/Duit-Foundation/duit_go/v4/pkg/duit_attributes"
+        "github.com/Duit-Foundation/duit_go/v4/pkg/duit_props"
+    )
+
+    func cardFragment() *duit_core.DuitElementModel {
+        return duit_widget.Container(
+            &duit_attributes.ContainerAttributes{
+                Color: "#F5F5F5",
+                BorderRadius: &duit_attributes.BorderRadius{
+                    All: 8,
+                },
+                Padding: &duit_attributes.EdgeInsets{
+                    All: 12,
+                },
+                BoxShadow: []*duit_attributes.BoxShadow{
+                    {
+                        Color:      "#CCCCCC",
+                        BlurRadius: 4,
+                    },
+                },
+            },
+            "card_container",
+        ).AddChild(
+            duit_widget.Column(
+                &duit_attributes.ColumnAttributes{
+                    CrossAxisAlignment: duit_props.CrossAxisAlignmentStart,
+                },
+                "card_column",
+            ).AddChildren(
+                duit_widget.Text(
+                    &duit_attributes.TextAttributes{
+                        Data: "Card Title",
+                        Style: &duit_attributes.TextStyle{
+                            FontSize:   18,
+                            FontWeight: 600,
+                        },
+                    },
+                    "card_title",
+                ),
+                duit_widget.SizedBox(
+                    &duit_attributes.SizedBoxAttributes{
+                        Height: 8,
+                    },
+                    "card_spacer",
+                ),
+                duit_widget.Text(
+                    &duit_attributes.TextAttributes{
+                        Data: "Card description goes here",
+                        Style: &duit_attributes.TextStyle{
+                            FontSize: 14,
+                            Color:    "#666666",
+                        },
+                    },
+                    "card_description",
+                ),
+            ),
+        )
+    }
+
+    func sidebarFragment() *duit_core.DuitElementModel {
+        return duit_widget.Container(
+            &duit_attributes.ContainerAttributes{
+                Width: 200,
+                Color: "#2C3E50",
+                Padding: &duit_attributes.EdgeInsets{
+                    All: 16,
+                },
+            },
+            "sidebar_container",
+        ).AddChild(
+            duit_widget.Column(
+                &duit_attributes.ColumnAttributes{
+                    MainAxisAlignment: duit_props.MainAxisAlignmentStart,
+                },
+                "sidebar_column",
+            ).AddChildren(
+                duit_widget.Text(
+                    &duit_attributes.TextAttributes{
+                        Data: "Navigation",
+                        Style: &duit_attributes.TextStyle{
+                            FontSize:   20,
+                            FontWeight: 700,
+                            Color:      "#FFFFFF",
+                        },
+                    },
+                    "sidebar_title",
+                ),
+                // ... navigation items
+            ),
+        )
+    }
+
+    func complexLayout() string {
+        builder := DuitView.Builder()
+        
+        // Регистрируем несколько фрагментов
+        embedded := []*ComponentDescription{
+            {
+                Tag:       "card",
+                LayoutRoot: cardFragment(),
+            },
+            {
+                Tag:        "sidebar",
+                LayoutRoot: sidebarFragment(),
+            },
+        }
+        
+        builder.SetEmbedded(embedded)
+
+        root := builder.CreateRootOfExactType(
+            duit_core.Row,
+            &duit_attributes.RowAttributes{},
+            "root",
+        )
+
+        root.AddChildren(
+            // Используем фрагмент сайдбара
+            duit_widget.Fragment("sidebar", "sidebar-1"),
+            // Используем фрагмент карточки
+            duit_widget.Fragment("card", "card-1"),
+            duit_widget.SizedBox(
+                &duit_attributes.SizedBoxAttributes{Width: 16},
+                "spacer",
+            ),
+            duit_widget.Fragment("card", "card-2"),
+        )
+
+        return builder.Build()
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+## Важные замечания
+
+1. **Tag обязателен**: Параметр `tag` является обязательным. Если он не указан, функция вызовет панику (Go) или ошибку (TypeScript).
+
+2. **Регистрация перед использованием**: Фрагменты должны быть зарегистрированы до их использования в дереве виджетов.
+
+3. **Переиспользование**: Один и тот же фрагмент может быть использован несколько раз с разными `id`.
+
+4. **Статическое содержимое**: Fragment предназначен для статического содержимого. Для динамических данных используйте [Component](/docs/advanced_tech/components/about.md).
+
+## Различия между Fragment и Component
+
+| Характеристика | Fragment | Component |
+| -------------- | -------- | --------- |
+| **Данные** | Статическое содержимое | Динамическое содержимое |
+| **Параметры** | Только `tag` и `id` | `tag`, `id` и `data` |
+| **Использование** | Кеширование и декомпозиция | Переиспользование с данными |
+
+## Когда использовать Fragment
+
+Fragment следует использовать, когда:
+- У вас есть статичная часть UI, которая повторяется на экране
+- Нужно оптимизировать производительность путем предварительной обработки
+- Требуется декомпозировать большой экран на переиспользуемые части
+- Содержимое не зависит от runtime данных
+
+Для динамических компонентов с данными используйте [Component](/docs/advanced_tech/components/about.md).

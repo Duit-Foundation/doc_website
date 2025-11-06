@@ -6,24 +6,22 @@ import TabItem from '@theme/TabItem';
 Говоря о темах подразумевается не совсем то, к чему привыкли обычные Flutter разработчики: глобальные стили виджетов, цветовые схемы и тд. В рамках Duit темы - это мощная функция, которая решает несколько ключевых задач:
 
 - Определение набора свойств виджетов, которые будут использоваться во всем приложении
-- Уменьшение размера макетов экранов за счет выделения повторябщихся свойств в темы
-- Поддежка дизайн-системы на стороне сервера
+- Уменьшение размера макетов экранов за счет выделения повторяющихся свойств в темы
+- Поддержка дизайн-системы на стороне сервера
 
 ## Принцип работы тем
 
 Применение тем к виджетам состоит из нескольких этапов:
 
-- Получение json-темы из источника данных
-- Преобразование json темы в токены темы (токенизация)
-- Слияние объекта атрибута виджета и контента токена темы
+1. **Инициализация темы**: Преобразование JSON-данных темы в токенизированный объект `DuitTheme` с помощью класса `DuitThemePreprocessor` и регистрация в `DuitRegistry`
+2. **Получение токена темы**: При создании атрибутов виджета извлекается соответствующий токен по ключу темы
+3. **Слияние атрибутов**: Объект атрибутов виджета сливается с атрибутами токена темы согласно правилам слияния
 
-Загрузка темы реализуется с помощью классов, реализующих интерфейса `ResourceLoader<T>`.
-
-За токенизацию объекта темы отвечает класс `ThemePreprocessor`
+Вся эта логика выполняется автоматически при создании экземпляра `ViewAttribute` через метод `ViewAttribute.from()`.
 
 ## Создание темы
 
-На текущем этапе DSL-библиотеки не имеют специфических классов или функций, которые помогут создавать и валидировать темы на строне бекенда. Тема предствляет собой хеш-таблицу следующего вида:
+На текущем этапе DSL-библиотеки не имеют специфических классов или функций для создания и валидации тем на стороне бэкенда. Тема представляет собой хеш-таблицу следующего вида:
 
 ```json
 {
@@ -70,36 +68,31 @@ import TabItem from '@theme/TabItem';
 
 ## Инициализация темы
 
-### Загрузчик темы
+### Создание и инициализация темы
 
-Прежде чем тема станет доступна для виджетов, ее следует инициализаровать. Duit из коробки предоставляет два загрузчика тем:
+Для работы с темами в Duit необходимо:
 
-- `AssetThemeLoader` для создания темы из json-файла, хранящегося в ассетах приложения
-- `StaticThemeLoader` для создания темы из `Map<String, dynamic>`
-
-Для более гибкой настройки процесса инициализации рекомендуется использовать собственную реализацию интерфейса `ResourceLoader<DuitTheme>`.
+1. Преобразовать JSON-данные темы в токенизированный объект `DuitTheme` с помощью класса `DuitThemePreprocessor`
+2. Инициализировать тему в реестре через метод `DuitRegistry.initialize()`
 
 ```dart
-final class DioThemeLoader implements ResourceLoader<DuitTheme> {
-  final Dio dio;
-  final String path;
-
-  DioThemeLoader(
-    this.dio,
-    this.path,
-  );
-
-  @override
-  Future<DuitTheme> load() async {
-    final res = await dio.get(path); //load theme json
-    final tokenizer = ThemePreprocessor(); //create tokenizer
-
-    return tokenizer.tokenize(res.data); //return tokenized theme
-  }
+// Пример: загрузка темы из JSON и инициализация
+Future<void> initTheme() async {
+  // Вариант 1: тема из локального JSON
+  final themeData = jsonDecode(await rootBundle.loadString('assets/theme.json'));
+  
+  // Вариант 2: тема с сервера
+  // final res = await dio.get('/theme');
+  // final themeData = res.data;
+  
+  final preprocessor = const DuitThemePreprocessor();
+  final theme = preprocessor.tokenize(themeData);
+  
+  await DuitRegistry.initialize(theme: theme);
 }
 ```
 
-После получения json, который содержит тему, следует использовать класс `ThemePreprocessor` для выполнения токенизации (преобразования `MapEntry` в экземпляры класса `ThemeToken`).
+После получения JSON-данных, которые содержат тему, следует использовать класс `DuitThemePreprocessor` для выполнения токенизации (преобразования `MapEntry` в экземпляры класса `ThemeToken`).
 
 ### Токены темы
 
@@ -124,93 +117,92 @@ abstract class ThemeToken {
 
 Пристальное внимание следует обратить на свойство `Set<String> excludedFields`. 
 Это множество, содержащее названия полей, которые не должны быть включены в атрибуты темы виджета. 
-Механиз токенизации позволяет валидировать входящие атрибуты и убедиться, что они соответствуют ожидаемым.
+Механизм токенизации позволяет валидировать входящие атрибуты и убедиться, что они соответствуют ожидаемым.
 
 В случае, если одно из свойств находится в сете `excludedFields`, будет выброшено исключение.
+
+### Встроенные типы токенов
+
+`DuitThemePreprocessor` поддерживает множество встроенных типов токенов:
+
+- **TextThemeToken** - для виджетов типа `Text`
+- **ImageThemeToken** - для виджетов типа `Image`
+- **AttendedWidgetThemeToken** - для виджетов с состоянием (Checkbox, Switch, TextField)
+- **AnimatedPropOwnerThemeToken** - для виджетов, владеющих анимированными свойствами
+- **ImplicitAnimatableThemeToken** - для виджетов с неявными анимациями
+- **ExcludeGestureCallbacksThemeToken** - для виджетов с жестами (GestureDetector, InkWell)
+- **ExcludeChildThemeToken** - для виджетов, исключающих дочерние элементы из темы (AppBar, Scaffold)
+- **DynamicChildHolderThemeToken** - для виджетов с динамическими дочерними элементами (GridView, ListView)
+- **RadioThemeToken**, **RadioGroupContextThemeToken** - для радиокнопок
+- **SliderThemeToken** - для слайдеров
+- **RichTextThemeToken** - для rich text
+
+Для всех остальных типов виджетов используется **DefaultThemeToken**.
 
 ### Расширение и переопределение поведения препроцессора
 
 В рамках реализации препроцессора существуют два способа расширения поведения:
 
-- `overrideWidgetTokenizer` - переопределение создания токена для конкретного типа виджета. Полезно в тех случаях, когда вы хотите изменить список исключенных полей.
-- `customWidgetTokenizer` - добавление обработки нового типа виджета в препроцессор. Полезно в тех случаях, когда вы хотите добавить не реализованые ранее темы виджетов или использовать темы для пользовательских виджетов.
+- `customWidgetTokenizer` - добавление обработки нового типа виджета в препроцессор. Полезно в тех случаях, когда вы хотите добавить не реализованные ранее темы виджетов или использовать темы для пользовательских виджетов.
+- `overrideWidgetTokenizer` - переопределение создания токена для конкретного типа виджета. Полезно в тех случаях, когда вы хотите изменить список исключенных полей для встроенного виджета.
 
 В обоих случаях следует вернуть экземпляр класса `ThemeToken` или `null`, если вы не хотите переопределить поведение. Также вы можете создавать свои собственные классы `ThemeToken` для удобства.
 
 ```dart
-//Create override token for text widget theme
-final class OverrideTextThemeToken extends ThemeToken {
-  OverrideTextThemeToken(Map<String, dynamic> data)
-      : super(
-          const {}, //allow override all fields
-          data,
-          "Text",
-        );
-}
-
-
-//Create token for custom widget
+// Создание токена для пользовательского виджета
 final class CustomWidgetThemeToken extends ThemeToken {
   CustomWidgetThemeToken(Map<String, dynamic> data)
       : super(
-          const {}, //allow override all fields
+          const {}, // разрешить все поля
           data,
           "ExampleCustomWidget",
         );
 }
 
+// Переопределение токена для встроенного виджета Text
+final class OverrideTextThemeToken extends ThemeToken {
+  OverrideTextThemeToken(Map<String, dynamic> data)
+      : super(
+          const {"data"}, // запретить использование поля "data"
+          data,
+          "Text",
+        );
+}
 
-final class DioThemeLoader implements ResourceLoader<DuitTheme> {
-    <...>
-
-    //Add custom token
-  ThemeToken? _customTokenizer(
-    String type,
-    Map<String, dynamic> themeData,
-  ) {
-    switch (type) {
-      case "ExampleCustomWidget":
-        return CustomWidgetThemeToken(themeData);
-    }
-
-    return null;
-  }
-
-    //Override default text token
-  ThemeToken? _overrideWidgetTokenizer(
-    String type,
-    Map<String, dynamic> themeData,
-  ) {
-    switch (type) {
-      case "Text":
-        return OverrideTextThemeToken(themeData);
-    }
-
-    return null;
-  }
-
-  @override
-  Future<DuitTheme> load() async {
-    final res = await dio.get(path); //load theme json
-    final tokenizer = ThemePreprocessor(); //create tokenizer
-
-    final tokenizer = ThemePreprocessor(
-      customWidgetTokenizer: _customTokenizer,
-      overrideWidgetTokenizer: _overrideWidgetTokenizer,
-    );
-
-    return tokenizer.tokenize(res.data);
-  }
+// Использование в препроцессоре
+Future<void> initThemeWithCustomTokens() async {
+  final preprocessor = DuitThemePreprocessor(
+    // Добавляем обработку нового токена
+    customWidgetTokenizer: (type, themeData) {
+      switch (type) {
+        case "ExampleCustomWidget":
+          return CustomWidgetThemeToken(themeData);
+      }
+      return null;
+    },
+    
+    // Переопределяем обработку встроенного виджета
+    overrideWidgetTokenizer: (type, themeData) {
+      switch (type) {
+        case "Text":
+          return OverrideTextThemeToken(themeData);
+      }
+      return null;
+    },
+  );
+  
+  final theme = preprocessor.tokenize(themeData);
+  await DuitRegistry.initialize(theme: theme);
 }
 ```
 
-В приведенном выше примере кода мы расширили изначальный код загрузчика темы, добавив туда методы для добавление абсолютно нового токена и переопределения поведения препроцессора для виджета типа `Text`.
+В приведенном выше примере кода мы создали препроцессор с настраиваемой логикой токенизации для пользовательских и встроенных виджетов.
 
 ---
 
 ## Использование темы в DSL-библиотеке
 
-Для многих виджетов, которые реализованы в DSL-библиотеках был добавлен ряд новых опциональных свойств, которые позволяют конфигурировать виджеты для использования тем.
+Для многих виджетов, которые реализованы в DSL-библиотеках был добавлен ряд новых опциональных свойств, которые позволяют конфигурировать виджеты для использования тем. Эти свойства определены в интерфейсе `ThemeConsumer`.
 
 <Tabs groupId="lang">
   <TabItem value="ts" label="TypeScript" default>
@@ -233,12 +225,122 @@ final class DioThemeLoader implements ResourceLoader<DuitTheme> {
   </TabItem>
 </Tabs>
 
-Взглянем подробнее на новые свойства атрибутов виджетов.
+### Свойства ThemeConsumer
 
-- Свойство `theme` это строковый ключ, уникальное название 
-токена темы, который вы хотите применить в виджете.
-- Свойство `ignoreTheme` указывает на то, следует ли конкретному виджету 
-игнорировать указанную темы. По умолчанию имеет значение `false`.
-- Свойство `overrideRule` определяет то, будет ли тема перезаписывать свойства 
-оригинального объекта своим содержимым или будет добавлять только новые свойства. 
-По умолчанию имеет значение `themeOverlay=0` и не перезаписывает оригинальные свойства.
+- **`theme`** - строковый ключ, уникальное название токена темы, который вы хотите применить к виджету.
+- **`ignoreTheme`** - указывает, должен ли конкретный виджет игнорировать указанную тему. По умолчанию имеет значение `false`.
+- **`overrideRule`** - определяет способ слияния атрибутов темы и виджета.
+
+### Правила слияния (overrideRule)
+
+Свойство `overrideRule` может принимать два значения:
+
+- **`themeOverlay`** (по умолчанию) - тема применяется поверх существующих свойств виджета, но не перезаписывает их. Если у виджета есть свойство, которое также есть в теме, значение виджета имеет приоритет.
+- **`themePriority`** - тема имеет приоритет над свойствами виджета. Если у виджета есть свойство, которое также есть в теме, значение темы перезапишет значение виджета.
+
+### Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="ts" label="TypeScript" default>
+    ```typescript
+    const textWidget: TextAttributes = {
+      data: "Hello World",
+      theme: "text_primary",
+      overrideRule: "themeOverlay",  // свойство data не будет перезаписано
+      textAlign: "center"
+    };
+    ```
+  </TabItem>
+  <TabItem value="go" label="Go">
+    ```go
+    textWidget := &TextAttributes{
+        Data: "Hello World",
+        ThemeConsumer: &ThemeConsumer{
+            Theme: "text_primary",
+            OverrideRule: ThemeOverlay,
+            IgnoreTheme: false,
+        },
+        TextAlign: duit_props.TextAlignCenter,
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+В данном примере, если тема `text_primary` содержит `fontSize: 18` и `color: "#FF0000"`, виджет получит эти свойства, но его собственные свойства (например, `textAlign: "center"` и `data: "Hello World"`) сохранятся.
+
+## Механизм слияния тем
+
+При создании атрибутов виджета происходит слияние свойств виджета с атрибутами темы:
+
+### Алгоритм слияния
+
+1. **Проверка флага `ignoreTheme`**: Если `ignoreTheme = true`, применение темы пропускается.
+2. **Получение токена темы**: По ключу `theme` извлекается токен темы из регистра `DuitRegistry`.
+3. **Проверка типа**: Токен применяется только если его тип совпадает с типом виджета.
+4. **Слияние атрибутов** в зависимости от `overrideRule`:
+   - **`themeOverlay`**: `{...token.widgetTheme, ...widgetAttributes}` - свойства виджета перезаписывают свойства темы
+   - **`themePriority`**: `widgetAttributes.addAll(token.widgetTheme)` - свойства темы перезаписывают свойства виджета
+
+### Примеры
+
+Рассмотрим пример работы механизма слияния:
+
+```json
+{
+  "text_primary": {
+    "type": "Text",
+    "data": {
+      "fontSize": 18.0,
+      "fontWeight": 700,
+      "color": "#FF0000"
+    }
+  }
+}
+```
+
+**Пример 1: themeOverlay (по умолчанию)**
+
+Виджет:
+```json
+{
+  "type": "Text",
+  "data": "Hello",
+  "theme": "text_primary",
+  "textAlign": "center"
+}
+```
+
+Результат слияния:
+```json
+{
+  "data": "Hello",
+  "textAlign": "center",
+  "fontSize": 18.0,
+  "fontWeight": 700,
+  "color": "#FF0000"
+}
+```
+
+**Пример 2: themePriority**
+
+Виджет:
+```json
+{
+  "type": "Text",
+  "data": "Hello",
+  "theme": "text_primary",
+  "overrideRule": "themePriority",
+  "textAlign": "center"
+}
+```
+
+Результат слияния:
+```json
+{
+  "data": "Hello",
+  "textAlign": "center",
+  "fontSize": 18.0,
+  "fontWeight": 700,
+  "color": "#FF0000"
+}
+```
