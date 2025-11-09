@@ -24,7 +24,7 @@ All variables below are compile-time constants resolved via `bool.fromEnvironmen
 
 - Package: `duit_kernel`
 - Type: `bool` (compile-time)
-- Default: `false`
+- Default: `true`
 - Purpose: Favors inline function strategies in the kernel where supported. Intended for advanced performance tuning and experimentation.
 
 ## How to set
