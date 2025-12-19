@@ -27,6 +27,14 @@ All variables below are compile-time constants resolved via `bool.fromEnvironmen
 - Default: `true`
 - Purpose: Favors inline function strategies in the kernel where supported. Intended for advanced performance tuning and experimentation.
 
+4) `duit:allow-focus-node-override`
+
+- Package: `flutter_duit`
+- Type: `bool` (compile-time)
+- Default: `false`
+- Purpose: Favors inline function strategies in the kernel where supported. Intended for advanced performance tuning and experimentation.
+- Назначение: Defines the behavior when binding a `FocusNode` to a driver if an attempt is made to bind a node with the same `nodeId` again.
+
 ## How to set
 
 These are compile-time flags and should be passed to the build/test commands.
