@@ -3,19 +3,32 @@ name: post-merge
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
-        with: 
-          node-version: '20.x'
-          cache: 'npm'
+        with:
+          node-version: "20.x"
+          cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
+
+      - name: Verify build output
+        run: |
+          test -d public
+          test -f public/index.html
+      - name: FTP site deploy 
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: public/
+          server-dir: /
+          dangerous-clean-slate: false
