@@ -84,11 +84,12 @@ const config: Config = {
           position: 'right',
           label: 'header_docs',
         },
-        // {
-        //   position: 'right',
-        //   to: '/about',
-        //   label: 'О проекте',
-        // },
+        {
+          href: 'https://services.duit.pro',
+          position: 'right',
+          'aria-label': 'Услуги',
+          label: "services"
+        },
         {
           type: 'localeDropdown',
           position: 'right',

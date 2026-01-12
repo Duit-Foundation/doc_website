@@ -22,5 +22,9 @@
   "item.label.header_docs": {
     "message": "Документация",
     "description": "Navbar item with label header_docs"
+  },
+  "item.label.services": {
+    "message": "Услуги",
+    "description": "Navbar item with label Services"
   }
 }
