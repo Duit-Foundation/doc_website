@@ -61,7 +61,6 @@ const sidebars: SidebarsConfig = {
             'advanced_tech/components/app',
           ],
         },
-        'advanced_tech/transport_override',
         {
           type: 'category',
           label: "sidebar.custom_widgets",
