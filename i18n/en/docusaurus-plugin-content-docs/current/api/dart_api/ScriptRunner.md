@@ -1,5 +1,11 @@
 # ScriptRunner
 
+:::danger Deprecated
+The `ScriptRunner` class is marked as deprecated and will be removed in the next major release.
+
+Use [ScriptingCapabilityDelegate](/docs/api/dart_api/ScriptingCapabilityDelegate) instead.
+:::
+
 An interface for creating classes responsible for handling and running dynamic scripts in the integrated execution environment.
 
 ```dart
@@ -32,5 +38,5 @@ abstract base class ScriptRunner<TOptions> {
 ```
 
 :::tip
-Learn more about using ScriptRunner in the corresponding section.
+Learn more about using ScriptRunner in the corresponding [section](/docs/advanced_tech/scripting).
 :::

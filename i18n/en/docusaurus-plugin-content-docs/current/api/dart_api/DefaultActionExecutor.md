@@ -1,3 +1,9 @@
 # DefaultActionExecutor
 
-Basic implementation of [ActionExecutor](api/dart_api/ActionExecutor.md). This class handles server-side actions and passes execution flow to [UIDriver](api/dart_api/UIDriver.md).
+:::danger Deprecated
+The `DefaultActionExecutor` class is marked as deprecated and will be removed in the next major release.
+
+Use [ServerActionExecutionCapabilityDelegate](/docs/api/dart_api/ServerActionExecutionCapabilityDelegate) instead.
+:::
+
+Basic implementation of [ActionExecutor](/docs/api/dart_api/ActionExecutor). This class handles server-side actions and passes execution flow to [UIDriver](/docs/api/dart_api/UIDriver).

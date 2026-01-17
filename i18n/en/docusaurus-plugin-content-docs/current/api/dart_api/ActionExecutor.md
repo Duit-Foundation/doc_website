@@ -1,5 +1,11 @@
 # ActionExecutor
 
+:::danger Deprecated
+The `ActionExecutor` class is marked as deprecated and will be removed in the next major release.
+
+Use [ServerActionExecutionCapabilityDelegate](/docs/api/dart_api/ServerActionExecutionCapabilityDelegate) instead.
+:::
+
 The interface for implementing a class responsible for executing actions. Use this interface to create custom implementations of `ActionExecutor`.
 
 ```dart

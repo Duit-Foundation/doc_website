@@ -1,5 +1,11 @@
 # TransportOptions
 
+:::danger Deprecated
+The `TransportOptions` class is marked as deprecated and will be removed in the next major release.
+
+Use [TransportCapabilityDelegate](/docs/api/dart_api/TransportCapabilityDelegate) and its implementations ([HttpTransportManager](/docs/api/dart_api/HttpTransportManager), [WSTransportManager](/docs/api/dart_api/WSTransportManager)) instead.
+:::
+
 The TransportOptions class represents the base options for configuring the transport.
 
 ```dart

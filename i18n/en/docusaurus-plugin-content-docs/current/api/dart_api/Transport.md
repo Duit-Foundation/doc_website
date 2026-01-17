@@ -1,5 +1,11 @@
 # Transport
 
+:::danger Deprecated
+The `Transport` class is marked as deprecated and will be removed in the next major release.
+
+Use [TransportCapabilityDelegate](/docs/api/dart_api/TransportCapabilityDelegate) instead.
+:::
+
 Interface for the transport layer implementation that interacts with `UIDriver`. Provides methods for the framework to communicate over the network.
 
 ```dart

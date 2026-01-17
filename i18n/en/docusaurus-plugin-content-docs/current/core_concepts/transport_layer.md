@@ -4,62 +4,213 @@ Duit enables the ability to request and receive the initial layout of screens/wi
 
 ## Types of Transports
 
-Out-of-the-box, Duit supports two major types of transports designed to work with specific network protocols: `HttpTransport` and `WebSocketTransport` for HTTP and WS respectively.
+Out-of-the-box, Duit provides the following transport layer implementations:
 
-The `HttpTransport` implementation uses the [http](https://pub.dev/packages/http) package as its HTTP client.
+- `HttpTransportManager` — for working with the HTTP protocol, including support for SSE (Server-Sent Events)
+- `WSTransportManager` — for working with the WebSocket protocol
+- `StubTransportManager` — a stub for testing and static content
+- `NativeTransportManager` — for integration with native applications
 
-The `WebSocketTransport` implementation utilizes the implementation provided by the [dart:io](https://dart.dev/libraries/dart-io) library.
+The `HttpTransportManager` implementation uses the [http](https://pub.dev/packages/http) package as its HTTP client.
+
+The `WSTransportManager` implementation utilizes the [dart:io](https://dart.dev/libraries/dart-io) library on native platforms and [web](https://pub.dev/packages/web) in the browser.
 
 ## Transport Interface
 
-All transport layer implementations adhere to the `Transport` interface.
+All transport layer implementations adhere to the `TransportCapabilityDelegate` mixin.
 
 This interface includes the following methods:
 
-- `connect`: Responsible for executing the request for the initial screen/widget layout.
-- `dispose`: Cleans up resources.
-- `execute`: Executes actions.
+- `connect`: Responsible for executing the request for the initial screen/widget layout. Returns a `Stream<Map<String, dynamic>>`, allowing for streaming data (e.g., SSE).
+- `releaseResources`: Cleans up resources.
+- `executeRemoteAction`: Executes actions on the server.
 - `request`: A utility method for performing arbitrary requests or publishing events. Designed for internal use by Duit tools, e.g., `ScriptRunner`.
+- `linkDriver`: Used to link the transport with the UI driver.
 
-## Configuring the Transport Layer
+## Using Transport with XDriver
 
-Configuring the transport layer is done using classes derived from `TransportOptions`. This class represents the base configuration required to initialize the desired transport with specified parameters.
+The transport layer is configured through the public API using `XDriver`. Transport configuration occurs during the creation of an `XDriver` instance by passing the required transport manager.
 
-Transport configuration occurs during the creation of a `DuitDriver` instance by passing the necessary `HttpTransportOptions` or `WebSocketTransportOptions` object.
+### Remote Mode
+
+Used for dynamically loading the UI from a server:
 
 ```dart
-  late final DuitDriver driver;
+late final XDriver driver;
 
 @override
 void initState() {
-  driver = DuitDriver(
-    "/example_screen",
-    transportOptions: HttpTransportOptions(
+  driver = XDriver.remote(
+    transportManager: HttpTransportManager(
+      url: "/example_screen",
+      baseUrl: "http://localhost:8999",
       defaultHeaders: {
         "Content-Type": "application/json",
       },
-      baseUrl: "http://localhost:8999",
-      decoder: CustomDecoder(),
     ),
+    initialRequestPayload: {
+      "userId": "12345",
+    },
   );
+  driver.init();
   super.initState();
+}
+
+@override
+void dispose() {
+  driver.dispose();
+  super.dispose();
 }
 ```
 
-## Using Third-Party HTTP Clients and Network Protocols
+### Static Mode
 
-Duit allows overriding the transport layer to utilize third-party HTTP clients or implement networking protocols used in your application instead of those supported out-of-the-box.
+Used for working with predefined JSON content without network requests:
 
-To do so, you need to create custom implementations of the `Transport` and `TransportOptions` interfaces. You can learn more about overriding the transport layer in the corresponding section of the documentation [here](advanced_tech/transport_override.md).
+```dart
+final uiContent = {
+  'type': 'Column',
+  'children': [
+    {'type': 'Text', 'data': 'Hello World'},
+  ],
+};
 
-<!-- ## Роль транспорта в интеграции с нативными приложениями
+final driver = XDriver.static(uiContent);
+```
 
-`NativeTransport` - особая реализация интерфейса `Transport`, предоставляющая асинхронный API для
-взаимодействия c
-нативными приложениями и обеспечением обмена данными между Dart-кодом и нативом, построенный на
-базе [`Platform channels`](https://docs.flutter.dev/platform-integration/platform-channels#architecture).
-При таком способе интеграции за взаимодействие с сетью отвечает нативная часть приложения, которая в
-свою очередь пересылает данные и события на сторону Dart, где Duit обрабатывает их.
+### Native Module Mode
 
-Подробнее об этой части функционала Duit можно узнать в
-соотвествующем [разделе](/docs/core_concepts/native) документации. -->
+Used for integrating Duit as a module into an existing native application:
+
+```dart
+final driver = XDriver.nativeModule(
+  initialRequestPayload: {
+    'hostVersion': '1.0.0',
+  },
+);
+```
+
+## HttpTransportManager Configuration
+
+`HttpTransportManager` supports the following configuration parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `url` | `String` | The path for requests (required) |
+| `baseUrl` | `String` | The base URL of the server |
+| `defaultHeaders` | `Map<String, String>` | Default headers |
+| `requestInterceptor` | `Function(Request)?` | HTTP request interceptor |
+| `errorInterceptor` | `Function(Object?)?` | Error interceptor |
+| `encoder` | `Converter<Object?, String>?` | Custom data encoder |
+| `decoder` | `Converter<Uint8List, Object?>?` | Custom response decoder |
+| `initialRequestMethod` | `String` | HTTP method for the initial request (default is "GET") |
+| `useSSEConn` | `bool` | Enable SSE connection mode |
+
+### SSE Example
+
+```dart
+final driver = XDriver.remote(
+  transportManager: HttpTransportManager(
+    url: "/sse-stream",
+    baseUrl: "http://localhost:8999",
+    useSSEConn: true,
+    defaultHeaders: {
+      "Authorization": "Bearer token",
+    },
+  ),
+);
+```
+
+## WSTransportManager Configuration
+
+`WSTransportManager` supports the following parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `url` | `String` | The WebSocket connection path (required) |
+| `baseUrl` | `String` | The base URL (must start with `ws://` or `wss://`) |
+| `defaultHeaders` | `Map<String, String>` | Connection headers |
+| `encoder` | `Converter<Object?, String>?` | Custom message encoder |
+| `decoder` | `Converter<Uint8List, Object?>?` | Custom message decoder |
+
+### WebSocket Example
+
+```dart
+final driver = XDriver.remote(
+  transportManager: WSTransportManager(
+    url: "/ws",
+    baseUrl: "ws://localhost:8999",
+  ),
+);
+```
+
+## Creating Custom Transport
+
+Duit allows creating custom transport layer implementations to use third-party HTTP clients or other network protocols.
+
+To do so, create a class that implements the `TransportCapabilityDelegate` mixin:
+
+```dart
+final class MyCustomTransport with TransportCapabilityDelegate {
+  @override
+  void linkDriver(UIDriver driver) {
+    // Save driver reference if needed
+  }
+
+  @override
+  Stream<Map<String, dynamic>> connect({
+    Map<String, dynamic>? initialRequestData,
+    Map<String, dynamic>? staticContent,
+  }) async* {
+    if (staticContent != null) {
+      yield staticContent;
+      return;
+    }
+    
+    // Implement connection logic
+    final response = await myCustomHttpClient.get('/layout');
+    yield response.data;
+  }
+
+  @override
+  Future<Map<String, dynamic>?> executeRemoteAction(
+    ServerAction action,
+    Map<String, dynamic> payload,
+  ) async {
+    // Implement action execution
+    return await myCustomHttpClient.post(action.eventName, payload);
+  }
+
+  @override
+  Future<Map<String, dynamic>?> request(
+    String url,
+    Map<String, dynamic> meta,
+    Map<String, dynamic> body,
+  ) async {
+    // Implement arbitrary requests
+    return await myCustomHttpClient.request(url, body);
+  }
+
+  @override
+  void releaseResources() {
+    // Release resources
+    myCustomHttpClient.close();
+  }
+}
+```
+
+Usage:
+
+```dart
+final driver = XDriver.remote(
+  transportManager: MyCustomTransport(),
+);
+```
+
+## Role of Transport in Native Application Integration
+
+`NativeTransportManager` is a special implementation of the `TransportCapabilityDelegate` mixin that provides an asynchronous API for interacting with native applications and ensuring data exchange between Dart code and native, built on [Platform channels](https://docs.flutter.dev/platform-integration/platform-channels#architecture).
+
+In this integration method, the native part of the application is responsible for network interaction, which in turn forwards data and events to the Dart side, where Duit processes them.
+
+You can learn more about this part of Duit's functionality in the corresponding [Native Integration](/docs/core_concepts/native) section of the documentation.

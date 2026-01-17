@@ -1,5 +1,11 @@
 # Transport
 
+:::danger Deprecated
+Класс `Transport` помечен как deprecated и будет удален в следующем мажорном релизе.
+
+Используйте [TransportCapabilityDelegate](/docs/api/dart_api/TransportCapabilityDelegate) вместо него.
+:::
+
 Интерфейст реализации транспортного слоя, с которой взамодействует `UIDriver`. Предоставляет методы для работы фреймворка с сетью.
 
 ```dart

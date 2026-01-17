@@ -224,31 +224,67 @@ Execution order of actions is not guaranteed!
 
 ### NavigationEvent, OpenUrlEvent, and CustomEvent
 
-These events are grouped together because handling them requires passing an implementation of the `ExternalEventHandler` interface to the `DuitDriver` constructor.
+These events require the registration of external handlers via the driver's `attachExternalHandler` method. Instead of using the `ExternalEventHandler` interface, Duit now uses a mechanism for registering individual handlers for each event type.
+
+The `UserDefinedHandlerKind` enum is used to specify the event type:
+
+- `navigation` — for navigation events (`NavigationEvent`).
+- `openUrl` — for opening external links (`OpenUrlEvent`).
+- `custom` — for custom user events (`CustomEvent`).
+
+All handlers must match the `UserDefinedEventHandler` signature:
 
 ```dart
-abstract interface class ExternalEventHandler {
-  FutureOr<void> handleNavigation(
-    BuildContext context,
-    String path,
-    Object? extra,
-  );
-
-  FutureOr<void> handleOpenUrl(String url);
-
-  FutureOr<void> handleCustomEvent(
-    BuildContext context,
-    String key,
-    Object? extra,
-  );
-}
+typedef UserDefinedEventHandler = FutureOr<void> Function(
+  BuildContext context,
+  String path,
+  Object? extra,
+);
 ```
 
-NavigationEvent - An event processed by the `handleNavigation` method, applied when transitioning to another non-Duit screen within the application is required.
+Example of registering handlers:
 
-OpenUrlEvent - An event processed by the `handleOpenUrl` method, intended for opening external links in the device's browser.
+```dart
+driver.attachExternalHandler(
+  UserDefinedHandlerKind.navigation,
+  (context, path, extra) {
+    // Logic for navigating to another screen
+  },
+);
 
-CustomEvent - A specialized event type enabling handling of unforeseen events. Useful in hybrid integrations involving Duit and other parts of the application.
+driver.attachExternalHandler(
+  UserDefinedHandlerKind.openUrl,
+  (context, url, _) {
+    // Logic for opening a URL
+  },
+);
+```
+
+**NavigationEvent** — used when a transition to another non-Duit screen within the application is required.
+
+**OpenUrlEvent** — intended for opening external links in the device's browser.
+
+**CustomEvent** — a specialized event type enabling the handling of unforeseen events. Useful in hybrid integrations involving Duit and other parts of the application.
+
+### External Event Streams
+
+Duit allows integrating external event sources (e.g., WebSockets, Firebase, or native platform events) into the driver's event handling system. Events from these streams will be automatically processed by the driver and can trigger UI updates or the execution of registered handlers.
+
+To add a stream, use the `addExternalEventStream` method:
+
+```dart
+final websocketStream = WebSocketChannel.connect(
+  Uri.parse('ws://example.com'),
+).stream.map((data) => jsonDecode(data) as Map<String, dynamic>);
+
+driver.addExternalEventStream(websocketStream);
+```
+
+**Key Features:**
+
+- The driver automatically subscribes to the stream when added and cancels the subscription when `dispose` is called.
+- You can add multiple streams; they will be processed in parallel.
+- The structure of events in the stream must match the expected Duit format or be handled by registered external handlers.
 
 ### NullEvent
 
