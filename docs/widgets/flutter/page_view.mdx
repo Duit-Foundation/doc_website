@@ -1,0 +1,42 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# PageView
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| PageView | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/PageView-class.html) |
+
+Виджет для отображения страниц с возможностью прокрутки между ними. Поддерживает два варианта: обычный и builder.
+
+:::info
+Вариант PageView.builder всегда является контроллируемым виджетом и поддерживает команды для управления.
+:::
+
+## Атрибуты
+
+| Атрибут | Тип | Описание |
+| - | - | - |
+| type | string/int | Вариант: "common" (0) или "builder" (1) |
+| scrollDirection | Axis | Направление прокрутки (по умолчанию: horizontal) |
+| reverse | bool | Обратное направление прокрутки |
+| physics | ScrollPhysics | Физика прокрутки |
+| pageSnapping | bool | Привязка к страницам (по умолчанию: true) |
+| dragStartBehavior | DragStartBehavior | Поведение начала перетаскивания |
+| allowImplicitScrolling | bool | Разрешить неявную прокрутку |
+| restorationId | string | ID для восстановления состояния |
+| clipBehavior | Clip | Поведение обрезки (по умолчанию: hardEdge) |
+| hitTestBehavior | HitTestBehavior | Поведение hit test (по умолчанию: opaque) |
+| padEnds | bool | Отступы по краям (по умолчанию: true) |
+| childObjects | List | Список дочерних элементов (для builder) |
+
+## Команды (только для контроллируемого PageView)
+
+Контроллируемый PageView поддерживает следующие команды:
+
+| Команда | Описание |
+| - | - |
+| jumpToPage | Мгновенный переход к странице |
+| animateToPage | Анимированный переход к странице |
+| nextPage | Переход к следующей странице |
+| previousPage | Переход к предыдущей странице |

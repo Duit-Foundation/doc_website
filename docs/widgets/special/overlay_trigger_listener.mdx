@@ -1,0 +1,53 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# OverlayTriggerListener
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| OverlayTriggerListener | &cross; | :heavy_check_mark: | &cross; | - |
+
+Специальный виджет-обёртка, который позволяет управлять overlay-элементами (диалоги и bottom sheets) через команды с сервера.
+
+Этот виджет автоматически добавляется при использовании `DuitViewWidget` и не требует явного добавления в дерево виджетов.
+
+## Поддерживаемые команды
+
+### DialogCommand
+
+Открывает или закрывает диалоговое окно.
+
+| Параметр | Тип | Описание |
+| - | - | - |
+| action | OverlayAction | "open" или "close" |
+| content | DuitElementModel | Содержимое диалога (для action: "open") |
+| barrierDismissible | bool | Можно ли закрыть диалог нажатием на фон |
+| useSafeArea | bool | Использовать безопасную область |
+| useRootNavigator | bool | Использовать корневой навигатор |
+| barrierColor | Color | Цвет фона за диалогом |
+| barrierLabel | string | Семантическая метка фона |
+| anchorPoint | Offset | Точка привязки диалога |
+| onClose | ServerAction | Действие при закрытии диалога |
+
+### BottomSheetCommand
+
+Открывает или закрывает нижнюю панель (bottom sheet).
+
+| Параметр | Тип | Описание |
+| - | - | - |
+| action | OverlayAction | "open" или "close" |
+| content | DuitElementModel | Содержимое панели (для action: "open") |
+| isScrollControlled | bool | Контролируется ли прокрутка |
+| backgroundColor | Color | Цвет фона панели |
+| barrierColor | Color | Цвет фона за панелью |
+| shape | ShapeBorder | Форма панели |
+| clipBehavior | Clip | Поведение обрезки |
+| useSafeArea | bool | Использовать безопасную область |
+| useRootNavigator | bool | Использовать корневой навигатор |
+| isDismissible | bool | Можно ли закрыть свайпом вниз |
+| enableDrag | bool | Включить перетаскивание |
+| showDragHandle | bool | Показать ручку для перетаскивания |
+| constraints | BoxConstraints | Ограничения размера |
+| anchorPoint | Offset | Точка привязки |
+| scrollControlDisabledMaxHeightRatio | double | Максимальное соотношение высоты |
+| onClose | ServerAction | Действие при закрытии панели |

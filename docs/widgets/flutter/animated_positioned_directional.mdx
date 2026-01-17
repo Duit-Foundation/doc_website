@@ -1,0 +1,26 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# AnimatedPositionedDirectional
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| AnimatedPositionedDirectional | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/AnimatedPositionedDirectional-class.html) |
+
+Анимированная версия `PositionedDirectional`. Используется внутри `Stack` для позиционирования дочерних элементов с учётом направления текста (LTR/RTL) с плавными переходами.
+
+В отличие от `AnimatedPositioned`, использует `start` и `end` вместо `left` и `right`, что делает его подходящим для интернационализированных приложений.
+
+## Атрибуты
+
+| Атрибут | Тип | Описание |
+| - | - | - |
+| start | double | Расстояние от начала (left для LTR, right для RTL) |
+| end | double | Расстояние от конца (right для LTR, left для RTL) |
+| top | double | Расстояние от верхнего края |
+| bottom | double | Расстояние от нижнего края |
+| width | double | Ширина элемента |
+| height | double | Высота элемента |
+| duration | int | Длительность анимации в миллисекундах |
+| curve | Curve | Кривая анимации (по умолчанию: linear) |
+| onEnd | ServerAction | Действие по завершении анимации |
