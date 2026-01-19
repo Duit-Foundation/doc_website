@@ -212,5 +212,3 @@ final driver = XDriver.remote(
 `NativeTransportManager` is a special implementation of the `TransportCapabilityDelegate` mixin that provides an asynchronous API for interacting with native applications and ensuring data exchange between Dart code and native, built on [Platform channels](https://docs.flutter.dev/platform-integration/platform-channels#architecture).
 
 In this integration method, the native part of the application is responsible for network interaction, which in turn forwards data and events to the Dart side, where Duit processes them.
-
-You can learn more about this part of Duit's functionality in the corresponding [Native Integration](/docs/core_concepts/native) section of the documentation.

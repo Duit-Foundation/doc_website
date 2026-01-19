@@ -1,6 +1,6 @@
 # ServerActionExecutionCapabilityDelegate
 
-A mixin that provides an interface for executing server actions ([ServerAction](/docs/api/dart_api/action_api/ServerAction)) and handling server events ([ServerEvent](/docs/api/dart_api/action_api/ServerEvent)).
+A mixin that provides an interface for executing server actions **ServerAction** and handling server events **ServerEvent**.
 
 ## Methods
 

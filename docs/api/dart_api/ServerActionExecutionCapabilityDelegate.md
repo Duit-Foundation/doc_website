@@ -1,6 +1,6 @@
 # ServerActionExecutionCapabilityDelegate
 
-Миксин, предоставляющий интерфейс для выполнения серверных действий ([ServerAction](/docs/api/dart_api/action_api/ServerAction)) и обработки серверных событий ([ServerEvent](/docs/api/dart_api/action_api/ServerEvent)).
+Миксин, предоставляющий интерфейс для выполнения серверных действий **ServerAction** и обработки серверных событий **ServerEvent**.
 
 ## Методы
 

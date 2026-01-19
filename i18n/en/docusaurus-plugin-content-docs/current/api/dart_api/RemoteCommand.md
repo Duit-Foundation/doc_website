@@ -53,7 +53,7 @@ base class RemoteCommand {
 
 ## Usage
 
-Commands are sent via [CommandEvent](../core_concepts/actions_events.md#commandevent) and processed by widget controllers. Each command type has its specialized implementation that extends `RemoteCommand`.
+Commands are sent via CommandEvent and processed by widget controllers. Each command type has its specialized implementation that extends `RemoteCommand`.
 
 ```dart
 // Example of listening to commands in a controller
