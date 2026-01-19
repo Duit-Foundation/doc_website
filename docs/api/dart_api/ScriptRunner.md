@@ -1,5 +1,11 @@
 # ScriptRunner
 
+:::danger Deprecated
+Класс `ScriptRunner` помечен как deprecated и будет удален в следующем мажорном релизе.
+
+Используйте [ScriptingCapabilityDelegate](/docs/api/dart_api/ScriptingCapabilityDelegate) вместо него.
+:::
+
 Интерфейс для создания классов, отвечающих за обработку и запуск динамических скриптов в интегрированной среде выполения.
 
 ```dart

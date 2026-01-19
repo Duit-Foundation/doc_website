@@ -140,40 +140,137 @@ Parsing new attributes does not support "flat" values. If a property is compound
 
 An event that sends a command to a controller for executing special operations. Commands allow the server to directly interact with widget controllers, triggering specific behaviors.
 
+Base CommandEvent structure:
+
 ```json
 {
   "type": "command",
-  "controllerId": "some_id",
-  "type": "animation",
+  "controllerId": "widget_id",
   "commandData": {
-    "animatedPropKey": "style",
-    "method": 0, // 0 - forward, 1 - repeat, 2 - reverse, 3 - toggle
-    "trigger": "auto" // auto, manual
+    "type": "animation",
+    // ... type-specific command data
   }
 }
 ```
 
-Commands support several types:
+#### Supported Command Types
 
-- **`animation`** - Controls property animations
-- **`bottomSheet`** - Shows/hides modal bottom sheets
-- **`dialog`** - Shows/hides dialog windows
+| Type | Description | API Reference |
+|------|-------------|---------------|
+| `animation` | Property animation control | [AnimationCommand](/docs/api/dart_api/AnimationCommand) |
+| `bottomSheet` | Show/hide modal bottom sheets | [BottomSheetCommand](/docs/api/dart_api/BottomSheetCommand) |
+| `dialog` | Show/hide dialog windows | [DialogCommand](/docs/api/dart_api/DialogCommand) |
+| `pageView` | PageView/PageController management | [PageViewCommand](/docs/api/dart_api/PageViewCommand) |
+| `focusNode` | Focus management for elements | [FocusNodeCommand](/docs/api/dart_api/FocusNodeCommand) |
 
-Example command for showing a BottomSheet:
+#### Animation Command
+
+```json
+{
+  "type": "command",
+  "controllerId": "animated_widget_id",
+  "commandData": {
+    "type": "animation",
+    "animatedPropKey": "style",
+    "method": 0,
+    "trigger": "onAction"
+  }
+}
+```
+
+Parameters:
+
+- `animatedPropKey` - key of the animated property
+- `method` - animation method: `0` (forward), `1` (repeat), `2` (reverse), `3` (toggle)
+- `trigger` - trigger: `onEnter` (when entering screen) or `onAction` (on action)
+
+#### BottomSheet Command
 
 ```json
 {
   "type": "command",
   "controllerId": "overlay",
-  "type": "bottomSheet",
   "commandData": {
+    "type": "bottomSheet",
     "action": "open",
     "content": {...},
     "isScrollControlled": true,
-    "isDismissible": true
+    "isDismissible": true,
+    "enableDrag": true,
+    "showDragHandle": true,
+    "backgroundColor": "#FFFFFF"
   }
 }
 ```
+
+Parameters:
+
+- `action` - action: `open` or `close`
+- `content` - content (widget tree)
+- `isScrollControlled`, `isDismissible`, `enableDrag` - behavior settings
+- `onClose` - action on close
+
+#### Dialog Command
+
+```json
+{
+  "type": "command",
+  "controllerId": "overlay",
+  "commandData": {
+    "type": "dialog",
+    "action": "open",
+    "content": {...},
+    "barrierDismissible": true,
+    "useSafeArea": true
+  }
+}
+```
+
+#### PageView Command
+
+```json
+{
+  "type": "command",
+  "controllerId": "page_view_id",
+  "commandData": {
+    "type": "pageView",
+    "action": "animateToPage",
+    "page": 2,
+    "duration": 300,
+    "curve": "easeInOut"
+  }
+}
+```
+
+Supported actions:
+
+- `nextPage`, `previousPage` - navigate between pages
+- `animateToPage`, `animateTo` - animated navigation
+- `jumpToPage`, `jumpTo` - instant navigation
+
+#### FocusNode Command
+
+```json
+{
+  "type": "command",
+  "controllerId": "text_field_id",
+  "commandData": {
+    "type": "focusNode",
+    "action": "requestFocus"
+  }
+}
+```
+
+Supported actions:
+
+- `requestFocus` - request focus
+- `unfocus` - remove focus
+- `nextFocus`, `previousFocus` - navigate between elements
+- `focusInDirection` - navigate in direction (`up`, `down`, `left`, `right`)
+
+:::info
+For detailed information about each command type, see the [API Reference](/docs/api/dart_api/RemoteCommand).
+:::
 
 ### TimerEvent
 
@@ -224,32 +321,189 @@ Execution order of actions is not guaranteed!
 
 ### NavigationEvent, OpenUrlEvent, and CustomEvent
 
-These events are grouped together because handling them requires passing an implementation of the `ExternalEventHandler` interface to the `DuitDriver` constructor.
+These events require the registration of external handlers via the driver's `attachExternalHandler` method. Instead of using the `ExternalEventHandler` interface, Duit now uses a mechanism for registering individual handlers for each event type.
+
+The `UserDefinedHandlerKind` enum is used to specify the event type:
+
+- `navigation` — for navigation events (`NavigationEvent`).
+- `openUrl` — for opening external links (`OpenUrlEvent`).
+- `custom` — for custom user events (`CustomEvent`).
+
+All handlers must match the `UserDefinedEventHandler` signature:
 
 ```dart
-abstract interface class ExternalEventHandler {
-  FutureOr<void> handleNavigation(
-    BuildContext context,
-    String path,
-    Object? extra,
-  );
-
-  FutureOr<void> handleOpenUrl(String url);
-
-  FutureOr<void> handleCustomEvent(
-    BuildContext context,
-    String key,
-    Object? extra,
-  );
-}
+typedef UserDefinedEventHandler = FutureOr<void> Function(
+  BuildContext context,
+  String path,
+  Object? extra,
+);
 ```
 
-NavigationEvent - An event processed by the `handleNavigation` method, applied when transitioning to another non-Duit screen within the application is required.
+Example of registering handlers:
 
-OpenUrlEvent - An event processed by the `handleOpenUrl` method, intended for opening external links in the device's browser.
+```dart
+driver.attachExternalHandler(
+  UserDefinedHandlerKind.navigation,
+  (context, path, extra) {
+    // Logic for navigating to another screen
+  },
+);
 
-CustomEvent - A specialized event type enabling handling of unforeseen events. Useful in hybrid integrations involving Duit and other parts of the application.
+driver.attachExternalHandler(
+  UserDefinedHandlerKind.openUrl,
+  (context, url, _) {
+    // Logic for opening a URL
+  },
+);
+```
+
+**NavigationEvent** — used when a transition to another non-Duit screen within the application is required.
+
+**OpenUrlEvent** — intended for opening external links in the device's browser.
+
+**CustomEvent** — a specialized event type enabling the handling of unforeseen events. Useful in hybrid integrations involving Duit and other parts of the application.
+
+### External Event Streams
+
+Duit allows integrating external event sources (e.g., WebSockets, Firebase, or native platform events) into the driver's event handling system. Events from these streams will be automatically processed by the driver and can trigger UI updates or the execution of registered handlers.
+
+To add a stream, use the `addExternalEventStream` method:
+
+```dart
+final websocketStream = WebSocketChannel.connect(
+  Uri.parse('ws://example.com'),
+).stream.map((data) => jsonDecode(data) as Map<String, dynamic>);
+
+driver.addExternalEventStream(websocketStream);
+```
+
+**Key Features:**
+
+- The driver automatically subscribes to the stream when added and cancels the subscription when `dispose` is called.
+- You can add multiple streams; they will be processed in parallel.
+- The structure of events in the stream must match the expected Duit format or be handled by registered external handlers.
 
 ### NullEvent
 
 A service event returned by the event parser when the event object cannot be properly processed.
+
+## Remote Command System (RemoteCommand)
+
+The remote command system is a mechanism that allows the server to directly control widget behavior through controllers. Unlike `UpdateEvent`, which updates widget attributes, commands trigger specific behaviors: starting animations, managing PageView navigation, controlling focus, displaying modal windows, and other operations.
+
+### Architecture
+
+```
+┌─────────────┐      ┌──────────────┐      ┌─────────────────────┐      ┌────────────┐
+│   Server    │ ───▶ │ CommandEvent │ ───▶ │ UIElementController │ ───▶ │   Widget   │
+└─────────────┘      └──────────────┘      └─────────────────────┘      └────────────┘
+                            │
+                            ▼
+                     ┌──────────────┐
+                     │ RemoteCommand│
+                     │   (base)     │
+                     └──────────────┘
+                            │
+          ┌─────────────────┼─────────────────┐
+          ▼                 ▼                 ▼
+   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+   │ Animation    │  │ BottomSheet  │  │ PageView     │
+   │ Command      │  │ Command      │  │ Command      │
+   └──────────────┘  └──────────────┘  └──────────────┘
+```
+
+### Base RemoteCommand Class
+
+All commands inherit from the base `RemoteCommand` class:
+
+```dart
+base class RemoteCommand {
+  final String controllerId;  // Recipient controller ID
+  final String type;          // Command type
+  final Map<String, dynamic> commandData;  // Command data
+
+  const RemoteCommand({
+    required this.controllerId,
+    required this.type,
+    required this.commandData,
+  });
+}
+```
+
+### Command Lifecycle
+
+1. **Creation on server** — the server forms a JSON command description
+2. **Parsing** — `CommandEvent.fromJson()` creates a `RemoteCommand` object
+3. **Specialization** — `SpecCommand(command).specify()` transforms the base command into a typed one (e.g., `AnimationCommand`)
+4. **Routing** — the driver finds the controller by `controllerId`
+5. **Delivery** — the command is sent to the controller's `commandChannel`
+6. **Processing** — the widget receives the command and performs the corresponding action
+
+### Command Handling in Controllers
+
+Widget controllers subscribe to the command channel via the `listenCommand` method:
+
+```dart
+controller.listenCommand((command) async {
+  // Pattern matching to determine command type
+  switch (command) {
+    case AnimationCommand(:final method, :final animatedPropKey):
+      await _handleAnimation(method, animatedPropKey);
+      break;
+    case BottomSheetCommand(:final action, :final content):
+      await _handleBottomSheet(action, content);
+      break;
+    case PageViewNextPageCommand(:final duration, :final curve):
+      await _pageController.nextPage(duration: duration, curve: curve);
+      break;
+    case FocusNodeRequestFocusCommand(:final nodeId):
+      _focusNode.requestFocus();
+      break;
+  }
+});
+```
+
+### Sending Commands Programmatically
+
+In addition to receiving commands from the server, you can send commands programmatically:
+
+```dart
+// Get the controller
+final controller = driver.getController("widget_id");
+
+// Create and send a command
+final command = AnimationCommand(
+  controllerId: "widget_id",
+  type: "animation",
+  commandData: {"type": "animation", "animatedPropKey": "style", "method": 0},
+  animatedPropKey: "style",
+  method: AnimationMethod.forward,
+  trigger: AnimationTrigger.onAction,
+);
+
+await controller.emitCommand(command);
+```
+
+### Special Controller Identifiers
+
+Some commands use reserved identifiers:
+
+| ID | Purpose |
+|----|---------|
+| `overlay` | Global controller for BottomSheet and Dialog |
+
+### Advantages of the Command System
+
+- **Declarative** — commands are described in JSON and can be generated on the server
+- **Type-safe** — each command type has strictly typed properties
+- **Extensible** — easy to add new command types
+- **Separation of concerns** — command execution logic is encapsulated in the widget
+- **Asynchronous** — commands are processed asynchronously via Stream
+
+:::tip
+Use commands for operations that cannot be expressed through attribute updates: animations, navigation, focus, modal windows.
+:::
+
+:::info
+For complete documentation on each command type, see the [API Reference](/docs/api/dart_api/RemoteCommand).
+:::

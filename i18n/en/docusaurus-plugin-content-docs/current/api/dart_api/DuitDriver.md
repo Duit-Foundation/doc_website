@@ -1,5 +1,11 @@
 # DuitDriver
 
+:::danger Deprecated
+The `DuitDriver` class is marked as deprecated and will be removed in the next major release.
+
+Use [XDriver](/docs/api/dart_api/XDriver) instead.
+:::
+
 Implementation of [UIDriver](/docs/api/dart_api/UIDriver). It is a crucial part of the Duit-presentation and coordinates the operation of all framework components: transport configuration, action execution, event handling, parsing, and rendering of UI elements.
 
 :::tip

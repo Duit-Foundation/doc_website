@@ -3,16 +3,16 @@
 Интерфейс `UIElementController` представляет собой публичный API контроллера. Контроллер обеспечивает связь между драйвером и отдельным контроллируемым виджетом.
 
 :::info
-Подробнее про роль контроллера можно прочитать в соотвествующем [разделе](/docs/core_concepts/controlled_widgets)
+Подробнее про роль контроллера можно прочитать в соответствующем [разделе](/docs/core_concepts/controlled_widgets)
 :::
 
 ```dart
-abstract interface class UIElementController<T> {
+abstract interface class UIElementController {
   /// Typed attributes object (view properties).
   ///
   /// The [attributes] property holds the typed attributes object associated with the controller.
   /// It provides access to the view properties and allows manipulation of their values.
-  abstract ViewAttribute<T> attributes;
+  abstract ViewAttribute attributes;
 
   /// Id for current controller, same with [ElementTreeEntry] id.
   abstract String id;
@@ -41,12 +41,12 @@ abstract interface class UIElementController<T> {
   /// It can be used to categorize or identify the controller.
   abstract String? tag;
 
-  /// A stream of animation commands.
+  /// A stream of remote commands.
   ///
-  /// The [commandChannel] property represents a stream of animation commands
+  /// The [commandChannel] property represents a stream of remote commands
   /// that are sent to the controller. The commands are processed by the controller
-  /// in order to perform the desired animation.
-  abstract StreamController<AnimationCommand> commandChannel;
+  /// in order to perform the desired operations (animations, navigation, etc.).
+  abstract StreamController<RemoteCommand> commandChannel;
 
   /// Perform the related action.
   ///
@@ -67,8 +67,8 @@ abstract interface class UIElementController<T> {
   /// Update the state.
   ///
   /// This method is called to update the state of the UI element associated with the controller.
-  /// It takes a [newState] parameter of type [ViewAttributeWrapper<T>] that represents the new state.
-  void updateState(ViewAttribute<T> newState);
+  /// It takes a [newState] parameter of type [ViewAttribute] that represents the new state.
+  void updateState(ViewAttribute newState);
 
   /// Add a listener to [ChangeNotifier].
   ///
@@ -87,23 +87,23 @@ abstract interface class UIElementController<T> {
   /// RemoveListener the [ChangeNotifier].
   void removeListener(VoidCallback listener);
 
-  /// Listen for animation commands.
+  /// Listen for remote commands.
   ///
   /// This method allows you to register a callback function that will be
-  /// triggered whenever an [AnimationCommand] is received. The callback
-  /// function should be a [Future<void> Function(AnimationCommand command)]
+  /// triggered whenever a [RemoteCommand] is received. The callback
+  /// function should be a [Future<void> Function(RemoteCommand command)]
   /// and will be executed with the received command as its argument.
-  void listenCommand(Future<void> Function(AnimationCommand command) callback);
+  void listenCommand(Future<void> Function(RemoteCommand command) callback);
 
-  /// Emit an animation command.
+  /// Emit a remote command.
   ///
-  /// This method can be used to emit an animation command to any widgets that
+  /// This method can be used to emit a remote command to any widgets that
   /// are listening for commands. The command will be sent to all widgets that
   /// are listening.
   ///
-  /// The method takes a single parameter of type [AnimationCommand] which is
+  /// The method takes a single parameter of type [RemoteCommand] which is
   /// the command to be emitted.
-  FutureOr<void> emitCommand(AnimationCommand command);
+  FutureOr<void> emitCommand(RemoteCommand command);
 
   /// Remove the command listener.
   ///
@@ -112,3 +112,9 @@ abstract interface class UIElementController<T> {
   void removeCommandListener();
 }
 ```
+
+## Связанные типы
+
+- [RemoteCommand](./RemoteCommand.md) - базовый класс команды
+- [ViewAttribute](./ViewAttribute.md) - атрибуты элемента
+- [UIDriver](./UIDriver.md) - драйвер UI

@@ -1,0 +1,23 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# ClipRect
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| ClipRect | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/ClipRect-class.html) |
+
+Виджет, который обрезает дочерний элемент по прямоугольнику.
+
+## Атрибуты
+
+| Атрибут | Тип | Описание |
+| - | - | - |
+| clipBehavior | Clip | Поведение обрезки (по умолчанию: hardEdge) |
+
+### Значения clipBehavior
+
+- `none` — без обрезки
+- `hardEdge` — жёсткая обрезка без сглаживания (по умолчанию)
+- `antiAlias` — обрезка со сглаживанием
+- `antiAliasWithSaveLayer` — обрезка со сглаживанием и сохранением слоя

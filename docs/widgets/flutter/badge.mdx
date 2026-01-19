@@ -1,0 +1,31 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Badge
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Badge | :heavy_check_mark: | &cross; | &cross; | [link](https://api.flutter.dev/flutter/material/Badge-class.html) |
+
+Виджет для отображения значка (badge) на другом виджете. Поддерживает два варианта: обычный и счётчик.
+
+## Атрибуты
+
+| Атрибут | Тип | Описание |
+| - | - | - |
+| variant | string/int | Вариант виджета: "common" (0) или "count" (1) |
+| backgroundColor | Color | Цвет фона значка |
+| textColor | Color | Цвет текста значка |
+| smallSize | double | Размер маленького значка |
+| largeSize | double | Размер большого значка |
+| textStyle | TextStyle | Стиль текста |
+| padding | EdgeInsets | Отступы внутри значка |
+| alignment | Alignment | Выравнивание значка |
+| offset | Offset | Смещение значка |
+| isLabelVisible | bool | Видимость метки (по умолчанию: true) |
+| count | int | Число для отображения (только для variant: "count") |
+
+## Дочерние элементы
+
+- Первый дочерний элемент (children[0]) — основной контент, на котором отображается badge
+- Второй дочерний элемент (children[1]) — метка (label), используется только для variant: "common"

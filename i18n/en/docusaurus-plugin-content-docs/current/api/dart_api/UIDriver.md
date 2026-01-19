@@ -1,112 +1,69 @@
 # UIDriver
 
-The `UIDriver` interface represents the public API of the driver that manages the Duit presentation.
+Abstract class representing the Duit driver interface.
+
+`UIDriver` combines all capability delegates through mixins and provides a base interface for managing Duit presentations.
+
+:::tip
+For creating a driver, it's recommended to use [XDriver](/docs/api/dart_api/XDriver), which provides a convenient public API.
+:::
+
+## Structure
 
 ```dart
-abstract interface class UIDriver {
-  /// The source url of the UI driver.
-  abstract final String source;
-
-  /// The options for the transport used by the UI driver.
-  abstract final TransportOptions transportOptions;
-
-  /// The transport used by the UI driver.
-  abstract Transport? transport;
-
-  /// The build context associated with the UI driver.
-  @protected
-  abstract BuildContext buildContext;
-
-  /// The stream controller for the UI driver.
-  @protected
-  abstract StreamController<ElementTree?> streamController;
-
-  /// The script runner used by the UI driver.
-  abstract ScriptRunner? scriptRunner;
-
-  /// The script runner used by the UI driver.
-  ///
-  /// The script runner is used to execute scripts defined in the layout.
-  abstract EventResolver eventResolver;
-
-  /// The executor of actions used by the UI driver.
-  ///
-  /// The action executor is used to execute actions defined in the layout.
-  abstract ActionExecutor actionExecutor;
-
-  /// The action executor used by the UI driver.
-  abstract ExternalEventHandler? externalEventHandler;
-
-  abstract MethodChannel? driverChannel;
-
-  abstract bool isModule;
-
-  abstract DebugLogger? logger;
-
-  /// Attaches a controller to the UI driver.
-  ///
-  /// Parameters:
-  /// - [id]: The ID of the controller.
-  /// - [controller]: The UI element controller to attach.
-  void attachController(String id, UIElementController controller);
-
-  /// Detaches a controller from the UI driver.
-  void detachController(String id);
-
-  /// Gets the controller associated with the given ID.
-  UIElementController? getController(String id);
-
-  /// Initializes the UI driver.
-  ///
-  /// This method initializes the UI driver by performing any necessary setup or
-  /// configuration. It can be called before using the UI driver to ensure that
-  /// it is ready to perform its intended tasks.
-  ///
-  /// Returns: A [Future] that completes when the initialization is done. If the
-  /// initialization is successful, the [Future] completes successfully. If there
-  /// is an error during initialization, the [Future] completes with an error.
+abstract class UIDriver
+    with
+        FocusCapabilityDelegate,
+        ServerActionExecutionCapabilityDelegate,
+        UIControllerCapabilityDelegate,
+        ViewModelCapabilityDelegate,
+        TransportCapabilityDelegate,
+        ScriptingCapabilityDelegate,
+        LoggingCapabilityDelegate,
+        NativeModuleCapabilityDelegate {
+  
+  /// Initializes the driver.
   Future<void> init();
 
-  /// Builds the UI.
-  ///
-  /// This method is responsible for building the user interface (UI) based on the
-  /// current state of the UI driver. It creates and returns a widget that represents
-  /// the UI to be rendered on the screen.
-  ///
-  /// Returns: The widget representing the UI.
-  Widget? build();
-
-  /// Executes a server action and handles the response event.
-  ///
-  /// If [dependencies] is not empty, it collects the data from the controllers
-  /// associated with each dependency and adds it to the payload. The payload is
-  /// then passed to the server action.
-  ///
-  /// This method is called when a server action needs to be executed.
-  ///
-  /// Parameters:
-  /// - [action]: The server action to be executed.
-  /// - [dependencies]: A list of dependencies for the server action.
-  Future<void> execute(ServerAction action);
-
-  /// Evaluates a script source code.
-  Future<void> evalScript(String source);
-
-  /// Disposes of the driver and releases any resources.
-  ///
-  /// This method is called when the driver is no longer needed.
+  /// Releases driver resources.
   void dispose();
 
-  /// Returns the stream of UI abstract trees.
-  Stream<ElementTree?> get stream;
-
-  /// Set the BuildContext.
-  set context(BuildContext value);
-
-  /// Prepares the payload for a server action.
-  Map<String, dynamic> preparePayload(Iterable<ActionDependency> dependencies);
-
-  /// Updates the attributes of a controller.
-  Future<void> updateAttributes(String controllerId, Map<String, dynamic> json);
+  /// Flag indicating whether the driver is running in native module mode.
+  abstract bool isModule;
 }
 ```
+
+## Capability Delegates
+
+`UIDriver` includes the following capability delegates:
+
+| Delegate | Description |
+|----------|-------------|
+| [FocusCapabilityDelegate](/docs/api/dart_api/FocusCapabilityDelegate) | UI element focus management |
+| [ServerActionExecutionCapabilityDelegate](/docs/api/dart_api/ServerActionExecutionCapabilityDelegate) | Server action execution and event handling |
+| [UIControllerCapabilityDelegate](/docs/api/dart_api/UIControllerCapabilityDelegate) | UI element controller management |
+| [ViewModelCapabilityDelegate](/docs/api/dart_api/ViewModelCapabilityDelegate) | View model management |
+| [TransportCapabilityDelegate](/docs/api/dart_api/TransportCapabilityDelegate) | Transport layer |
+| [ScriptingCapabilityDelegate](/docs/api/dart_api/ScriptingCapabilityDelegate) | Script execution |
+| [LoggingCapabilityDelegate](/docs/api/dart_api/LoggingCapabilityDelegate) | Logging |
+| [NativeModuleCapabilityDelegate](/docs/api/dart_api/NativeModuleCapabilityDelegate) | Native code interaction |
+
+## Deprecated Properties
+
+The following properties are marked as deprecated and will be removed in the next major release:
+
+- `source` — driver source URL
+- `transportOptions` — transport options
+- `transport` — transport instance
+- `scriptRunner` — ScriptRunner instance
+- `eventResolver` — event resolver
+- `actionExecutor` — action executor
+- `externalEventHandler` — external event handler
+- `driverChannel` — native communication channel
+- `logger` — logger (use `LoggingCapabilityDelegate`)
+- `build()` — UI building method
+
+## See Also
+
+- [XDriver](/docs/api/dart_api/XDriver) — public API for working with the driver
+- [DuitViewHost](/docs/api/dart_api/DuitViewHost) — host widget for Duit presentation
