@@ -21,24 +21,11 @@ The widget can be useful in cases:
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Meta(
-        {
-            id: "id",
-            attributes: {
-                key: "value",
-                key2: "value2",
-            }
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Meta(
+Meta(
       &duit_attributes.MetaAttributes{
         "key": "value",
         "key2": "value2",
@@ -46,7 +33,7 @@ The widget can be useful in cases:
       "id",
       nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

@@ -66,25 +66,11 @@ final class CarouselViewAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    CarouselView(
-        {
-            id: "id",
-            attributes: {
-                constructor: "common",
-                itemExtent: 120.0,
-            },
-            controlled: false,
-        },
-        [], //children
-    );
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	CarouselView(
+CarouselView(
 		&duit_attributes.CarouselViewAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsAll, duit_decoration.BeveledRectangleBorder[duit_color.ColorString]]{
 			Constructor: duit_attributes.CarouselViewCommon,	
 		},
@@ -92,7 +78,7 @@ final class CarouselViewAttributes extends AnimatedPropertyOwner
 		false,
 		[]*duit_core.DuitElementModel{}, //children
 	)
+
     ```
   </TabItem>
 </Tabs>
-

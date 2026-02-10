@@ -39,25 +39,11 @@ class SingleChildScrollviewAttributes
 
 ## Пример использования
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    SingleChildScrollView(
-        {
-            id: "id",
-            attributes: {
-                scrollDirection: 'vertical',
-                clipBehavior: 'hardEdge',
-            },
 
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+<Tabs groupId="lang">
+  <TabItem value="go" label="Go" default>
     ```go
-	SingleChildScrollView(
+SingleChildScrollView(
 		&duit_attributes.SingleChildScrollViewAttributes[duit_edge_insets.EdgeInsetsAll]{
 			ScrollDirection: duit_flex.Vertical,
 			ClipBehavior: duit_clip.HardEdge,
@@ -66,7 +52,7 @@ class SingleChildScrollviewAttributes
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

@@ -57,35 +57,11 @@ class CheckboxAttributes extends AttendedModel<bool>
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    CheckBox(
-        {
-            id: "id",
-            controlled: true,
-            attributes: {
-                value: true,
-                overlayColor: {
-                    disabled: "#DCDCDC",
-                },
-            },
-            action: LocalExecutedAction(
-                UpdateEvent(
-                    {
-                        "other_id": {
-                            key: "value",
-                        },
-                    },
-                )
-            )
-        },
-    )
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	CheckBox(
+CheckBox(
 		&duit_attributes.CheckboxAttributes[duit_color.ColorString]{
 			Value: true,
 			OverlayColor: &duit_material.MaterialStateProperty[duit_color.ColorString]{
@@ -103,7 +79,7 @@ class CheckboxAttributes extends AttendedModel<bool>
 			),
 		},
 	)
+
     ```
   </TabItem>
 </Tabs>
-

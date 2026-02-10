@@ -60,24 +60,11 @@ final class AnimatedContainerAttributes extends ImplicitAnimatable
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AnimatedContainer(
-        {
-            id: "id",
-            attributes: {
-                duratuion: 1000,
-                width: 100,
-            },
-        },
-        // child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	AnimatedContainer(
+AnimatedContainer(
 		&duit_attributes.AnimatedContainerAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
 			Width: 100,
 			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
@@ -87,7 +74,7 @@ final class AnimatedContainerAttributes extends ImplicitAnimatable
 		"id",
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

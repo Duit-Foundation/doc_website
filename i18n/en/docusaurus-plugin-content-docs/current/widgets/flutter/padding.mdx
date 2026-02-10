@@ -26,27 +26,11 @@ final class PaddingAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Padding(
-        {
-            id: "id",
-            attributes: {
-                padding: EdgeInsetsUtils.symmetric({
-                    vertical: 12,
-                    horizontal: 24
-                }),
-            },
-            controlled: false,
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Padding(
+Padding(
 		&duit_attributes.PaddingAttributes[duit_edge_insets.EdgeInsetsSymmentric]{
 			Padding: duit_edge_insets.EdgeInsetsSymmentric{
 				12.0, //vertical
@@ -57,7 +41,7 @@ final class PaddingAttributes extends AnimatedPropertyOwner
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

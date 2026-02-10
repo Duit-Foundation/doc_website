@@ -59,26 +59,11 @@ final class ContainerAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-Container(
-    {
-        attributes: {
-            decoration: {
-                color: "#DCDCDC"
-            },
-        },
-        id: "id",
-        controlled: false,
-    },
-    //child
-)
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Container(
+Container(
 		&duit_attributes.ContainerAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
 			Decoration: &duit_decoration.BoxDecoration[duit_color.ColorString]{
 				Color: "#DCDCDC",
@@ -88,7 +73,7 @@ Container(
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

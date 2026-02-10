@@ -179,38 +179,11 @@ final class GridViewAttributes
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-  GridView(
-      {
-          id: "id",
-          attributes: {
-              constructor: GridConstructor.builder,
-              sliverGridDelegateKey: "delegate1",
-              childObjects: [], //initial data
-              mergeStrategy: "addToEnd",
-              scrollDirection: "vertical",
-          },
-          action: HttpAction(
-              "/get_items",
-              {
-                  method: "GET"
-              },
-              [
-                  {
-                      id: "id",
-                      target: "some_field"
-                  }
-              ],
-          )
-      }
-  )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    GridView[duit_core.RemoteAction, duit_edge_insets.EdgeInsetsAll](
+GridView[duit_core.RemoteAction, duit_edge_insets.EdgeInsetsAll](
         &duit_attributes.GridViewBuilderAttributes[duit_edge_insets.EdgeInsetsAll]{
           SliverGridDelegateKey:     "delegate1",
           Builder:                   duit_builder.Builder{
@@ -228,7 +201,7 @@ final class GridViewAttributes
         },
         nil, //children
     )
+
     ```
   </TabItem>
 </Tabs>
-

@@ -26,25 +26,11 @@ final class CenterAttributes implements DuitAttributes<CenterAttributes> {
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Center(
-        {
-            id: "id",
-            attributes: {
-                widthFactor: 1.2,
-                heightFactor: 0.6,
-            },
-            controlled: false
-        },
-        //child
-    );
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Center(&duit_attributes.CenterAttributes{
+Center(&duit_attributes.CenterAttributes{
 		WidgthFactor: 1.2,
 		HeightFactor: 0.6,
 	},
@@ -52,7 +38,7 @@ final class CenterAttributes implements DuitAttributes<CenterAttributes> {
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

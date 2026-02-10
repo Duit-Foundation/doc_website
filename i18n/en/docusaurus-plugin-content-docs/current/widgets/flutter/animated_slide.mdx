@@ -27,25 +27,11 @@ final class AnimatedSlideAttributes extends ImplicitAnimatable
 
 ## Usage Example
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AnimatedSlide({
-        id: "id",
-        attributes: {
-            offset: { x: 0.5, y: 0.0 },
-            duration: 300,
-            curve: "easeInOut"
-        },
-        controlled: false,
-    },
-    //child
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    AnimatedSlide(
+AnimatedSlide(
       &duit_attributes.AnimatedSlideAttributes{
         Offset: duit_offset.Offset{X: 0.5, Y: 0.0},
         Duration: 300 * time.Millisecond,
@@ -55,6 +41,7 @@ final class AnimatedSlideAttributes extends ImplicitAnimatable
       false,
       //child,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

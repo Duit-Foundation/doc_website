@@ -33,28 +33,11 @@ final class SliverVisibilityAttributes implements DuitAttributes<SliverVisibilit
 
 ## Usage Example
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    SliverVisibility({
-        id: "id",
-        attributes: {
-            visible: true,
-            maintainState: false,
-            maintainAnimation: false,
-            maintainSize: false,
-            maintainSemantics: false,
-            maintainInteractivity: false
-        },
-        controlled: false,
-    },
-    //child
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    SliverVisibility(
+SliverVisibility(
       &duit_attributes.SliverVisibilityAttributes{
         Visible: true,
         MaintainState: false,
@@ -67,6 +50,7 @@ final class SliverVisibilityAttributes implements DuitAttributes<SliverVisibilit
       false,
       //child,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

@@ -1,0 +1,37 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# InteractiveViewer
+
+| Type name | Supports Property Animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| InteractiveViewer | &cross; | :heavy_check_mark: | &cross; | [link](https://api.flutter.dev/flutter/widgets/InteractiveViewer-class.html) |
+
+## Usage
+
+
+<Tabs groupId="lang">
+  <TabItem value="go" label="Go" default>
+    ```go
+InteractiveViewer(
+		&duit_attributes.InteractiveViewerAttributes[duit_core.RemoteAction]{
+			PanEnabled:   true,
+			ScaleEnabled: true,
+			MinScale:     0.8,
+			MaxScale:     2.5,
+			Constrained:  true,
+			ClipBehavior: "hardEdge",
+			OnInteractionStart: &duit_core.RemoteAction{
+				Event: "/on_interaction_start",
+			},
+			OnInteractionEnd: &duit_core.RemoteAction{
+				Event: "/on_interaction_end",
+			},
+		},
+		"id",
+		nil, //child
+	)
+
+    ```
+  </TabItem>
+</Tabs>

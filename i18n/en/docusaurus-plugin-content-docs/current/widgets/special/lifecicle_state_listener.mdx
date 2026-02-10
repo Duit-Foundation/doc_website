@@ -13,29 +13,11 @@ When the application state changes, the corresponding action is triggered if it 
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-  LifecycleEventListener(
-      {
-          id: "id",
-          attributes: {
-              onHidden: HttpAction(
-                  "/some_endpoint",
-                  {
-                      method: "POST",
-                  },
-                  [],
-              )
-          },
-      },
-      //child
-  )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	LifecycleEvent(
+LifecycleEvent(
 		&duit_attributes.LifecycleEventListenerAttributes[duit_core.RemoteAction]{
 			OnHidden: &duit_core.RemoteAction{
 				Event: "/some_endpoint",
@@ -45,7 +27,7 @@ When the application state changes, the corresponding action is triggered if it 
 		"id",
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

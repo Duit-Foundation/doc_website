@@ -38,31 +38,11 @@ final class CardAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Card(
-    {
-        id: "id",
-        attributes: {
-            shadowColor: "#DCDCDC",
-            shape: {
-                type: ShapeBorderType.BeveledRectangleBorder,
-                side: {
-                    color: "#DCDCDC",
-                    width: 3,
-                },
-            }
-        },
-        controlled: false
-    }
-    //child,
-);
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Card(
+Card(
 		&duit_attributes.CardAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsAll, duit_decoration.BeveledRectangleBorder[duit_color.ColorString]]{
 			ShadowColor: duit_color.ColorString("black"),
 			Shape: &duit_decoration.BeveledRectangleBorder[duit_color.ColorString]{
@@ -76,7 +56,7 @@ final class CardAttributes extends AnimatedPropertyOwner
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

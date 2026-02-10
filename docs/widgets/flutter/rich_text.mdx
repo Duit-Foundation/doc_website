@@ -50,38 +50,11 @@ final class RichTextAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    RichText(
-        {
-            id: "id",
-            attributes: {
-                textSpan: {
-                    children: [
-                        {
-                            text: "Hello",
-                            style: {
-                                color: "#FF0000",
-                            },
-                        },
-                        {
-                            text: " World",
-                            style: {
-                                color: "#DCDCDC",
-                            },
-                        }
-                    ]
-                }
-            },
-            controlled: false,
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	RichText(
+RichText(
 		&duit_attributes.RichTextAttributes[duit_color.ColorString]{
 			TextSpan: &duit_text_properties.TextSpan[duit_color.ColorString]{
 				Children: []*duit_text_properties.TextSpan[duit_color.ColorString]{
@@ -103,7 +76,7 @@ final class RichTextAttributes extends AnimatedPropertyOwner
 		"id",
 		false,
 	)
+
     ```
   </TabItem>
 </Tabs>
-

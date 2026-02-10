@@ -40,25 +40,11 @@ final class WrapAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Wrap(
-        {
-            id: "id",
-            attributes: {
-                spacing: 12,
-                runSpacing: 24,
-            },
-            controlled: false,
-        },
-        [], //children
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Wrap(
+Wrap(
 		&duit_attributes.WrapAttributes{
 			Spacing: 12,
 			RunSpacing: 24,
@@ -67,7 +53,7 @@ final class WrapAttributes extends AnimatedPropertyOwner
 		false,
 		nil, //children
 	)
+
     ```
   </TabItem>
 </Tabs>
-

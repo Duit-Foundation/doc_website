@@ -26,34 +26,11 @@ final class AnimatedBuilderAttributes
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-AnimatedBuilder(
-    {
-        id: "animated_builder",
-        attributes: {
-            tweenDescriptions: [
-                {
-                    "type": "tween",
-                    "animatedPropKey": "width",
-                    "begin": 0,
-                    "end": 100,
-                    "duration": 1000,
-                    "trigger": AnimationTrigger.onEnter,
-                    "method": AnimationMethod.forward
-                }
-            ],
-        },
-        controlled: true
-    },
-    child: //child
-);
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    AnimatedBuilder(
+AnimatedBuilder(
 		&duit_attributes.AnimatedBuilderAttributes{
 			PersistentId: "1", //override it for use builder inside component layout
 			Tweens: []any{
@@ -72,7 +49,7 @@ AnimatedBuilder(
 		"", //id
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

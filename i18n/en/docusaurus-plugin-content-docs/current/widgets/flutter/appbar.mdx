@@ -80,24 +80,9 @@ final class AppBarAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-AppBar({
-        backgroundColor: "#FF0000",
-        actionsPadding: EdgeInsetsUtils.only({
-            top: 0.0,
-            right: 12.0,
-            bottom: 0.0,
-            left: 12.0
-        }),
-        title: //child
-},
-    "id",
-);
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
 AppBar(
 	&duit_attributes.AppBarAttributes[duit_color.ColorString, duit_edge_insets.EdgeInsetsLTRB, duit_decoration.RoundedRectangleBorder[duit_color.ColorString]]{
@@ -107,7 +92,7 @@ AppBar(
 	},
 	"id",
 )
+
     ```
   </TabItem>
 </Tabs>
-

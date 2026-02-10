@@ -26,29 +26,11 @@ final class ConstrainedBoxAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    ConstrainedBox(
-        {
-            attributes: {
-                constraints: {
-                    minWidth: 156,
-                    maxWidth: 300,
-                    minHeight: 60,
-                    maxHeight: 120
-                }
-            },
-            id: "id",
-            controlled: false
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    ConstrainedBox(
+ConstrainedBox(
         &duit_attributes.ConstrainedBoxAttributes{
             MinWidth: 156,
             MaxWidth: 300,
@@ -59,7 +41,7 @@ final class ConstrainedBoxAttributes extends AnimatedPropertyOwner
         false,
         nil, //child
 )
+
     ```
   </TabItem>
 </Tabs>
-

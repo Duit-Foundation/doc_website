@@ -1,0 +1,36 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Visibility
+
+| Название типа| Поддерживает анимации свойств | Контроллируемый по умолчанию | Может содержать связанное действие | Ссылка |
+| - | - | - | - | - |
+| Visibility | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Visibility-class.html) |
+
+:::info
+Виджет принимает до двух дочерних элементов. Первый — основной виджет, второй (опциональный) — виджет-замена, отображаемый при `visible: false`. Если замена не задана, используется `SizedBox.shrink()`.
+:::
+
+## Пример использования
+
+<Tabs groupId="lang">
+  <TabItem value="go" label="Go" default>
+    ```go
+Visibility(
+	&duit_attributes.VisibilityAttributes{
+		Visible:                true,
+		MaintainState:          false,
+		MaintainAnimation:      false,
+		MaintainSize:           false,
+		MaintainSemantics:      false,
+		MaintainInteractivity:  false,
+	},
+	"id",
+	false,
+	nil, //child
+	nil, //replacement (optional)
+)
+
+    ```
+  </TabItem>
+</Tabs>

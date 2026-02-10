@@ -42,28 +42,11 @@ final class PhysicalModelAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    PhysicalModel({
-        id: "id",
-        attributes: {
-            elevation: 8.0,
-            color: "#FF5722",
-            shadowColor: "#000000",
-            clipBehavior: "antiAlias",
-            borderRadius: { topLeft: 8, topRight: 8, bottomLeft: 8, bottomRight: 8 },
-            shape: "rectangle"
-        },
-        controlled: false,
-    },
-    //child
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    PhysicalModel(
+PhysicalModel(
       &duit_attributes.PhysicalModelAttributes{
         Elevation: 8.0,
         Color: duit_color.Color{R: 255, G: 87, B: 34, A: 255},
@@ -78,6 +61,7 @@ final class PhysicalModelAttributes extends AnimatedPropertyOwner
       false,
       //child,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

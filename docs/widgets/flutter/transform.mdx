@@ -96,26 +96,11 @@ final class FlipTransform extends TransformAttributes
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Transform(
-        {
-            id: "id",
-            attributes: {
-                type: "scale",
-                data: {
-                    scale: 2,
-                },
-            },
-            controlled: false,
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Transform(
+Transform(
 		&duit_attributes.TransfromAttributes[duit_transform.ScaleTransfrom]{
 			Data: &duit_transform.ScaleTransfrom{
 				Scale: 2,
@@ -125,7 +110,7 @@ final class FlipTransform extends TransformAttributes
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

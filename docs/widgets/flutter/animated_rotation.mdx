@@ -31,24 +31,11 @@ final class AnimatedRotationAttributes extends ImplicitAnimatable
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AnimatedRotation(
-        {
-            id: "id",
-            attributes: {
-                turns: 3.14,
-                duratuion: 1000,
-            },
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	AnimatedRotation(
+AnimatedRotation(
 		&duit_attributes.AnimatedRotationAttributes{
 			Turns: 3.14,
 			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
@@ -58,7 +45,7 @@ final class AnimatedRotationAttributes extends ImplicitAnimatable
 		"id",
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-
