@@ -23,23 +23,11 @@ final class AbsorbPointerAttributes implements DuitAttributes<AbsorbPointerAttri
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AbsorbPointer({
-        id: "id",
-        attributes: {
-            absorbing: true
-        },
-        controlled: false,
-    },
-    //child
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    AbsorbPointer(
+AbsorbPointer(
       &duit_attributes.AbsorbPointerAttributes{
         Absorbing: true,
       },
@@ -47,6 +35,7 @@ final class AbsorbPointerAttributes implements DuitAttributes<AbsorbPointerAttri
       false,
       //child,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

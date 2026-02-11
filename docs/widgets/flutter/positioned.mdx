@@ -34,27 +34,11 @@ final class PositionedAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Positioned(
-        {
-            id: "id",
-            attributes: {
-                top: 10,
-                left: 20,
-                right: 30,
-                bottom: 40
-            },
-            controlled: false,
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Positioned(
+Positioned(
       &duit_attributes.PositionedAttributes{
         Top:    10,
         Bottom: 20,
@@ -65,7 +49,7 @@ final class PositionedAttributes extends AnimatedPropertyOwner
       false,
       nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

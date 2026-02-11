@@ -81,28 +81,11 @@ final class SliverAppBarAttributes implements DuitAttributes<SliverAppBarAttribu
 
 ## Usage Example
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    SliverAppBar({
-        id: "id",
-        attributes: {
-            title: "My App",
-            floating: true,
-            pinned: true,
-            expandedHeight: 200,
-            backgroundColor: "#2196F3",
-            elevation: 4
-        },
-        controlled: false,
-    },
-    //flexibleSpace
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    SliverAppBar(
+SliverAppBar(
       &duit_attributes.SliverAppBarAttributes{
         Title: "My App",
         Floating: true,
@@ -115,6 +98,7 @@ final class SliverAppBarAttributes implements DuitAttributes<SliverAppBarAttribu
       false,
       //flexibleSpace,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

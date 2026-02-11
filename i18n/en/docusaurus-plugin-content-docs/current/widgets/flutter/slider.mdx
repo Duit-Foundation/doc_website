@@ -52,37 +52,11 @@ final class SliderAttributes extends AttendedModel<double>
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Slider(
-        {
-            id: "id",
-            attributes: {
-                min: 0,
-                max: 100,
-                value: 25,
-                divisions: 5,
-                onChangeEnd: HttpAction(
-                    "/on_change_end",
-                    {
-                        method: "POST",
-                    },
-                    [
-                        {
-                            id: "id",
-                            target: "value",
-                        }
-                    ]
-                )
-            },
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Slider(
+Slider(
 		&duit_attributes.SliderAttributes[duit_core.RemoteAction, duit_color.ColorString]{
 			OnChangeEnd: &duit_core.RemoteAction{
 				Event: "/on_change_end",
@@ -100,7 +74,7 @@ final class SliderAttributes extends AttendedModel<double>
 		},
 		"id",
 	)
+
     ```
   </TabItem>
 </Tabs>
-

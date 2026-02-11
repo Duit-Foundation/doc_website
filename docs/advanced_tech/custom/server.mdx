@@ -1,6 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Пользовательские виджеты - сервер
 
 ## Описание модели объекта атрибутов
@@ -13,18 +10,7 @@ import TabItem from '@theme/TabItem';
 Используйте `AnimatedPropertyOwner`, если хотите поддерживать Duit-анимацию в вашем пользовательском виджете.
 :::
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    interface SvgAttributes extends ValueReferenceHolder<SvgAttributes>, AnimatedPropertyOwner  {
-        width?: number;
-        height?: number;
-        content: string;
-    }
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
-    ```go
+```go
     type SvgAttributes struct {
     	ValueReferenceHolder
     	animations.AnimatedPropertyOwner
@@ -33,30 +19,12 @@ import TabItem from '@theme/TabItem';
     	Content string  `json:"content,omitempty"`
     }
     ```
-  </TabItem>
-</Tabs>
 
 ## Создание функции-конструктора
 
 Функции-конструкторы в стиле DSL Duit помогают сохранить общую семантику верстки макетов и использовать пользовательские виджеты единообразно с базовыми виджетами.
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    //notexport classes as independent member
-    class _SvgWidget extends CustomWidget<SvgAttributes> {
-
-        constructor(attrs: SvgAttributes, tag: string, id?: string) {
-            super(attrs, tag, id, undefined, false);
-        }
-    }
-
-    //use functions as constructor
-    export const Svg = (attributes: SvgAttributes, id?: string) => new SvgWidget(attributes, "SvgCustomWidget", id);
-    ````
-  </TabItem>
-  <TabItem value="go" label="Go">
-    ```go
+```go
     func Svg(attributes *SvgAttributes, id string, controlled bool) *duit_core.DuitElementModel {
     	return new(duit_core.DuitElementModel).CreateElement(
     		duit_core.Custom, //type = Custom
@@ -71,8 +39,6 @@ import TabItem from '@theme/TabItem';
     	)
     }
     ```
-  </TabItem>
-</Tabs>
 
 :::info
 

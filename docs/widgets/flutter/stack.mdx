@@ -32,24 +32,11 @@ final class StackAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Stack(
-        {
-            id: "id",
-            attributes: {
-                alignment: "center",
-                fit: "expand",
-            },
-        },
-        [], //children
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Stack(
+Stack(
 		&duit_attributes.StackAttributes{
 			Alignment: duit_alignment.TopCenter,
 			Fit:       duit_flex.Expand,
@@ -58,7 +45,7 @@ final class StackAttributes extends AnimatedPropertyOwner
 		false,
 		nil, //children
 	)
+
     ```
   </TabItem>
 </Tabs>
-

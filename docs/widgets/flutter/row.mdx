@@ -34,25 +34,11 @@ sealed class FlexAttributes {
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Row(
-        {
-            id: "id",
-            attributes: {
-                mainAxisAlignment: "spaceBetween",
-                crossAxisAlignment: "center",
-            },
-            controlled: false,
-        },
-        [], //children
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Row(
+Row(
 		&duit_attributes.FlexAttributes{
 			MainAxisAlignment:  duit_main_axis.SpaceBetween,
 			CrossAxisAlignment: duit_cross_axis.Center,
@@ -61,7 +47,7 @@ sealed class FlexAttributes {
 		false,
 		nil, //children
 	)
+
     ```
   </TabItem>
 </Tabs>
-

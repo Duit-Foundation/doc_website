@@ -48,32 +48,11 @@ final class CustomScrollViewAttributes implements DuitAttributes<CustomScrollVie
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    CustomScrollView({
-        id: "id",
-        attributes: {
-            scrollDirection: "vertical",
-            reverse: false,
-            shrinkWrap: false,
-            primary: true,
-            physics: "bouncingScrollPhysics",
-            anchor: 0.0,
-            dragStartBehavior: "start",
-            keyboardDismissBehavior: "manual",
-            clipBehavior: "hardEdge",
-            hitTestBehavior: "opaque"
-        },
-        controlled: false,
-    },
-    //slivers
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    CustomScrollView(
+CustomScrollView(
       &duit_attributes.CustomScrollViewAttributes{
         ScrollDirection: duit_axis.Vertical,
         Reverse: false,
@@ -90,6 +69,7 @@ final class CustomScrollViewAttributes implements DuitAttributes<CustomScrollVie
       false,
       //slivers,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

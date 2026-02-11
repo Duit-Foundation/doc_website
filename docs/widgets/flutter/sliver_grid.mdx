@@ -53,29 +53,11 @@ final class SliverGridAttributes
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    SliverGrid.count({
-        id: "id",
-        attributes: {
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 1.0,
-            addAutomaticKeepAlives: true,
-            addRepaintBoundaries: true,
-            addSemanticIndexes: true
-        },
-        controlled: false,
-    },
-    //delegate
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    SliverGridCount(
+SliverGridCount(
       &duit_attributes.SliverGridAttributes{
         CrossAxisCount: 2,
         CrossAxisSpacing: 8,
@@ -89,6 +71,7 @@ final class SliverGridAttributes
       false,
       //delegate,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

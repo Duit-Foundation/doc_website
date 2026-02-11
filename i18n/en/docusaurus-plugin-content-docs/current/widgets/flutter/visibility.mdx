@@ -1,0 +1,37 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Visibility
+
+| Type name | Supports Property Animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| Visibility | &cross; | &cross; | &cross; | [link](https://api.flutter.dev/flutter/widgets/Visibility-class.html) |
+
+:::info
+The widget accepts up to two children. The first is the main widget, the second (optional) is the replacement widget displayed when `visible: false`. If no replacement is provided, `SizedBox.shrink()` is used.
+:::
+
+## Usage
+
+
+<Tabs groupId="lang">
+  <TabItem value="go" label="Go" default>
+    ```go
+Visibility(
+		&duit_attributes.VisibilityAttributes{
+			Visible:                true,
+			MaintainState:          false,
+			MaintainAnimation:      false,
+			MaintainSize:           false,
+			MaintainSemantics:      false,
+			MaintainInteractivity:  false,
+		},
+		"id",
+		false,
+		nil, //child
+		nil, //replacement (optional)
+	)
+
+    ```
+  </TabItem>
+</Tabs>

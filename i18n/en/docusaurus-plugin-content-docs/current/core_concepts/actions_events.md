@@ -97,6 +97,33 @@ Example for debounce:
 }
 ```
 
+### Idempotent Action Execution
+
+For `TransportAction` and `ScriptAction`, Duit supports idempotent execution. When idempotency is enabled, repeated invocations with identical input data (from `dependsOn`) are suppressed — no request is sent to the server.
+
+A hash cache is used: on each invocation, a hash of the dependency data is computed. If the hash matches the last successful execution, the action is not executed.
+
+Parameters:
+
+- **`idempotent`** (bool) — enables idempotent execution mode. Default is `false`.
+- **`suppressionTTL`** (int, milliseconds) — optional. Time after which re-execution with the same data is allowed. If not specified, duplicate suppression lasts indefinitely (until the data changes).
+
+:::tip
+Use idempotency to avoid redundant requests on rapid button taps or when multiple widgets trigger the same action with identical data.
+:::
+
+```json
+{
+    "executionType": 0,
+    "dependsOn": [{"target": "query", "id": "search_input"}],
+    "event": "/api/search",
+    "idempotent": true,
+    "suppressionTTL": 5000
+}
+```
+
+In the example above, the action will not be executed again with the same search text within 5 seconds of the last execution.
+
 ## Action Dependencies
 
 During application usage, users may interact with UI elements such as TextFields, CheckBoxes, Radios, etc. Interacting with these elements often involves collecting and utilizing data entered by the user.

@@ -57,26 +57,11 @@ final class ImageAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Image(
-        {
-            id: "id",
-            attributes: {
-                type: "network",
-                src: "https://via.assets.so/game.png?id=1&q=95&w=360&h=360&fit=fill",
-                width: 100,
-                height: 100,
-            },
-            controlled: false,
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Image(
+Image(
 		&duit_attributes.ImageAttributes[duit_color.ColorString]{
 			Type: duit_painting.Network,
 			Src:  "https://via.assets.so/game.png?id=1&q=95&w=360&h=360&fit=fill",
@@ -86,7 +71,7 @@ final class ImageAttributes extends AnimatedPropertyOwner
 		"id",
 		false,
 	)
+
     ```
   </TabItem>
 </Tabs>
-

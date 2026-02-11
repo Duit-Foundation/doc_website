@@ -37,30 +37,11 @@ final class AnimatedCrossFadeAttributes extends ImplicitAnimatable
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AnimatedCrossFade({
-        id: "id",
-        attributes: {
-            duration: 300,
-            reverseDuration: 300,
-            firstCurve: "linear",
-            secondCurve: "linear",
-            sizeCurve: "linear",
-            excludeBottomFocus: true,
-            crossFadeState: 0,
-            alignment: "topCenter"
-        },
-        controlled: false,
-    },
-    [], //children
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    AnimatedCrossFade(
+AnimatedCrossFade(
       &duit_attributes.AnimatedCrossFadeAttributes{
         Duration: 300 * time.Millisecond,
         ReverseDuration: 300 * time.Millisecond,
@@ -75,6 +56,7 @@ final class AnimatedCrossFadeAttributes extends ImplicitAnimatable
       false,
       []*duit_core.DuitElement, //children
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

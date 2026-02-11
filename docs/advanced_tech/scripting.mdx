@@ -183,26 +183,7 @@ void initState() {
 
 Рассмотрим, как создать действие-скрипт. DSL-библиотеки предоставляют специальные функции для удобного создания подобных действий.
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-const action = ScriptAction(
-      "script1", //event name
-      {
-          "sourceCode": "fun testFn() {...}", //sctipt text
-          "functionName": "testFn", //function name to call
-      },
-      [
-          {
-              id: "dependency1",
-              target: "value"
-          },
-      ],
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
-    ```go
+```go
 action := NewScriptAction(
 		"scipt1", 
 		[]*ActionDependency{
@@ -216,6 +197,4 @@ action := NewScriptAction(
 			FunctionName: "function name", //function name to call
 		},
 	)
-    ```
-  </TabItem>
-</Tabs>
+```

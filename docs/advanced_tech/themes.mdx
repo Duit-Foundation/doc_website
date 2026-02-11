@@ -1,6 +1,3 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Темы
 
 Говоря о темах подразумевается не совсем то, к чему привыкли обычные Flutter разработчики: глобальные стили виджетов, цветовые схемы и тд. В рамках Duit темы - это мощная функция, которая решает несколько ключевых задач:
@@ -204,26 +201,13 @@ Future<void> initThemeWithCustomTokens() async {
 
 Для многих виджетов, которые реализованы в DSL-библиотеках был добавлен ряд новых опциональных свойств, которые позволяют конфигурировать виджеты для использования тем. Эти свойства определены в интерфейсе `ThemeConsumer`.
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    export interface ThemeConsumer {
-      theme?: string;
-      ignoreTheme?: boolean;
-      overrideRule?: keyof typeof ThemeOverrideRule;
-    }
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
-    ```go
+```go
     type ThemeConsumer struct {
       Theme string `json:"theme,omitempty"`
       IgnoreTheme bool `json:"ignoreTheme,omitempty"`
       OverrideRule ThemeOverrideRule `json:"overrideRule,omitempty"`
     }
     ```
-  </TabItem>
-</Tabs>
 
 ### Свойства ThemeConsumer
 
@@ -240,19 +224,7 @@ Future<void> initThemeWithCustomTokens() async {
 
 ### Пример использования
 
-<Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    const textWidget: TextAttributes = {
-      data: "Hello World",
-      theme: "text_primary",
-      overrideRule: "themeOverlay",  // свойство data не будет перезаписано
-      textAlign: "center"
-    };
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
-    ```go
+```go
     textWidget := &TextAttributes{
         Data: "Hello World",
         ThemeConsumer: &ThemeConsumer{
@@ -263,8 +235,6 @@ Future<void> initThemeWithCustomTokens() async {
         TextAlign: duit_props.TextAlignCenter,
     }
     ```
-  </TabItem>
-</Tabs>
 
 В данном примере, если тема `text_primary` содержит `fontSize: 18` и `color: "#FF0000"`, виджет получит эти свойства, но его собственные свойства (например, `textAlign: "center"` и `data: "Hello World"`) сохранятся.
 

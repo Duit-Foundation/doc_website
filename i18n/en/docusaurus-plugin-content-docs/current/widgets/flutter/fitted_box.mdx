@@ -30,25 +30,11 @@ final class FittedBoxAttributes extends AnimatedPropertyOwner
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    FittedBox(
-        {
-            id: "id",
-            attributes: {
-                fit: "fill",
-                clipBehavior: "none",
-            },
-            controlled: false
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	FittedBox(
+FittedBox(
 		&duit_attributes.FittedBoxAttributes{
 			Fit: duit_flex.Fill,
 			ClipBehavior: duit_clip.None,
@@ -57,7 +43,7 @@ final class FittedBoxAttributes extends AnimatedPropertyOwner
 		false,
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

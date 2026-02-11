@@ -56,36 +56,11 @@ final class TextFieldAttributes extends AttendedModel<String>
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    TextField(
-        {
-            id: "id",
-            attributes: {
-                maxLines: 3,
-                obscureText: true,
-                obscuringCharacter: "^",
-            },
-            action: HttpAction(
-                "/on_change",
-                {
-                    method: "POST",
-                },
-                [
-                    {
-                        id: "id",
-                        target: "value",
-                    }
-                ],
-            )
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	TextField(
+TextField(
 		&duit_attributes.TextFieldAttributes[duit_edge_insets.EdgeInsetsAll, duit_color.ColorString]{
 			MaxLines: 3,
 			ObscureText: true,
@@ -102,7 +77,7 @@ final class TextFieldAttributes extends AttendedModel<String>
 			},
 		},
 	)
+
     ```
   </TabItem>
 </Tabs>
-

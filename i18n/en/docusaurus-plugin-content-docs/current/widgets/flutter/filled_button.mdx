@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# FilledButton
+
+| Type name | Supports Property Animations | Controlled by default | May contain associated action | Link |
+| - | - | - | - | - |
+| FilledButton | &cross; | :heavy_check_mark: | :heavy_check_mark: | [link](https://api.flutter.dev/flutter/material/FilledButton-class.html) |
+
+## Usage
+
+
+<Tabs groupId="lang">
+  <TabItem value="go" label="Go" default>
+    ```go
+FilledButton(
+		&duit_attributes.FilledButtonAttributes[duit_color.ColorString, duit_core.RemoteAction]{
+			Autofocus: false,
+			OnLongPress: &duit_core.RemoteAction{
+				Event: "/some_endpoint",
+			},
+		},
+		"id",
+		&duit_core.RemoteAction{
+			Event: "/on_pressed_endpoint",
+		},
+		nil, //child
+	)
+
+    ```
+  </TabItem>
+</Tabs>

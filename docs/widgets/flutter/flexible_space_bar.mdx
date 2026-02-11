@@ -37,27 +37,11 @@ final class FlexibleSpaceBarAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    FlexibleSpaceBar({
-        id: "id",
-        attributes: {
-            collapseMode: "parallax",
-            stretchModes: ["zoomBackground"],
-            expandedTitleScale: 1.5,
-            centerTitle: true,
-            title: "My App"
-        },
-        controlled: false,
-    },
-    //background
-);
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-    FlexibleSpaceBar(
+FlexibleSpaceBar(
       &duit_attributes.FlexibleSpaceBarAttributes{
         CollapseMode: duit_collapse_mode.Parallax,
         StretchModes: []duit_stretch_mode.StretchMode{duit_stretch_mode.ZoomBackground},
@@ -69,6 +53,7 @@ final class FlexibleSpaceBarAttributes extends AnimatedPropertyOwner
       false,
       //background,
     )
+
     ```
   </TabItem>
-</Tabs> 
+</Tabs>

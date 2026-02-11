@@ -40,30 +40,18 @@ final class TextAttributes extends AnimatedPropertyOwner
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-  Text(
-      {
-          id: "id",
-          attributes: {
-              data: "Hello, Duit!"
-          },
-          controlled: false,
-      }
-  )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Text(
+Text(
 		&duit_attributes.TextAttributes[duit_color.ColorString]{
 			Data: "Hello, Duit!",
 		},
 		"id",
 		false,
 	)
+
     ```
   </TabItem>
 </Tabs>
-

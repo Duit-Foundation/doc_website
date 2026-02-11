@@ -32,25 +32,11 @@ final class AnimatedOpacityAttributes extends ImplicitAnimatable
 
 ## Пример использования
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    AnimatedOpacity(
-        {
-            id: "id",
-            attributes: {
-                opacity: 0.85,
-                duratuion: 1000,
-            },
-            controlled: false,
-        },
-        //child
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	AnimatedOpacity(
+AnimatedOpacity(
 		&duit_attributes.AnimatedOpacityAttributes{
 			Opacity: 0.85,
 			ImplicitAnimatable: duit_animations.ImplicitAnimatable{
@@ -60,7 +46,7 @@ final class AnimatedOpacityAttributes extends ImplicitAnimatable
 		"",
 		nil, //child
 	)
+
     ```
   </TabItem>
 </Tabs>
-

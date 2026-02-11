@@ -56,34 +56,11 @@ final class SwitchAttributes extends AttendedModel<bool>
 
 ## Usage
 
+
 <Tabs groupId="lang">
-  <TabItem value="ts" label="TypeScript" default>
-    ```typescript
-    Switch(
-        {
-            id: "id",
-            attributes: {
-                value: true,
-            },
-            action: HttpAction(
-                "/on_change",
-                {
-                    method: "POST",
-                },
-                [
-                    {
-                        id: "id",
-                        target: "value",
-                    }
-                ]
-            )
-        }
-    )
-    ```
-  </TabItem>
-  <TabItem value="go" label="Go">
+  <TabItem value="go" label="Go" default>
     ```go
-	Switch(
+Switch(
 		&duit_attributes.SwitchAttributes[duit_color.ColorString]{
 			Value: false,
 		},
@@ -98,7 +75,7 @@ final class SwitchAttributes extends AttendedModel<bool>
 			},
 		},
 	)
+
     ```
   </TabItem>
 </Tabs>
-
